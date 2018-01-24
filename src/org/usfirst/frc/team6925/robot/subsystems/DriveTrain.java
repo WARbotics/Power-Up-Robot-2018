@@ -130,8 +130,7 @@ public class DriveTrain extends Subsystem
 	/**
 	 * The current angle of the drivetrain as measured by the Gyro.
 	 */
-	public double getAngle() 
-	{
+	public double getAngle() {
 		return m_gyro.getAngle();
 	}
 }
