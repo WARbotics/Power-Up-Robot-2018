@@ -3,12 +3,14 @@ package org.usfirst.frc.team6925.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class DriveWithJoystick {
+public class DriveWithJoystick 
+{
 	
 	public Joystick controller;
 	public int port;
 	
-	public void Joystick(int port) {
+	public void Joystick(int port) 
+	{
 		this.port = port;
 		this.controller = new Joystick(port);
 		// When the Controller is initialized, it will automatically set the controller object and port value

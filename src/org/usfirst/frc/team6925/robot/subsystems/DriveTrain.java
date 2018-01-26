@@ -19,7 +19,8 @@ import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
  * The DriveTrain subsystem controls the robot's chassis and reads in
  * information about it's speed and position.
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem 
+{
 	// Subsystem devices
 	private SpeedController m_frontLeftCIM = new VictorSP(1);
 	private SpeedController m_frontRightCIM = new VictorSP(2);
@@ -32,7 +33,8 @@ public class DriveTrain extends Subsystem {
 	private Encoder m_leftEncoder = new Encoder(3, 4, false, EncodingType.k4X);
 	private AnalogGyro m_gyro = new AnalogGyro(2);
 
-	public DriveTrain() {
+	public DriveTrain() 
+	{
 		// Configure drive motors
 		addChild("Front Left CIM", (VictorSP) m_frontLeftCIM);
 		addChild("Front Right CIM", (VictorSP) m_frontRightCIM);
@@ -48,10 +50,13 @@ public class DriveTrain extends Subsystem {
 		m_rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		m_leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 
-		if (Robot.isReal()) { // Converts to feet
+		if (Robot.isReal()) 
+		{ // Converts to feet
 			m_rightEncoder.setDistancePerPulse(0.0785398);
 			m_leftEncoder.setDistancePerPulse(0.0785398);
-		} else {
+		} 
+		else 
+		{
 			// Convert to feet 4in diameter wheels with 360 tick sim encoders
 			m_rightEncoder.setDistancePerPulse(
 					(4.0/* in */ * Math.PI) / (360.0 * 12.0/* in/ft */));
@@ -63,7 +68,8 @@ public class DriveTrain extends Subsystem {
 		addChild("Left Encoder", m_leftEncoder);
 
 		// Configure gyro
-		if (Robot.isReal()) {
+		if (Robot.isReal()) 
+		{
 			m_gyro.setSensitivity(0.007); // TODO: Handle more gracefully?
 		}
 		addChild("Gyro", m_gyro);
@@ -74,8 +80,9 @@ public class DriveTrain extends Subsystem {
 	 * the joystick.
 	 */
 	@Override
-	public void initDefaultCommand() {
-		setDefaultCommand(new DriveWithJoysitck());
+	public void initDefaultCommand() 
+	{
+		setDefaultCommand(new DriveWithJoystick());
 		//The reason that this is not working is because with need make the DriveWithJoyStick command
 	}
 
@@ -84,7 +91,8 @@ public class DriveTrain extends Subsystem {
 	 *
 	 * @param joy PS3 style joystick to use as the input for tank drive.
 	 */
-	public void tankDrive(Joystick joy) {
+	public void tankDrive(Joystick joy) 
+	{
 		m_drive.tankDrive(joy.getY(), joy.getRawAxis(4));
 	}
 
@@ -94,14 +102,16 @@ public class DriveTrain extends Subsystem {
 	 * @param leftAxis Left sides value
 	 * @param rightAxis Right sides value
 	 */
-	public void tankDrive(double leftAxis, double rightAxis) {
+	public void tankDrive(double leftAxis, double rightAxis) 
+	{
 		m_drive.tankDrive(leftAxis, rightAxis);
 	}
 
 	/**
 	 * Stop the drivetrain from moving.
 	 */
-	public void stop() {
+	public void stop() 
+	{
 		m_drive.tankDrive(0, 0);
 	}
 
@@ -109,7 +119,8 @@ public class DriveTrain extends Subsystem {
 	 * The encoder getting the distance and speed of left side of the
 	 * drivetrain.
 	 */
-	public Encoder getLeftEncoder() {
+	public Encoder getLeftEncoder() 
+	{
 		return m_leftEncoder;
 	}
 
@@ -117,14 +128,16 @@ public class DriveTrain extends Subsystem {
 	 * The encoder getting the distance and speed of right side of the
 	 * drivetrain.
 	 */
-	public Encoder getRightEncoder() {
+	public Encoder getRightEncoder() 
+	{
 		return m_rightEncoder;
 	}
 
 	/**
 	 * The current angle of the drivetrain as measured by the Gyro.
 	 */
-	public double getAngle() {
+	public double getAngle() 
+	{
 		return m_gyro.getAngle();
 	}
 }
