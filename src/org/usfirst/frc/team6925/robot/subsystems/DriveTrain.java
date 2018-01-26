@@ -64,6 +64,7 @@ public class DriveTrain extends Subsystem
 
 		addChild("Right Encoder", m_rightEncoder);
 		addChild("Left Encoder", m_leftEncoder);
+	}
 	/**
 	 * When other commands aren't using the drivetrain, allow tank drive with
 	 * the joystick.

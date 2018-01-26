@@ -27,10 +27,13 @@ public class Robot extends IterativeRobot
 	public static OI oi;
 	//Subsystem
 	public static DriveTrain drivetrain = new DriveTrain();
-	
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
-	private static final String kCustomTest = "Test Auto";
+	public static String gameData;
+	private static final String kRightDefaultAuto = "Right Default";
+	private static final String kRightCustomAuto = "Right Auto";
+	private static final String kRightCustomTest = "Test Right Auto";
+	private static final String kLeftDefaultAuto = "Left Default";
+	private static final String kLeftCustomAuto = "Left Auto";
+	private static final String kLeftCustomTest = "Test Right Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	/**
@@ -40,9 +43,13 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit() 
 	{
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
-		m_chooser.addObject("Test Auto", kCustomTest);
+		m_chooser.addDefault("Default Right Auto", kRightDefaultAuto);
+		m_chooser.addObject("Right Auto", kRightCustomAuto);
+		m_chooser.addObject("Test Right Auto", kRightCustomTest);
+		m_chooser.addDefault("Default Right Auto", kLeftDefaultAuto);
+		m_chooser.addObject("Left custom Auto", kLeftCustomAuto);
+		m_chooser.addObject("Left Custom Test", kLeftCustomTest);
+		
 		SmartDashboard.putData("Auto choices", m_chooser);
 	}
 
@@ -56,42 +63,59 @@ public class Robot extends IterativeRobot
 	 * <p>You can add additional auto modes by adding additional comparisons to
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
+	 * @return 
 	 */
 	
 	@Override
 	public void autonomousInit() 
 	{
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L')
-		{
-			//This is just the normal code they gave on the site they suggest a querry 
-			//Put left auto code here
-		} else {
-			//Put right auto code here
-		}
+		String GameData;
+		GameData = DriverStation.getInstance().getGameSpecificMessage();
+		gameData = GameData;	
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
-
+	public String getGameData()
+	{
+		return gameData;
+	}
 	/**
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
 	public void autonomousPeriodic() 
 	{
-		switch (m_autoSelected) 
+		if (gameData.charAt(0)== 'L')
 		{
-			case kCustomAuto:
-				// Put custom auto code here
+			switch(m_autoSelected)
+			{
+			case kLeftCustomAuto:
+				break; 
+			case kLeftCustomTest: 
+				break; 
+			case kLeftDefaultAuto:
+				
 				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
+			}
 		}
+		
+		else 
+		{
+			switch (m_autoSelected) 
+			{
+				case kRightCustomAuto:
+					// Put custom auto code here
+					break;
+				case kRightCustomTest: 
+					//place test code
+					break; 
+				case kRightDefaultAuto:
+					break;
+			}
+		}
+		
 	}
 
 	/**
