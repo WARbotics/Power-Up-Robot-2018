@@ -22,7 +22,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot 
+{
 	public static OI oi;
 	//Subsystem
 	public static DriveTrain drivetrain = new DriveTrain();
@@ -37,7 +38,8 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	@Override
-	public void robotInit() {
+	public void robotInit() 
+	{
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		m_chooser.addObject("Test Auto", kCustomTest);
@@ -57,7 +59,8 @@ public class Robot extends IterativeRobot {
 	 */
 	
 	@Override
-	public void autonomousInit() {
+	public void autonomousInit() 
+	{
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if(gameData.charAt(0) == 'L')
@@ -77,8 +80,10 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
-	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
+	public void autonomousPeriodic() 
+	{
+		switch (m_autoSelected) 
+		{
 			case kCustomAuto:
 				// Put custom auto code here
 				break;
@@ -93,13 +98,17 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control.
 	 */
 	@Override
-	public void teleopPeriodic() {
+	public void teleopPeriodic() 
+	{
+		
 	}
 
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
-	public void testPeriodic() {
+	public void testPeriodic() 
+	{
+		
 	}
 }
