@@ -15,9 +15,10 @@ public class DriveWithJoystick
 		this.port = port;
 		this.controller = new Joystick(port);
 		
+		
 		// When the Controller is initialized, it will automatically set the controller object and port value
 	}
-
+	
 	public boolean getTriggerPressed() 
 	{
 		return true;
