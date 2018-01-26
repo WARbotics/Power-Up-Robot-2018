@@ -8,14 +8,21 @@ public class DriveWithJoystick
 	
 	public Joystick controller;
 	public int port;
+	public boolean triggerPressed = false;
 	
 	public void Joystick(int port) 
 	{
 		this.port = port;
 		this.controller = new Joystick(port);
+		
+		
 		// When the Controller is initialized, it will automatically set the controller object and port value
 	}
-
+	
+	public boolean getTriggerPressed() 
+	{
+		return true;
+	}
 	// Configuration
 
 	double DEAD_ZONE = 0.08;
@@ -23,3 +30,4 @@ public class DriveWithJoystick
 		// Prevents the robot from going nuts at the slightest movement.
 	
 }
+

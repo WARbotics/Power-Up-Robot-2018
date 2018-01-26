@@ -1,6 +1,6 @@
 package org.usfirst.frc.team6925.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Encoder;
@@ -31,7 +31,6 @@ public class DriveTrain extends Subsystem
 	private DifferentialDrive m_drive;
 	private Encoder m_rightEncoder = new Encoder(1, 2, true, EncodingType.k4X);
 	private Encoder m_leftEncoder = new Encoder(3, 4, false, EncodingType.k4X);
-	private AnalogGyro m_gyro = new AnalogGyro(2);
 
 	public DriveTrain() 
 	{
@@ -66,15 +65,7 @@ public class DriveTrain extends Subsystem
 
 		addChild("Right Encoder", m_rightEncoder);
 		addChild("Left Encoder", m_leftEncoder);
-
-		// Configure gyro
-		if (Robot.isReal()) 
-		{
-			m_gyro.setSensitivity(0.007); // TODO: Handle more gracefully?
-		}
-		addChild("Gyro", m_gyro);
 	}
-
 	/**
 	 * When other commands aren't using the drivetrain, allow tank drive with
 	 * the joystick.
@@ -133,10 +124,6 @@ public class DriveTrain extends Subsystem
 	/**
 	 * The current angle of the drivetrain as measured by the Gyro.
 	 */
-	public double getAngle() 
-	{
-		return m_gyro.getAngle();
-	}
 }
 
 
