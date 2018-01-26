@@ -82,17 +82,14 @@ public class DriveTrain extends Subsystem
 	@Override
 	public void initDefaultCommand() 
 	{
-		setDefaultCommand(new DriveWithJoystick());
+
+		setDefaultCommand(new DriveWithJoysitck());
 		//The reason that this is not working is because with need make the DriveWithJoyStick command
 	}
 
-	/**
-	 * Tank drive using a PS3 joystick.
-	 *
-	 * @param joy PS3 style joystick to use as the input for tank drive.
-	 */
-	public void tankDrive(Joystick joy) 
-	{
+		public void tankDrive(Joystick joy) 
+		{
+
 		m_drive.tankDrive(joy.getY(), joy.getRawAxis(4));
 	}
 
