@@ -43,6 +43,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit() 
 	{
+
 		m_chooser.addDefault("Default Right Auto", kRightDefaultAuto);
 		m_chooser.addObject("Right Auto", kRightCustomAuto);
 		m_chooser.addObject("Test Right Auto", kRightCustomTest);
@@ -50,6 +51,7 @@ public class Robot extends IterativeRobot
 		m_chooser.addObject("Left custom Auto", kLeftCustomAuto);
 		m_chooser.addObject("Left Custom Test", kLeftCustomTest);
 		
+
 		SmartDashboard.putData("Auto choices", m_chooser);
 	}
 
@@ -69,9 +71,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
+
 		String GameData;
 		GameData = DriverStation.getInstance().getGameSpecificMessage();
 		gameData = GameData;	
+
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
@@ -87,6 +91,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic() 
 	{
+
 		if (gameData.charAt(0)== 'L')
 		{
 			switch(m_autoSelected)
@@ -97,6 +102,7 @@ public class Robot extends IterativeRobot
 				break; 
 			case kLeftDefaultAuto:
 				
+
 				break;
 			}
 		}
