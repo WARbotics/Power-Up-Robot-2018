@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6925.robot;
 
+import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot 
 {
+
 	public static OI oi;
 	//Subsystem
 	public static DriveTrain drivetrain = new DriveTrain();
@@ -96,7 +98,7 @@ public class Robot extends IterativeRobot
 			case kLeftCustomTest: 
 				break; 
 			case kLeftDefaultAuto:
-				
+			default: 	
 				break;
 			}
 		}
@@ -112,6 +114,8 @@ public class Robot extends IterativeRobot
 					//place test code
 					break; 
 				case kRightDefaultAuto:
+				default:
+					// Put default auto code here
 					break;
 			}
 		}

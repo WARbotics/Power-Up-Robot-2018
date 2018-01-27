@@ -9,7 +9,7 @@ import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 
 public class OI 
 {
-	public Joystick m_joystick = new Joystick(0);
+	
 
 	public OI() 
 	{

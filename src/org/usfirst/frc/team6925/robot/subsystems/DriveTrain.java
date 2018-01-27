@@ -1,5 +1,5 @@
 package org.usfirst.frc.team6925.robot.subsystems;
-
+//
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.PWMSpeedController;
 
 import org.usfirst.frc.team6925.robot.Robot;
 import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
@@ -21,16 +22,25 @@ import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
  */
 public class DriveTrain extends Subsystem 
 {
+	//motors and speed Controller 
+	public VictorSP m_frontLeftMotor = new VictorSP(1);
+	public VictorSP m_frontRightMotor = new VictorSP(2);
+	
+	public VictorSP m_rearleftMotor = new VictorSP(3);
+	public VictorSP m_rearRightMotor = new VictorSP(4);
+	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearleftMotor);
+	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
+	
 	// Subsystem devices
-	private SpeedController m_frontLeftCIM = new VictorSP(1);
-	private SpeedController m_frontRightCIM = new VictorSP(2);
-	private SpeedController m_rearLeftCIM = new VictorSP(3);
-	private SpeedController m_rearRightCIM = new VictorSP(4);
-	private SpeedControllerGroup m_leftCIMs = new SpeedControllerGroup(m_frontLeftCIM, m_rearLeftCIM);
-	private SpeedControllerGroup m_rightCIMs = new SpeedControllerGroup(m_frontRightCIM, m_rearRightCIM);
-	private DifferentialDrive m_drive;
-	private Encoder m_rightEncoder = new Encoder(1, 2, true, EncodingType.k4X);
-	private Encoder m_leftEncoder = new Encoder(3, 4, false, EncodingType.k4X);
+	public SpeedController m_frontLeftCIM = new VictorSP(1);
+	public SpeedController m_frontRightCIM = new VictorSP(2);
+	public SpeedController m_rearLeftCIM = new VictorSP(3);
+	public SpeedController m_rearRightCIM = new VictorSP(4);
+	public SpeedControllerGroup m_leftCIMs = new SpeedControllerGroup(m_frontLeftCIM, m_rearLeftCIM);
+	public SpeedControllerGroup m_rightCIMs = new SpeedControllerGroup(m_frontRightCIM, m_rearRightCIM);
+	public DifferentialDrive m_drive;
+	public Encoder m_rightEncoder = new Encoder(1, 2, true, EncodingType.k4X);
+	public Encoder m_leftEncoder = new Encoder(3, 4, false, EncodingType.k4X);
 
 	public DriveTrain() 
 	{
