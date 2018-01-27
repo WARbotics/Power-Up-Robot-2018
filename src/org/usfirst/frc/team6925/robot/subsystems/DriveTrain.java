@@ -49,7 +49,8 @@ public class DriveTrain extends Subsystem
 		m_rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		m_leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 
-		if (Robot.isReal()) { // Converts to feet
+		if (Robot.isReal()) 
+		{ // Converts to feet
 			m_rightEncoder.setDistancePerPulse(0.0785398);
 			m_leftEncoder.setDistancePerPulse(0.0785398);
 		} 
@@ -72,12 +73,15 @@ public class DriveTrain extends Subsystem
 	@Override
 	public void initDefaultCommand() 
 	{
+
 		setDefaultCommand(new DriveWithJoystick());
+
 		//The reason that this is not working is because with need make the DriveWithJoyStick command
 	}
 
 		public void tankDrive(Joystick joy) 
 		{
+
 		m_drive.tankDrive(joy.getY(), joy.getRawAxis(4));
 	}
 
