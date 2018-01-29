@@ -22,10 +22,10 @@ import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 public class DriveTrain extends Subsystem 
 {
 	// Subsystem devices
-	private SpeedController m_frontLeftCIM = new VictorSP(1);
-	private SpeedController m_frontRightCIM = new VictorSP(2);
-	private SpeedController m_rearLeftCIM = new VictorSP(3);
-	private SpeedController m_rearRightCIM = new VictorSP(4);
+	public SpeedController m_frontLeftCIM = new VictorSP(1);
+	public SpeedController m_frontRightCIM = new VictorSP(2);
+	public SpeedController m_rearLeftCIM = new VictorSP(3);
+	public SpeedController m_rearRightCIM = new VictorSP(4);
 	private SpeedControllerGroup m_leftCIMs = new SpeedControllerGroup(m_frontLeftCIM, m_rearLeftCIM);
 	private SpeedControllerGroup m_rightCIMs = new SpeedControllerGroup(m_frontRightCIM, m_rearRightCIM);
 	private DifferentialDrive m_drive;
@@ -74,7 +74,7 @@ public class DriveTrain extends Subsystem
 	public void initDefaultCommand() 
 	{
 
-		setDefaultCommand(new DriveWithJoysitck());
+		setDefaultCommand(new DriveWithJoystick());
 		//The reason that this is not working is because with need make the DriveWithJoyStick command
 	}
 
@@ -102,7 +102,6 @@ public class DriveTrain extends Subsystem
 	{
 		m_drive.tankDrive(0, 0);
 	}
-
 	/**
 	 * The encoder getting the distance and speed of left side of the
 	 * drivetrain.
