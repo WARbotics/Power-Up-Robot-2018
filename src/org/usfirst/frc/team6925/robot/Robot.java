@@ -103,6 +103,7 @@ public class Robot extends IterativeRobot
 			case kLeftCustomTest: 
 				break; 
 			case kLeftDefaultAuto:
+
 				break;
 			}
 		}
