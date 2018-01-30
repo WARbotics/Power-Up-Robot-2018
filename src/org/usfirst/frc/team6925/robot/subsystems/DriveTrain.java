@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem 
 {
+<<<<<<< HEAD
 	public static VictorSP m_frontLeftMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_LEFT_FRONT);
 	public static VictorSP m_frontRightMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_RIGHT_FRONT);
 	
@@ -34,10 +35,14 @@ public class DriveTrain extends Subsystem
 	public static VictorSP m_rearRightMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_RIGHT_BACK);
 	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
+=======
+
+>>>>>>> refs/remotes/origin/Joystick
 	public DriveTrain()
 	{
 		
 	}
+<<<<<<< HEAD
 
 	public void tankDrive(Joystick controller) 
 	{
@@ -90,5 +95,7 @@ public class DriveTrain extends Subsystem
 		
 	}
 
+=======
+>>>>>>> refs/remotes/origin/Joystick
 }
 		
