@@ -10,6 +10,7 @@ import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 
 public class OI 
 {
+
 	public Joystick m_joystick = new Joystick(0);
 	Joystick leftJoy = new Joystick(1);
 	Button button1 = new JoystickButton(leftJoy, 1),
@@ -20,6 +21,7 @@ public class OI
 	button6 = new JoystickButton(leftJoy, 6),
 	button7 = new JoystickButton(leftJoy, 7),
 	button8 = new JoystickButton(leftJoy, 8);
+
 	}
 }
 

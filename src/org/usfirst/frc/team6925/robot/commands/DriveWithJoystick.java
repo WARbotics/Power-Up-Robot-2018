@@ -2,32 +2,55 @@
 package org.usfirst.frc.team6925.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.PWMSpeedController;
 
-public class DriveWithJoystick 
+
+public class DriveWithJoystick
 {
 	
 	public Joystick controller;
 	public int port;
 	public boolean triggerPressed = false;
-	
 	public void Joystick(int port) 
 	{
 		this.port = port;
 		this.controller = new Joystick(port);
-		
-		
 		// When the Controller is initialized, it will automatically set the controller object and port value
 	}
+	public void drive()
+	{
+		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
+		double speed = controller.getY();
+		double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
+	 
+		if(speed < 0)
+		{
+			speed = speed*-1; 
+		}
+		double turnPower = ((controller.getTwist()));
+		double turn = (Math.sin(Math.PI*(turnPower - 0.5)) +1) /2;;
+		
+		if(controller.getY() > 0 ) 
+		{
+			m_frontLeftMotor.set((throttle * (power - turn)));
+			m_rearLeftMotor.set((throttle * (power - turn)));
+			m_frontRightMotor.set((throttle * (power + turn)));
+			m_rearRightMotor.set((throttle * (power + turn)));
+		}
+		else
+		{
+			m_frontLeftMotor.set((throttle * (power + turn)));
+			m_rearLeftMotor.set((throttle * (power + turn)));
+			m_frontRightMotor.set((throttle * (power - turn)));
+			m_rearRightMotor.set((throttle * (power - turn)));
+		}
+	}
+	//test even more 
 	
 	public boolean getTriggerPressed() 
 	{
 		return true;
 	}
-	// Configuration
-
-	double DEAD_ZONE = 0.08;
-		// This is a sensitivity buffer for the joysticks. (Recommended 0.05 or higher)
-		// Prevents the robot from going nuts at the slightest movement.
-	
 }
 
