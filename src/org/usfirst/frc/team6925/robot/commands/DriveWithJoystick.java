@@ -1,19 +1,24 @@
 
 package org.usfirst.frc.team6925.robot.commands;
-import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team6925.robot.Robot;
+import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.PWMSpeedController;
 
 
-public class DriveWithJoystick extends Command
+public class DriveWithJoystick
 {
 	
 	public Joystick controller;
 	public int port;
 	public boolean triggerPressed = false;
-	public void Joystick(int port) 
+	
+	
+	public void DriveWithJoystick(int port) 
 	{
+		requires(Robot.drivetrainObject);
 		this.port = port;
 		this.controller = new Joystick(port);
 		// When the Controller is initialized, it will automatically set the controller object and port value
@@ -33,17 +38,17 @@ public class DriveWithJoystick extends Command
 		
 		if(controller.getY() > 0 ) 
 		{
-			m_frontLeftMotor.set((throttle * (power - turn)));
-			m_rearLeftMotor.set((throttle * (power - turn)));
-			m_frontRightMotor.set((throttle * (power + turn)));
-			m_rearRightMotor.set((throttle * (power + turn)));
+			DriveTrain.m_frontLeftMotor.set((throttle * (power - turn)));
+			DriveTrain.m_rearLeftMotor.set((throttle * (power - turn)));
+			DriveTrain.m_frontRightMotor.set((throttle * (power + turn)));
+			DriveTrain.m_rearRightMotor.set((throttle * (power + turn)));
 		}
 		else
 		{
-			m_frontLeftMotor.set((throttle * (power + turn)));
-			m_rearLeftMotor.set((throttle * (power + turn)));
-			m_frontRightMotor.set((throttle * (power - turn)));
-			m_rearRightMotor.set((throttle * (power - turn)));
+			DriveTrain.m_frontLeftMotor.set((throttle * (power + turn)));
+			DriveTrain.m_rearLeftMotor.set((throttle * (power + turn)));
+			DriveTrain.m_frontRightMotor.set((throttle * (power - turn)));
+			DriveTrain.m_rearRightMotor.set((throttle * (power - turn)));
 		}
 	}
 	//test even more 
@@ -51,11 +56,6 @@ public class DriveWithJoystick extends Command
 	public boolean getTriggerPressed() 
 	{
 		return true;
-	}
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
 
