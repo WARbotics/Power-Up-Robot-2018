@@ -1,12 +1,12 @@
 
 package org.usfirst.frc.team6925.robot.commands;
-
-import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMSpeedController;
+import edu.wpi.first.wpilibj.command.Command;
 
 
-public class DriveWithJoystick
+public class DriveWithJoystick extends Command
 {
 	
 	public Joystick controller;
@@ -51,6 +51,11 @@ public class DriveWithJoystick
 	public boolean getTriggerPressed() 
 	{
 		return true;
+	}
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 
