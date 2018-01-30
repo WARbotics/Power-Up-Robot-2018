@@ -23,7 +23,7 @@ public class OI
 	button8 = new JoystickButton(leftJoy, 8);
 
 	}
-}
+
 
 
 
