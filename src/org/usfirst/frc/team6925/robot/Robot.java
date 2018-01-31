@@ -13,13 +13,9 @@ import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
-=======
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
->>>>>>> refs/remotes/origin/Joystick
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,11 +31,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;;
 public class Robot extends IterativeRobot 
 {
 	
-<<<<<<< HEAD
 	public Joystick controller = new Joystick (0);
-=======
-	public Joystick controller;
->>>>>>> refs/remotes/origin/Joystick
 	public int port;
 	public boolean triggerPressed = false;
 	public static OI oi;
@@ -54,7 +46,6 @@ public class Robot extends IterativeRobot
 	private static final String kLeftCustomTest = "Test Right Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-<<<<<<< HEAD
 	/*public VictorSP m_frontLeftMotor = new VictorSP(1);
 	*public VictorSP m_frontRightMotor = new VictorSP(2);
 	*public VictorSP m_rearLeftMotor = new VictorSP(3);
@@ -64,15 +55,6 @@ public class Robot extends IterativeRobot
 	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
 	*/
 	
-=======
-	public VictorSP m_frontLeftMotor = new VictorSP(1);
-	public VictorSP m_frontRightMotor = new VictorSP(2);
-	
-	public VictorSP m_rearLeftMotor = new VictorSP(3);
-	public VictorSP m_rearRightMotor = new VictorSP(4);
-	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
-	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
->>>>>>> refs/remotes/origin/Joystick
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -190,7 +172,7 @@ public class Robot extends IterativeRobot
 				DriveTrain.m_frontRightMotor.set((throttle * (power + turn)));
 				DriveTrain.m_rearRightMotor.set((throttle * (power + turn)));
 			}
-			else
+			else if (controller.getY() < 0 )
 			{
 				DriveTrain.m_frontLeftMotor.set((throttle * (power + turn)));
 				DriveTrain.m_rearLeftMotor.set((throttle * (power + turn)));
@@ -199,44 +181,13 @@ public class Robot extends IterativeRobot
 			}
 		}
 	@Override
-	public void teleopPeriodic() {
+	public void teleopPeriodic() 
+	{
 		
-		public void Joystick(int port)
-		{
-			this.port = port;
-			this.controller = new Joystick(port);
-			double throttle = Math.abs(controller.getThrottle()-1)/1.5;
-			double speed = controller.getY();
-			double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
-	 
-			if(speed < 0)
-			{
-				speed = speed*-1; 
-			}	
-			double turnPower = ((controller.getTwist()));
-			double turn = (Math.sin(Math.PI*(turnPower - 0.5)) +1) /2;;
-		
-			if(controller.getY() > 0 ) 
-			{
-				m_frontLeftMotor.set((throttle * (power - turn)));
-				m_rearLeftMotor.set((throttle * (power - turn)));
-				m_frontRightMotor.set((throttle * (power + turn)));
-				m_rearRightMotor.set((throttle * (power + turn)));
-			}
-			else
-			{
-				m_frontLeftMotor.set((throttle * (power + turn)));
-				m_rearLeftMotor.set((throttle * (power + turn)));
-				m_frontRightMotor.set((throttle * (power - turn)));
-				m_rearRightMotor.set((throttle * (power - turn)));
-			}
-		
-		}
 	}
 		
 
 		
-<<<<<<< HEAD
 
 	    public void operatorControl() 
 	    {
@@ -247,8 +198,6 @@ public class Robot extends IterativeRobot
 	    		}
 	    }
 		
-=======
->>>>>>> refs/remotes/origin/Joystick
 
 	/**
 	 * This function is called periodically during test mode.

@@ -43,7 +43,7 @@ public class DriveWithJoystick
 			DriveTrain.m_frontRightMotor.set((throttle * (power + turn)));
 			DriveTrain.m_rearRightMotor.set((throttle * (power + turn)));
 		}
-		else
+		else if (controller.getY() < 0)
 		{
 			DriveTrain.m_frontLeftMotor.set((throttle * (power + turn)));
 			DriveTrain.m_rearLeftMotor.set((throttle * (power + turn)));
