@@ -11,19 +11,18 @@ import edu.wpi.first.wpilibj.PWMSpeedController;
 public class DriveWithJoystick
 {
 	
-	public Joystick controller;
-	public int port;
+	public static Joystick controller;
+	public static int port;
 	public boolean triggerPressed = false;
 	
 	
 	public void DriveWithJoystick(int port) 
 	{
-		requires(Robot.drivetrainObject);
 		this.port = port;
-		this.controller = new Joystick(port);
+		controller = new Joystick(port);
 		// When the Controller is initialized, it will automatically set the controller object and port value
 	}
-	public void drive()
+	public static void drive()
 	{
 		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 		double speed = controller.getY();
@@ -57,5 +56,6 @@ public class DriveWithJoystick
 	{
 		return true;
 	}
+	
 }
 

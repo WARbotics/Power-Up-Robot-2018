@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.command.Subsystem;;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -183,7 +185,14 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic() 
 	{
-		
+		Scheduler.getInstance().run();
+		DriveWithJoystick.drive();
+		startCompetition();
+	}
+	@Override
+	public void teleopInit()
+	{
+		controller = new Joystick(3);
 	}
 		
 
