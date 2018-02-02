@@ -20,7 +20,7 @@ public class DriveWithJoystick
 	{
 		this.port = port;
 	}
-	public static void drive()
+	public static void Joystick()
 	{
 		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 		double speed = controller.getY();

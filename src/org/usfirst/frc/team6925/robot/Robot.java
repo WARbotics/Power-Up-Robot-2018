@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot 
 {
-	
+	public static Joystick controller = new Joystick(0);
 	public int port;
 	public boolean triggerPressed = false;
 	public static OI oi;
@@ -155,7 +155,7 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic() 
 	{
 		
-		DriveWithJoystick.drive();
+		DriveWithJoystick.Joystick();
 	}
 		
 	@Override
