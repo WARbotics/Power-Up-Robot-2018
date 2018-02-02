@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team6925.robot;
 
-import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
+//import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString line to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional comparisons to
+	 * You can add additional auto modes by adding additional comparisons to
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 * @return 
@@ -156,8 +156,8 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic() 
 	{
 		Scheduler.getInstance().run();
-		DriveWithJoystick.drive();
-		startCompetition();
+		//DriveWithJoystick.drive();
+		//startCompetition();
 		port = 0;//We changed tis to 1 to make sure that it works
 		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 		double speed = controller.getY();
@@ -184,13 +184,13 @@ public class Robot extends IterativeRobot
 			DriveTrain.m_frontRightMotor.set((throttle * (power - turn)));
 			DriveTrain.m_rearRightMotor.set((throttle * (power - turn)));
 
-	}
+		}
 	}
 		
 	@Override
 	public void teleopInit()
 	{
-		controller = new Joystick(3);
+		controller = new Joystick(0);
 	}
 		
 
