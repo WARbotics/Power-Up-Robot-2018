@@ -154,8 +154,7 @@ public class Robot extends IterativeRobot
 	
 		public void Joystick(int port)
 		{
-			this.port = port;
-			this.controller = new Joystick(port);
+			port = 1;
 			double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 			double speed = controller.getY();
 			double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
