@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.PWMSpeedController;
 
 import org.usfirst.frc.team6925.robot.Robot;
 import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team6925.robot.RobotMap;
 
 
 import edu.wpi.first.wpilibj.Victor;
@@ -27,11 +26,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem 
 {
-	public static VictorSP m_frontLeftMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_LEFT_FRONT);
-	public static VictorSP m_frontRightMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_RIGHT_FRONT);
+	public static VictorSP m_frontLeftMotor = new VictorSP(0);
+	public static VictorSP m_frontRightMotor = new VictorSP(1);
 	
-	public static VictorSP m_rearLeftMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_LEFT_BACK);
-	public static VictorSP m_rearRightMotor = new VictorSP(RobotMap.DRIVETRAIN_VICTOR_RIGHT_BACK);
+	public static VictorSP m_rearLeftMotor = new VictorSP(2);
+	public static VictorSP m_rearRightMotor = new VictorSP(3);
 	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
 	public DriveTrain()

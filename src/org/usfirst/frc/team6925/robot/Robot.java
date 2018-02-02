@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team6925.robot;
 
-//import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -33,7 +33,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Robot extends IterativeRobot 
 {
 	
-	public Joystick controller = new Joystick (1);
+	public Joystick controller = new Joystick (0);
 	public int port;
 	public boolean triggerPressed = false;
 	public static OI oi;
@@ -115,7 +115,7 @@ public class Robot extends IterativeRobot
 	public void autonomousPeriodic() 
 	{
 
-		if (gameData.charAt(0)== 'L')
+		/*if (gameData.charAt(0)== 'L')
 		{
 			switch(m_autoSelected)
 			{
@@ -145,7 +145,7 @@ public class Robot extends IterativeRobot
 					break;
 			}
 		}
-		
+		*/
 	}
 
 	/**
@@ -155,36 +155,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic() 
 	{
-		Scheduler.getInstance().run();
-		//DriveWithJoystick.drive();
-		//startCompetition();
-		port = 0;//We changed tis to 1 to make sure that it works
-		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
-		double speed = controller.getY();
-		double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
- 
-		if(speed < 0)
-		{
-			speed = speed*-1; 
-		}	
-		double turnPower = ((controller.getTwist()));
-		double turn = (Math.sin(Math.PI*(turnPower - 0.5)) +1) /2;;
-	
-		if(controller.getY() > 0 ) 
-		{
-			DriveTrain.m_frontLeftMotor.set((throttle * (power - turn)));
-			DriveTrain.m_rearLeftMotor.set((throttle * (power - turn)));
-			DriveTrain.m_frontRightMotor.set((throttle * (power + turn)));
-			DriveTrain.m_rearRightMotor.set((throttle * (power + turn)));
-		}
-		else if (controller.getY() < 0 )
-		{
-			DriveTrain.m_frontLeftMotor.set((throttle * (power + turn)));
-			DriveTrain.m_rearLeftMotor.set((throttle * (power + turn)));
-			DriveTrain.m_frontRightMotor.set((throttle * (power - turn)));
-			DriveTrain.m_rearRightMotor.set((throttle * (power - turn)));
-
-		}
+		DriveWithJoystick.drive();
 	}
 		
 	@Override
