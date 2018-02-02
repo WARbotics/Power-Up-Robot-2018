@@ -18,7 +18,7 @@ public class DriveWithJoystick
 	
 	public void DriveWithJoystick(int port) 
 	{
-		this.port = port;
+		port = 1;
 		controller = new Joystick(port);
 		// When the Controller is initialized, it will automatically set the controller object and port value
 	}
