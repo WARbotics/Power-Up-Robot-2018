@@ -26,14 +26,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
+ * documentation. If yous change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
  * project.
  */
 public class Robot extends IterativeRobot 
 {
 	
-	public Joystick controller = new Joystick (0);
 	public int port;
 	public boolean triggerPressed = false;
 	public static OI oi;
@@ -77,7 +76,7 @@ public class Robot extends IterativeRobot
 		oi = new OI();
 		drivetrainObject = new DriveTrain();
 	}
-
+/*pls work bb
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -155,6 +154,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic() 
 	{
+		
 		DriveWithJoystick.drive();
 	}
 		

@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.PWMSpeedController;
 public class DriveWithJoystick
 {
 	
-	public static Joystick controller;
+	public static Joystick controller = new Joystick(0);
 	public static int port;
 	public boolean triggerPressed = false;
 	
 	
 	public void DriveWithJoystick(int port) 
 	{
-		port = 0;
+		this.port = port;
 	}
 	public static void drive()
 	{
