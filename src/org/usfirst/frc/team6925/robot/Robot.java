@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 //import edu.wpi.first.wpilibj.command.Subsystem;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;;
 
@@ -162,8 +163,13 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopInit()
 	{
-		//when teleop is starts it place the controller
+		//when the tele operator period start it will start with this function
+		drivetrainObject = new DriveTrain();
+		DriveWithJoystick.drive();
 		controller = new Joystick(1);
+		
+		
+		
 		
 	}
 		
@@ -174,7 +180,7 @@ public class Robot extends IterativeRobot
 	    {
 	    		while (isOperatorControl() && isEnabled()) 
 	    		{
-	    			drivetrainObject.tankDrive(controller);
+	    			drivetrainObject.DriveTrain(controller);
 	    			Timer.delay(0.01);
 	    		}
 	    }

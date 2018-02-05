@@ -42,21 +42,16 @@ public class DriveTrain extends Subsystem
 	{
 		
 	}
-	
-	
 
-
-	public void tankDrive(Joystick controller)
-	{
 	
-	}
 	@Override
 	protected void initDefaultCommand() 
 	{
 		setDefaultCommand(new DriveWithJoystick());
 		
 	}
-	public void setMotors(double left, double right) {
+	public void setMotors(double left, double right) 
+	{
     	left = scaleLeft(left);
     	right = scaleRight(right);
     	
@@ -93,6 +88,12 @@ public class DriveTrain extends Subsystem
 	private void setDefaultCommand(DriveWithJoystick driveWithJoystick) 
 	{
 		
+		
+	}
+
+	public void DriveTrain(Joystick controller) 
+	{
+		DriveWithJoystick.drive();
 		
 	}
 
