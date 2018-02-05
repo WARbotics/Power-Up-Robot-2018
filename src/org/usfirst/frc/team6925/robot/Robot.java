@@ -93,7 +93,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-
+		//collects the game data for finding out if the switch is left or right 
 		String GameData;
 		GameData = DriverStation.getInstance().getGameSpecificMessage();
 		gameData = GameData;	
@@ -113,7 +113,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic() 
 	{
-
+		//Setting up the switch case based on the data of left or right switch 
 		/*if (gameData.charAt(0)== 'L')
 		{
 			switch(m_autoSelected)
@@ -154,14 +154,17 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic() 
 	{
-		
-		DriveWithJoystick.Joystick();
+		//at the start of the Competition it calls drive from drive with joystick 
+		startCompetition();
+		DriveWithJoystick.drive();
 	}
 		
 	@Override
 	public void teleopInit()
 	{
-		//controller = new Joystick(1);
+		//when teleop is starts it place the controller
+		controller = new Joystick(1);
+		
 	}
 		
 

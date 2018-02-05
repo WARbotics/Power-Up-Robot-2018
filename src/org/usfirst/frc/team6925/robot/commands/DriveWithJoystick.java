@@ -16,12 +16,15 @@ public class DriveWithJoystick
 	public boolean triggerPressed = false;
 	
 	
-	public void DriveWithJoystick(int port) 
-	{
-		this.port = port;
+
+	public DriveWithJoystick()
+	{	
+		
 	}
-	public static void Joystick()
+	
+	public static void drive() 
 	{
+		
 		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 		double speed = controller.getY();
 		double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
@@ -48,7 +51,6 @@ public class DriveWithJoystick
 			DriveTrain.m_rearRightMotor.set((throttle * (power - turn)));
 		}
 	}
-	//test even more 
 	
 	public boolean getTriggerPressed() 
 	{
