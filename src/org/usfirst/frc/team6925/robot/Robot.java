@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team6925.robot;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -93,7 +92,7 @@ public class Robot extends IterativeRobot
 	{
 		//collects the game data for finding out if the switch is left or right 
 		String GameData;
-		GameData = DriverStation.getInstance().getGameSpecificMessage();
+		GameData = DriverStation.getInstance().getGameSpecificMessage();//collects it is right or left
 		gameData = GameData;	
 
 		m_autoSelected = m_chooser.getSelected();
@@ -153,7 +152,7 @@ public class Robot extends IterativeRobot
 		//at the start of the Competition it calls drive from drive with joystick 
 		startCompetition();
 		DriveWithJoystick.drive();
-		drivetrainObject.driveTrain(controller);
+		drivetrainObject.driveTrainJoystick(controller);
 		System.out.print("teleop Peridic has started");
 	}
 		
@@ -163,7 +162,7 @@ public class Robot extends IterativeRobot
 		//when the tele operator period start it will start with this function
 		drivetrainObject = new DriveTrain();
 		DriveWithJoystick.drive();
-		controller = new Joystick(3);
+		controller = new Joystick(RobotMap.joystick_port);
 		System.out.println("Init of teleop has finished");
 		
 		

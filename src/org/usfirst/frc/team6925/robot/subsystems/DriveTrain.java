@@ -29,68 +29,27 @@ public class DriveTrain extends Subsystem
 	
 	public static VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
 	public static VictorSP m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
+	//place the the motor into speed control based on left or right
 	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
-	
-
 	
 	public DriveTrain() 
 	{
 		System.out.println("The wrong driveTrain was called ;(");
 	}
 
-	
 	@Override
 	protected void initDefaultCommand() 
 	{
-		setDefaultCommand(new DriveWithJoystick());
+		//When robot init happens it calls this 
+		DriveWithJoystick.drive(); //this calls the joystick
 		System.out.println("init of defualt command");
 		
 	}
-	public void setMotors(double left, double right) 
+	public void driveTrainJoystick(Joystick controller) 
 	{
-    	left = scaleLeft(left);
-    	right = scaleRight(right);
-    	
-    	setMotorsRaw(left, right);
-    }
-    
-    public void setMotorsRaw(double left, double right) 
-    {
-    	left = safetyTest(left);
-    	right = safetyTest(right);
-    	
-    	m_Left.set(left);
-    	m_Right.set(right);		
-	}
-    
-    private double safetyTest(double motorValue) 
-    {
-        motorValue = (motorValue < -1) ? -1 : motorValue;
-        motorValue = (motorValue > 1) ? 1 : motorValue;
-        
-        return motorValue;
-    }
-    
-    private double scaleLeft(double left) 
-    {
-    	return 1.0 * left;
-    }
-    
-    private double scaleRight(double right) 
-    {
-    	return 1.0 * right;
-    }
-
-	private void setDefaultCommand(DriveWithJoystick driveWithJoystick) 
-	{
-		
-		
-	}
-
-	public void driveTrain(Joystick controller) 
-	{
-		DriveWithJoystick.drive();
+		DriveWithJoystick.drive();//calls the joystick
+		//constructs the VictorSP PWM speed controllers 
 		m_frontLeftPWM = new VictorSP(RobotMap.m_frontLeftPWM);
 		m_frontRightPWM = new VictorSP(RobotMap.m_frontRightPWM);
 		m_rearLeftPWM = new VictorSP(RobotMap.m_rearLeftPWM);

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI 
 {
-	Joystick leftJoy = new Joystick(1);
+	Joystick leftJoy = new Joystick(RobotMap.joystick_port);
 	Button button1 = new JoystickButton(leftJoy, 1),
 	button2 = new JoystickButton(leftJoy, 2),
 	button3 = new JoystickButton(leftJoy, 3),
