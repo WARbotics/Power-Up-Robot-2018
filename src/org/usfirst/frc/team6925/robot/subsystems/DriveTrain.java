@@ -44,6 +44,7 @@ public class DriveTrain extends Subsystem
 	protected void initDefaultCommand() 
 	{
 		setDefaultCommand(new DriveWithJoystick());
+		System.out.println("init of defualt command");
 		
 	}
 	public void setMotors(double left, double right) 
@@ -94,6 +95,7 @@ public class DriveTrain extends Subsystem
 		m_frontRightPWM = new VictorSP(RobotMap.m_frontRightPWM);
 		m_rearLeftPWM = new VictorSP(RobotMap.m_rearLeftPWM);
 		m_rearRightPWM = new VictorSP(RobotMap.m_rearRightPWM);
+		System.out.println("driveTrain was called");
 		
 	}
 

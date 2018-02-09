@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6925.robot;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -71,6 +72,7 @@ public class Robot extends IterativeRobot
 		SmartDashboard.putData("Auto choices", m_chooser);
 		oi = new OI();
 		drivetrainObject = new DriveTrain();
+		System.out.println("Robot has init");
 	}
 
 	/**
@@ -151,6 +153,8 @@ public class Robot extends IterativeRobot
 		//at the start of the Competition it calls drive from drive with joystick 
 		startCompetition();
 		DriveWithJoystick.drive();
+		drivetrainObject.driveTrain(controller);
+		System.out.print("teleop Peridic has started");
 	}
 		
 	@Override
@@ -160,7 +164,7 @@ public class Robot extends IterativeRobot
 		drivetrainObject = new DriveTrain();
 		DriveWithJoystick.drive();
 		controller = new Joystick(1);
-		
+		System.out.println("Init of teleop has finished");
 		
 		
 		
@@ -175,6 +179,7 @@ public class Robot extends IterativeRobot
 	    		{
 	    			drivetrainObject.driveTrain(controller);
 	    			Timer.delay(0.01);
+	    			System.out.println("Operator control has gone");
 	    		}
 	    }
 		

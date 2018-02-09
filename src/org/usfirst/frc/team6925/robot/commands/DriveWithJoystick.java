@@ -24,7 +24,7 @@ public class DriveWithJoystick
 	
 	public static void drive() 
 	{
-		
+		System.out.println("drive was called");
 		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 		double speed = controller.getY();
 		double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
