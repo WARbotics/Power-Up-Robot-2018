@@ -23,16 +23,6 @@ public class DriveTrain extends Subsystem
 	private VictorSP m_rearLeftPWM;
 	private VictorSP m_rearRightPWM;
 	
-	//creating the motors(victorSP) 
-	public static VictorSP m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
-	public static VictorSP m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-	
-	public static VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-	public static VictorSP m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
-	//place the the motor into speed control based on left or right
-	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
-	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
-	
 	public DriveTrain() 
 	{
 		System.out.println("The wrong driveTrain was called ;(");
