@@ -64,6 +64,7 @@ public class Robot extends IterativeRobot
 	public void robotInit() 
 	{
 		//creating the motors(victorSP) 
+		
 		VictorSP m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
 		VictorSP m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
 		
@@ -86,6 +87,7 @@ public class Robot extends IterativeRobot
 		oi = new OI();
 		drivetrainObject = new DriveTrain();
 		System.out.println("Robot has init");
+		startCompetition();
 	}
 
 	/**
@@ -172,6 +174,7 @@ public class Robot extends IterativeRobot
 	public void teleopInit()
 	{
 		//when the tele operator period start it will start with this function
+		startCompetition();
 		drivetrainObject = new DriveTrain();
 		DriveWithJoystick.drive();
 		controller = new Joystick(RobotMap.joystick_port);
@@ -188,6 +191,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void testPeriodic() 
 	{
+		startCompetition();
 		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
 		double speed = controller.getY();
 		double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
