@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;;
  */
 public class Robot extends IterativeRobot 
 {
-	public static Joystick controller = new Joystick(0);
+	public static Joystick controller = new Joystick(3);
 	public int port;
 	public boolean triggerPressed = false;
 	public static OI oi;
@@ -163,25 +163,12 @@ public class Robot extends IterativeRobot
 		//when the tele operator period start it will start with this function
 		drivetrainObject = new DriveTrain();
 		DriveWithJoystick.drive();
-		controller = new Joystick(1);
+		controller = new Joystick(3);
 		System.out.println("Init of teleop has finished");
 		
 		
 		
 	}
-		
-
-		
-
-	    public void operatorControl() 
-	    {
-	    		while (isOperatorControl() && isEnabled()) 
-	    		{
-	    			drivetrainObject.driveTrain(controller);
-	    			Timer.delay(0.01);
-	    			System.out.println("Operator control has gone");
-	    		}
-	    }
 		
 
 	/**

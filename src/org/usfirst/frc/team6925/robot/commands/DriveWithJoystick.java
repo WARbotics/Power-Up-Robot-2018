@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.PWMSpeedController;
 public class DriveWithJoystick
 {
 	
-	public static Joystick controller = new Joystick(0);
+	public static Joystick controller = new Joystick(3);
 	public static int port;
 	public boolean triggerPressed = false;
 	
