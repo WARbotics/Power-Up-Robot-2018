@@ -9,20 +9,15 @@ package org.usfirst.frc.team6925.robot;
 
 import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-//import edu.wpi.first.wpilibj.RobotDrive;
-//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
-//import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
-//import edu.wpi.first.wpilibj.command.Subsystem;
-//import edu.wpi.first.wpilibj.livewindow.LiveWindow;;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -77,7 +72,7 @@ public class Robot extends IterativeRobot
 		oi = new OI();
 		drivetrainObject = new DriveTrain();
 	}
-/*pls work bb
+
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -100,8 +95,6 @@ public class Robot extends IterativeRobot
 		gameData = GameData;	
 
 		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
 	public String getGameData()
@@ -180,7 +173,7 @@ public class Robot extends IterativeRobot
 	    {
 	    		while (isOperatorControl() && isEnabled()) 
 	    		{
-	    			drivetrainObject.DriveTrain(controller);
+	    			drivetrainObject.driveTrain(controller);
 	    			Timer.delay(0.01);
 	    		}
 	    }
