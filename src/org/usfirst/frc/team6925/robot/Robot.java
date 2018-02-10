@@ -12,10 +12,7 @@ import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,10 +31,11 @@ public class Robot extends IterativeRobot
 	public static Joystick controller = new Joystick(RobotMap.joystick_port);
 	public boolean triggerPressed = false;
 	public static OI oi;
+	
 	//Subsystem 
-	RobotDrive robotDrive;
 	public static DriveTrain drivetrainObject;
 	public static String gameData;
+	//sendable choosers
 	private static final String kRightDefaultAuto = "Right Default";
 	private static final String kRightCustomAuto = "Right Auto";
 	private static final String kRightCustomTest = "Test Right Auto";
@@ -46,15 +44,6 @@ public class Robot extends IterativeRobot
 	private static final String kLeftCustomTest = "Test Right Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	public VictorSP m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
-	public VictorSP m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-	public VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-	public VictorSP m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
-	
-	SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
-	SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
-	
-	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -63,18 +52,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit() 
 	{
-		//creating the motors(victorSP) 
-		
-		VictorSP m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
-		VictorSP m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-		
-		VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-		VictorSP m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
-		//place the the motor into speed control based on left or right
-		SpeedControllerGroup m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
-		SpeedControllerGroup m_Right = new SpeedControllerGroup(m_rearRightMotor, m_rearRightMotor);
-		
-		robotDrive = new RobotDrive(m_frontLeftMotor, m_frontRightMotor, m_rearLeftMotor, m_rearRightMotor);
+		//sendable choosers 
 		m_chooser.addDefault("Default Right Auto", kRightDefaultAuto);
 		m_chooser.addObject("Right Auto", kRightCustomAuto);
 		m_chooser.addObject("Test Right Auto", kRightCustomTest);
@@ -87,7 +65,6 @@ public class Robot extends IterativeRobot
 		oi = new OI();
 		drivetrainObject = new DriveTrain();
 		System.out.println("Robot has init");
-		startCompetition();
 	}
 
 	/**
@@ -167,6 +144,8 @@ public class Robot extends IterativeRobot
 	{
 		//at the start of the Competition it calls drive from drive with joystick 
 		startCompetition();
+		DriveWithJoystick.drive();
+		drivetrainObject.driveTrainJoystick(controller);
 		System.out.print("teleop Peridic has started");
 	}
 		
@@ -174,7 +153,6 @@ public class Robot extends IterativeRobot
 	public void teleopInit()
 	{
 		//when the tele operator period start it will start with this function
-		startCompetition();
 		drivetrainObject = new DriveTrain();
 		DriveWithJoystick.drive();
 		controller = new Joystick(RobotMap.joystick_port);
@@ -191,31 +169,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void testPeriodic() 
 	{
-		startCompetition();
-		double throttle = Math.abs(controller.getThrottle()-1)/1.5;
-		double speed = controller.getY();
-		double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2; 
-	 
-		if(speed < 0)
-		{
-			speed = speed*-1; 
-		}
-		double turnPower = ((controller.getTwist()));
-		double turn = (Math.sin(Math.PI*(turnPower - 0.5)) +1) /2;;
 		
-		if(controller.getY() > 0 ) 
-		{
-			m_frontLeftMotor.set((throttle * (power - turn)));
-			m_rearLeftMotor.set((throttle * (power - turn)));
-			m_frontRightMotor.set((throttle * (power + turn)));
-			m_rearRightMotor.set((throttle * (power + turn)));
-		}
-		else if (controller.getY() < 0)
-		{
-			m_frontLeftMotor.set((throttle * (power + turn)));
-			m_rearLeftMotor.set((throttle * (power + turn)));
-			m_frontRightMotor.set((throttle * (power - turn)));
-			m_rearRightMotor.set((throttle * (power - turn)));
-		}
 	}
 }

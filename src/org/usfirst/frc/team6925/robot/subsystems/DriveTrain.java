@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6925.robot.subsystems;
 //
 
+import org.usfirst.frc.team6925.robot.Robot;
 import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,14 +19,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrain extends Subsystem 
 {
 	//creating the PWM speed controllers 
-	private VictorSP m_frontLeftPWM;
-	private VictorSP m_frontRightPWM; 
-	private VictorSP m_rearLeftPWM;
-	private VictorSP m_rearRightPWM;
+	public static VictorSP m_frontLeftPWM;
+	public static VictorSP m_frontRightPWM; 
+	public static VictorSP m_rearLeftPWM;
+	public static VictorSP m_rearRightPWM;
 	
 	public DriveTrain() 
 	{
-		System.out.println("The wrong driveTrain was called ;(");
+		VictorSP m_frontLeftPWM = new VictorSP(RobotMap.m_frontLeftPWM);
+		VictorSP m_frontRightPWM = new VictorSP(RobotMap.m_frontRightPWM);
+		VictorSP m_rearLeftPWM = new VictorSP(RobotMap.m_rearLeftPWM);
+		VictorSP m_rearRightPWM = new VictorSP(RobotMap.m_rearRightPWM);
 	}
 
 	@Override
@@ -36,16 +40,18 @@ public class DriveTrain extends Subsystem
 		System.out.println("init of defualt command");
 		
 	}
+
+
+	
 	public void driveTrainJoystick(Joystick controller) 
 	{
 		DriveWithJoystick.drive();//calls the joystick
 		//constructs the VictorSP PWM speed controllers 
-		m_frontLeftPWM = new VictorSP(RobotMap.m_frontLeftPWM);
-		m_frontRightPWM = new VictorSP(RobotMap.m_frontRightPWM);
-		m_rearLeftPWM = new VictorSP(RobotMap.m_rearLeftPWM);
-		m_rearRightPWM = new VictorSP(RobotMap.m_rearRightPWM);
 		System.out.println("driveTrain was called");
 		
 	}
 
-}
+		
+	}
+
+
