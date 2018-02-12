@@ -29,6 +29,7 @@ public class Robot extends IterativeRobot
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	
 	public SpeedControllerGroup m_Left = 
 			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontLeftMotor), 
 			new VictorSP(RobotMap.m_rearLeftMotor));
