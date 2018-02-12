@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 
 /**
@@ -28,9 +29,13 @@ public class Robot extends IterativeRobot
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	private DifferentialDrive m_myRobot
-			= new DifferentialDrive(new VictorSP(RobotMap.m_frontRightMotor),
-			new VictorSP(RobotMap.m_frontRightMotor));
+	public SpeedControllerGroup m_Left = 
+			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontLeftMotor), 
+			new VictorSP(RobotMap.m_rearRightMotor));
+	public SpeedControllerGroup m_Right =
+			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontRightMotor), 
+			new VictorSP(RobotMap.m_rearRightMotor));
+	private DifferentialDrive m_myRobot = new DifferentialDrive(m_Left, m_Right);
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
 
