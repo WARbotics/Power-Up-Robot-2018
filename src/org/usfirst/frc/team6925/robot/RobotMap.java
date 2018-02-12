@@ -3,14 +3,11 @@ package org.usfirst.frc.team6925.robot;
 public class RobotMap {
 	//RobotMap is here just to allow to change variables easier 
 	public static int joystick_port = 3;
-	public static int m_frontLeftMotor = 0;
-	public static int m_frontRightMotor = 1;
-	public static int m_rearLeftMotor = 2;
-	public static int m_rearRightMotor = 3;
-	public static int m_frontLeftPWM = 1; 
-	public static int m_frontRightPWM = 3; 
-	public static int m_rearLeftPWM = 0; 
-	public static int m_rearRightPWM = 2; 
+	public static int m_frontLeftMotor = 1;
+	public static int m_frontRightMotor = 2;
+	public static int m_rearLeftMotor = 3;
+	public static int m_rearRightMotor = 4;
+
 	public static final double kAngleSetpoint = 0.0;
 	public static final double kP = 0.005; // propotional turning constant
 

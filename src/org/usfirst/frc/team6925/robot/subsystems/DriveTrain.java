@@ -26,10 +26,7 @@ public class DriveTrain extends Subsystem
 	
 	public DriveTrain() 
 	{
-		VictorSP m_frontLeftPWM = new VictorSP(RobotMap.m_frontLeftPWM);
-		VictorSP m_frontRightPWM = new VictorSP(RobotMap.m_frontRightPWM);
-		VictorSP m_rearLeftPWM = new VictorSP(RobotMap.m_rearLeftPWM);
-		VictorSP m_rearRightPWM = new VictorSP(RobotMap.m_rearRightPWM);
+
 	}
 
 	@Override
