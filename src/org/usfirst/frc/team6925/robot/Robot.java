@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public SpeedControllerGroup m_Left = 
 			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontLeftMotor), 
-			new VictorSP(RobotMap.m_rearRightMotor));
+			new VictorSP(RobotMap.m_rearLeftMotor));
 	public SpeedControllerGroup m_Right =
 			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontRightMotor), 
 			new VictorSP(RobotMap.m_rearRightMotor));
@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		startCompetition();
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
