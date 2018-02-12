@@ -38,7 +38,6 @@ public class Robot extends IterativeRobot
 	private DifferentialDrive m_myRobot = new DifferentialDrive(m_Left, m_Right);
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -46,13 +45,13 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		startCompetition();
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-	}
 
+		
+	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -82,7 +81,7 @@ public class Robot extends IterativeRobot
 		switch (m_autoSelected) 
 		{
 			case kCustomAuto:
-				// Put custom auto code here
+			
 				break;
 			case kDefaultAuto:
 			default:
@@ -97,10 +96,15 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
+		System.out.println("IN TELEOPPERIODIC");
+		System.out.println("VALUE OF Y = " + m_joystick.getY());
+		//startCompetition();
+		System.out.println("AFTERCOMPETITION FUNC");
 		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
 		// Invert the direction of the turn if we are going backwards
 		turningValue = Math.copySign(turningValue, m_joystick.getY());
 		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
+		
 	}
 
 	/**
