@@ -7,64 +7,44 @@
 
 package org.usfirst.frc.team6925.robot;
 
-import org.usfirst.frc.team6925.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team6925.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If yous change the name of this class or the package after
+ * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
  * project.
  */
 public class Robot extends IterativeRobot 
 {
-	public static Joystick controller = new Joystick(RobotMap.joystick_port);
-	public boolean triggerPressed = false;
-	public static OI oi;
-	
-	//Subsystem 
-	public static DriveTrain drivetrainObject;
-	public static String gameData;
-	//sendable choosers
-	private static final String kRightDefaultAuto = "Right Default";
-	private static final String kRightCustomAuto = "Right Auto";
-	private static final String kRightCustomTest = "Test Right Auto";
-	private static final String kLeftDefaultAuto = "Left Default";
-	private static final String kLeftCustomAuto = "Left Auto";
-	private static final String kLeftCustomTest = "Test Right Auto";
+	private static final String kDefaultAuto = "Default";
+	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	private DifferentialDrive m_myRobot
+			= new DifferentialDrive(new VictorSP(RobotMap.m_frontRightMotor),
+			new VictorSP(RobotMap.m_frontRightMotor));
+	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
+	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-
 	@Override
-	public void robotInit() 
+	public void robotInit()
 	{
-		//sendable choosers 
-		m_chooser.addDefault("Default Right Auto", kRightDefaultAuto);
-		m_chooser.addObject("Right Auto", kRightCustomAuto);
-		m_chooser.addObject("Test Right Auto", kRightCustomTest);
-		m_chooser.addDefault("Default Right Auto", kLeftDefaultAuto);
-		m_chooser.addObject("Left custom Auto", kLeftCustomAuto);
-		m_chooser.addObject("Left Custom Test", kLeftCustomTest);
-		
-
+		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
+		m_chooser.addDefault("Default Auto", kDefaultAuto);
+		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		oi = new OI();
-		drivetrainObject = new DriveTrain();
-		System.out.println("Robot has init");
 	}
 
 	/**
@@ -74,100 +54,54 @@ public class Robot extends IterativeRobot
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString line to get the auto name from the text box below the Gyro
 	 *
-	 * You can add additional auto modes by adding additional comparisons to
+	 * <p>You can add additional auto modes by adding additional comparisons to
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
-	 * @return 
 	 */
-	
 	@Override
 	public void autonomousInit() 
 	{
-		//collects the game data for finding out if the switch is left or right 
-		String GameData;
-		GameData = DriverStation.getInstance().getGameSpecificMessage();//collects it is right or left
-		gameData = GameData;	
-
 		m_autoSelected = m_chooser.getSelected();
+		// autoSelected = SmartDashboard.getString("Auto Selector",
+		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
-	public String getGameData()
-	{
-		return gameData;
-	}
+
 	/**
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
-	public void autonomousPeriodic() 
+	public void autonomousPeriodic()
 	{
-		//Setting up the switch case based on the data of left or right switch 
-		/*if (gameData.charAt(0)== 'L')
+		switch (m_autoSelected) 
 		{
-			switch(m_autoSelected)
-			{
-			case kLeftCustomAuto:
-				break; 
-			case kLeftCustomTest: 
-				break; 
-			case kLeftDefaultAuto:
-
+			case kCustomAuto:
+				// Put custom auto code here
 				break;
-			}
+			case kDefaultAuto:
+			default:
+				// Put default auto code here
+				break;
 		}
-		
-		else 
-		{
-			switch (m_autoSelected) 
-			{
-				case kRightCustomAuto:
-					// Put custom auto code here
-					break;
-				case kRightCustomTest: 
-					//place test code
-					break; 
-				case kRightDefaultAuto:
-				default:
-					// Put default auto code here
-					break;
-			}
-		}
-		*/
 	}
 
 	/**
 	 * This function is called periodically during operator control.
 	 */
-
 	@Override
-	public void teleopPeriodic() 
+	public void teleopPeriodic()
 	{
-		//at the start of the Competition it calls drive from drive with joystick 
-		startCompetition();
-		DriveWithJoystick.drive();
-		drivetrainObject.driveTrainJoystick(controller);
-		System.out.print("teleop Peridic has started");
+		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
+		// Invert the direction of the turn if we are going backwards
+		turningValue = Math.copySign(turningValue, m_joystick.getY());
+		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
 	}
-		
-	@Override
-	public void teleopInit()
-	{
-		//when the tele operator period start it will start with this function
-		drivetrainObject = new DriveTrain();
-		DriveWithJoystick.drive();
-		controller = new Joystick(RobotMap.joystick_port);
-		System.out.println("Init of teleop has finished");
-		
-		
-		
-	}
-		
 
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
-	public void testPeriodic() 
+	public void testPeriodic()
 	{
 		
 	}
