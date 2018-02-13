@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
-
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -29,7 +30,8 @@ public class Robot extends IterativeRobot
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	
+	public static String gameData;
+	public VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
 	public SpeedControllerGroup m_Left = 
 			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontLeftMotor), 
 			new VictorSP(RobotMap.m_rearLeftMotor));
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot
 	private DifferentialDrive m_myRobot = new DifferentialDrive(m_Left, m_Right);
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -46,6 +49,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		CameraServer.getInstance().startAutomaticCapture();
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
@@ -101,10 +105,27 @@ public class Robot extends IterativeRobot
 		System.out.println("VALUE OF Y = " + m_joystick.getY());
 		//startCompetition();
 		System.out.println("AFTERCOMPETITION FUNC");
-		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
-		// Invert the direction of the turn if we are going backwards
-		turningValue = Math.copySign(turningValue, m_joystick.getY());
-		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
+	   	 double throttle = Math.abs(m_joystick.getThrottle()-1)/1.5;
+	   	 double speed = m_joystick.getY();
+	   	 double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2;
+	   	 if(speed < 0)
+	   	 {
+	   		 speed = speed*-1;
+	   	 }
+	   	 double turnPower = ((m_joystick.getTwist()));
+	   	 double turn = (Math.sin(Math.PI*(turnPower - 0.5)) +1) /2;;
+	   	 
+	   	 if(m_joystick.getY() > 0 )
+	   	 {
+	   		 m_Left.set((throttle * (power - turn)));;
+	   		 m_Right.set((throttle * (power + turn)));
+	   		
+	   	 }
+	   	 else if (m_joystick.getY() < 0)
+	   	 {
+	   		 m_Left.set((throttle * (power + turn)));
+	   		 m_Right.set((throttle * (power - turn)));
+	   	 }
 		
 	}
 
