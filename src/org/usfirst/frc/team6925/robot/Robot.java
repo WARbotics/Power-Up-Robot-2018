@@ -110,13 +110,13 @@ public class Robot extends IterativeRobot
 	{
 		System.out.println("IN TELEOPPERIODIC");
 		System.out.println("VALUE OF Y = " + m_joystick.getY());
-		//startCompetition();
-		System.out.println("AFTERCOMPETITION FUNC");
+		System.out.println("The swing Value is = " + m_joystick.getTwist());
 		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
 		// Invert the direction of the turn if we are going backwards
-		turningValue = Math.copySign(turningValue, m_joystick.getY());
-		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
-
+		double throttle = (m_joystick.getThrottle());
+		double turn = (m_joystick.getTwist());
+		
+		m_myRobot.arcadeDrive(throttle, m_joystick.getTwist());
 		
 		//Printing out Encorder "distance"
 		//testEnc
