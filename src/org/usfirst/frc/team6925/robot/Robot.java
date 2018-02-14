@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -26,6 +28,8 @@ import edu.wpi.first.wpilibj.DriverStation;
  */
 public class Robot extends IterativeRobot 
 {
+	
+	
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
@@ -41,6 +45,9 @@ public class Robot extends IterativeRobot
 	private DifferentialDrive m_myRobot = new DifferentialDrive(m_Left, m_Right);
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
+	
+	//Building encoder
+	public Encoder ourCoolEncoder = new Encoder(3,4, false, Encoder.EncodingType.k4X);
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -111,6 +118,10 @@ public class Robot extends IterativeRobot
 		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
 
 		
+		//Printing out Encorder "distance"
+		//testEnc
+		System.out.println(ourCoolEncoder.getDistance());
+		
 	}
 
 	/**
@@ -119,6 +130,5 @@ public class Robot extends IterativeRobot
 	@Override
 	public void testPeriodic()
 	{
-		
 	}
 }
