@@ -46,9 +46,6 @@ public class Robot extends IterativeRobot
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
 	
-	//Building encoder
-	public Encoder ourCoolEncoder = new Encoder(3,4, false, Encoder.EncodingType.k4X);
-	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -119,8 +116,7 @@ public class Robot extends IterativeRobot
 		m_myRobot.arcadeDrive(throttle, m_joystick.getTwist());
 		
 		//Printing out Encorder "distance"
-		//testEnc
-		System.out.println(ourCoolEncoder.getDistance());
+
 		
 	}
 
