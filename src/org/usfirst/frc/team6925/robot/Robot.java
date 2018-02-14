@@ -105,27 +105,11 @@ public class Robot extends IterativeRobot
 		System.out.println("VALUE OF Y = " + m_joystick.getY());
 		//startCompetition();
 		System.out.println("AFTERCOMPETITION FUNC");
-	   	 double throttle = Math.abs(m_joystick.getThrottle()-1)/1.5;
-	   	 double speed = m_joystick.getY();
-	   	 double power = (Math.sin(Math.PI*(speed - 0.5)) + 1 ) /2;
-	   	 if(speed < 0)
-	   	 {
-	   		 speed = speed*-1;
-	   	 }
-	   	 double turnPower = ((m_joystick.getTwist()));
-	   	 double turn = (Math.sin(Math.PI*(turnPower - 0.5)) +1) /2;;
-	   	 
-	   	 if(m_joystick.getY() > 0 )
-	   	 {
-	   		 m_Left.set((throttle * (power - turn)));;
-	   		 m_Right.set((throttle * (power + turn)));
-	   		
-	   	 }
-	   	 else if (m_joystick.getY() < 0)
-	   	 {
-	   		 m_Left.set((throttle * (power + turn)));
-	   		 m_Right.set((throttle * (power - turn)));
-	   	 }
+		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
+		// Invert the direction of the turn if we are going backwards
+		turningValue = Math.copySign(turningValue, m_joystick.getY());
+		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
+
 		
 	}
 
