@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -35,6 +36,8 @@ public class Robot extends IterativeRobot
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
+	public static Double joyStick0;
+	public static Double joyStick1;
 	public VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
 	public SpeedControllerGroup m_Left = 
 			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontLeftMotor), 
@@ -44,7 +47,8 @@ public class Robot extends IterativeRobot
 			new VictorSP(RobotMap.m_rearRightMotor));
 	private DifferentialDrive m_myRobot = new DifferentialDrive(m_Left, m_Right);
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
-	private Joystick m_joystick = new Joystick(RobotMap.joystick_port);
+	private Joystick m_joystick0 = new Joystick(RobotMap.joystick_port);
+	private Joystick m_joystick1 = new Joystick(RobotMap.joystick_port1);
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -106,17 +110,18 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic()
 	{
 		System.out.println("IN TELEOPPERIODIC");
-		System.out.println("VALUE OF Y = " + m_joystick.getY());
-		System.out.println("The swing Value is = " + m_joystick.getTwist());
+		System.out.println("VALUE OF Y = " + m_joystick0.getY());
+		System.out.println("The swing Value is = " + m_joystick0.getTwist());
 		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
 		// Invert the direction of the turn if we are going backwards
-		double throttle = (m_joystick.getThrottle());
-		double turn = (m_joystick.getTwist());
-		
-		m_myRobot.arcadeDrive(throttle, m_joystick.getTwist());
+		double throttle = (m_joystick0.getThrottle());
+		double turn = (m_joystick0.getTwist());
+		joyStick0 = Math.copySign(turningValue, m_joystick0.getY());
+		joyStick1 = Math.copySign(turningValue, m_joystick1.getY());
+		m_myRobot.tankDrive(joyStick0, joyStick1);
 		
 		//Printing out Encorder "distance"
-
+		
 		
 	}
 
