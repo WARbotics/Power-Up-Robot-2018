@@ -9,10 +9,6 @@ public class RobotMap {
 	public static int m_rearLeftMotor = 2;
 	public static int m_rearRightMotor = 3;
 	public static int frontCamera = 0; 
-	public static int Left = 0; 
-	public static int Right = 1;
-	
-	
 	
 	public static final double kAngleSetpoint = 0.0;
 	public static final double kP = 0.005; // propotional turning constant

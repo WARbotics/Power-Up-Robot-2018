@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
@@ -30,6 +31,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
+
 public class Robot extends IterativeRobot 
 {
 	
