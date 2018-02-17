@@ -27,7 +27,7 @@ public class Intake extends Command {
     {
     		double LeftSpeed = 1;
     		double RightSpeed = 1;
-    		
+    		Robot.intake.tankDrive(1,1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

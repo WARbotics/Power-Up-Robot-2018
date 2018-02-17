@@ -9,10 +9,8 @@ package org.usfirst.frc.team6925.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -28,8 +26,8 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 
 public class Robot extends IterativeRobot 
 {
-	public static IntakeSubsystem intake = null;
-	public static driveTrain drivetrain = null;
+	public static IntakeSubsystem intake;
+	public static driveTrain drivetrain;
 	public static OI oi;
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
@@ -37,7 +35,6 @@ public class Robot extends IterativeRobot
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
-	private BuiltInAccelerometer Acel = new BuiltInAccelerometer();
 
 
 	
@@ -105,10 +102,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		Scheduler.getInstance().run();
 		System.out.println("IN TELEOPPERIODIC");
-		double actualSpeed = Acel.getY();
-		SmartDashboard.putNumber("Speed", actualSpeed); 
 		
 		//Printing out Encorder "distance"
 		
