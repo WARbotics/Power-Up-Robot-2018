@@ -11,6 +11,8 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -34,8 +36,6 @@ public class Robot extends IterativeRobot
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
-	public static Double joyStick0;
-	public static Double joyStick1;
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	private BuiltInAccelerometer Acel = new BuiltInAccelerometer();
 
@@ -105,8 +105,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
+		Scheduler.getInstance().run();
 		System.out.println("IN TELEOPPERIODIC");
-		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
 		double actualSpeed = Acel.getY();
 		SmartDashboard.putNumber("Speed", actualSpeed); 
 		
@@ -120,5 +120,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void testPeriodic()
 	{
+
 	}
 }

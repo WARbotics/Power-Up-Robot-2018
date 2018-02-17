@@ -4,7 +4,7 @@ import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.driveArcade;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.Spark;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,17 +14,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class driveTrain extends Subsystem 
 {
-	Spark intakeLeft = null;
-	Spark intakeRight = null;
-	VictorSP frontLeft = null;
-	VictorSP frontRight = null;
-	VictorSP rearLeft = null; 
-	VictorSP rearRight = null;
-	SpeedControllerGroup m_Left = null;
-	SpeedControllerGroup m_Right = null;
-	SpeedControllerGroup inTake = null;
-	DifferentialDrive robotDrive = null;
-	
+	public VictorSP frontLeft, frontRight, rearLeft, rearRight;
+	public SpeedControllerGroup m_Left, m_Right;
+	public DifferentialDrive robotDrive;
     // Put methods for controlling this subsystem
     // here. Call these from Commands
 
