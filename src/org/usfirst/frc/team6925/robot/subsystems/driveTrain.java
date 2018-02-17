@@ -28,10 +28,10 @@ public class driveTrain extends Subsystem
 	public driveTrain() 
 	{
 		System.out.println("We are calling DriveTrain");
-		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
-		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
+		m_frontLeftMotor = new VictorSP(1);
+		m_frontRightMotor = new VictorSP(3);
+		m_rearLeftMotor = new VictorSP(2);
+		m_rearRightMotor = new VictorSP(4);
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
