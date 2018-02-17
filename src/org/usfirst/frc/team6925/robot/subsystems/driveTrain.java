@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class driveTrain extends Subsystem 
 {
-	 public VictorSP frontLeft = new VictorSP(RobotMap.m_frontLeftMotor);
-	 public VictorSP frontRight = new VictorSP(RobotMap.m_frontRightMotor);
-	 public VictorSP rearLeft = new VictorSP(RobotMap.m_rearLeftMotor);
-	 public VictorSP rearRight = new VictorSP(RobotMap.m_rearRightMotor);
-	 public SpeedControllerGroup m_Left = new SpeedControllerGroup(frontLeft, rearLeft);
-	 public SpeedControllerGroup m_Right = new SpeedControllerGroup(frontRight, rearRight);
-	 public DifferentialDrive robotDrive = new DifferentialDrive(m_Left, m_Right);
+	 VictorSP frontLeft = new VictorSP(1);
+	 VictorSP frontRight = new VictorSP(3);
+	 VictorSP rearLeft = new VictorSP(2);
+	 VictorSP rearRight = new VictorSP(4);
+	 SpeedControllerGroup m_Left = new SpeedControllerGroup(frontLeft, rearLeft);
+	 SpeedControllerGroup m_Right = new SpeedControllerGroup(frontRight, rearRight);
+	 DifferentialDrive robotDrive = new DifferentialDrive(m_Left, m_Right);
     // Put methods for controlling this subsystem
     // here. Call these from Commands
 
