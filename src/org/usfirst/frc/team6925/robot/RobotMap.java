@@ -4,6 +4,7 @@ public class RobotMap {
 	//RobotMap is here just to allow to change variables easier 
 	//Joystick
 	public static int joystick_port = 0;
+	public static int OP_joystick_Port = 1;
 	//Motors
 	public static int m_frontLeftMotor = 1;
 	public static int m_frontRightMotor = 3;
@@ -14,6 +15,8 @@ public class RobotMap {
 	//Intake Motor
 	public static int intakeMotor = 0;
 	public static int intakeMotor1 = 1;
+	//Basket motor
+	public static int basketMotor = 0;
 	//Joystick Axis
 	public static int Joystick_Move_Axis = 1;
 	public static int Joystick_Rotate_Axis = 0; 

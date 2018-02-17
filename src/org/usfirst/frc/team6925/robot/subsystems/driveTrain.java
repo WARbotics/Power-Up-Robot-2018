@@ -27,6 +27,7 @@ public class driveTrain extends Subsystem
 
 	public driveTrain() 
 	{
+		System.out.println("We are calling DriveTrain");
 		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
 		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
 		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
@@ -35,6 +36,7 @@ public class driveTrain extends Subsystem
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
 		robotDrive = new DifferentialDrive(m_Left, m_Right);
+		System.out.println("end of driveTrain method");
 	}
 
    public void arcadeDrive(double moveSpeed, double rotateSpeed) 

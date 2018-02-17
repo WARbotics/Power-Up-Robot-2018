@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
 import org.usfirst.frc.team6925.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team6925.robot.subsystems.basket;
 import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,8 +25,11 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
  * project.
  */
 
+//TODO 
+//Button and basket (spark)
 public class Robot extends IterativeRobot 
 {
+	public static basket Basket; 
 	public static IntakeSubsystem intake;
 	public static driveTrain drivetrain;
 	public static OI oi;
@@ -45,6 +49,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		System.out.println("Robot has init");
+		Basket = new basket();
 		intake = new IntakeSubsystem();
 		drivetrain = new driveTrain();
 		oi = new OI();
@@ -55,6 +61,7 @@ public class Robot extends IterativeRobot
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		System.out.println("Robot Init has finished");
 
 		
 	}
