@@ -13,10 +13,10 @@ public class RobotMap {
 	//Cammera
 	public static int frontCamera = 0; 
 	//Intake Motor
-	public static int intakeMotor = 0;
-	public static int intakeMotor1 = 1;
+	public static int intakeMotor = 6;
+	public static int intakeMotor1 = 7;
 	//Basket motor
-	public static int basketMotor = 0;
+	public static int basketMotor = 5;
 	//Joystick Axis
 	public static int Joystick_Move_Axis = 1;
 	public static int Joystick_Rotate_Axis = 0; 
