@@ -13,17 +13,9 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GenericHID.Hand; 
+import org.usfirst.frc.team6925.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -34,8 +26,9 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class Robot extends IterativeRobot 
 {
-	
-	
+	public static IntakeSubsystem intake = null;
+	public static driveTrain drivetrain = null;
+	public static OI oi;
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
@@ -43,20 +36,9 @@ public class Robot extends IterativeRobot
 	public static String gameData;
 	public static Double joyStick0;
 	public static Double joyStick1;
-	public VictorSP m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-	public SpeedControllerGroup m_Left = 
-			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontLeftMotor), 
-			new VictorSP(RobotMap.m_rearLeftMotor));
-	public SpeedControllerGroup m_Right =
-			new SpeedControllerGroup(new VictorSP(RobotMap.m_frontRightMotor), 
-			new VictorSP(RobotMap.m_rearRightMotor));
-	private DifferentialDrive m_myRobot = new DifferentialDrive(m_Left, m_Right);
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
-	private Joystick m_opJoyStick = new Joystick(RobotMap.joystick_port);
-	private XboxController m_driveController = new XboxController(RobotMap.m_driveController);
 	private BuiltInAccelerometer Acel = new BuiltInAccelerometer();
-	private Hand kLeft; 
-	private Hand kRight;
+
 
 	
 	/**
@@ -66,6 +48,9 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		intake = new IntakeSubsystem();
+		drivetrain = new driveTrain();
+		oi = new OI();
 		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
 		m_frontCamera.setFPS(60);
 		m_frontCamera.setResolution(640, 640);
@@ -122,15 +107,10 @@ public class Robot extends IterativeRobot
 	{
 		System.out.println("IN TELEOPPERIODIC");
 		double turningValue = (RobotMap.kAngleSetpoint - m_gyro.getAngle()) * RobotMap.kP;
-		double driveLeft =  Math.copySign(turningValue, m_driveController.getY(kLeft));// double check this 
-		double driveRight = Math.copySign(turningValue, m_driveController.getY(kRight));
-		// Invert the direction of the turn if we are going backwards
 		double actualSpeed = Acel.getY();
-		SmartDashboard.putNumber("Speed", actualSpeed);
-		m_myRobot.tankDrive(driveLeft, driveRight); 
+		SmartDashboard.putNumber("Speed", actualSpeed); 
 		
 		//Printing out Encorder "distance"
-		
 		
 	}
 
