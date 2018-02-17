@@ -16,7 +16,7 @@ public class basket extends Subsystem
     // here. Call these from Commands.
 	public basket() 
 	{
-		Spark basketMotor = new Spark(0);
+		Spark basketMotor = new Spark(RobotMap.basketMotor);
 	}
 	public void setSpeed(double inputSpeed) 
 	{

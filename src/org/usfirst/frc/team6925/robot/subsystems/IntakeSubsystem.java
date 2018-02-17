@@ -22,8 +22,8 @@ public class IntakeSubsystem extends Subsystem
 
 	public IntakeSubsystem() 
 	{
-		Spark intakeLeft = new Spark(0);
-		Spark intakeRight = new Spark(1);
+		Spark intakeLeft = new Spark(RobotMap.intakeMotor);
+		Spark intakeRight = new Spark(RobotMap.intakeMotor1);
 		
 		SpeedControllerGroup intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 	}
