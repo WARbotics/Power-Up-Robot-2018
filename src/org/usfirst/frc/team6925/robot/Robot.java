@@ -108,18 +108,41 @@ public class Robot extends IterativeRobot
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
-	public void autonomousPeriodic() {
-		switch(m_autoSelected) 
-		 {
-		 
-  		 case kLeftCustomAuto:
-  			 break;
-  		 case kLeftCustomTest:
-  			 break;
-  		 case kLeftDefaultAuto:
+	public void autonomousPeriodic() 
+	{
+		
+		if (gameData.charAt(0)== 'L') 
+		{
+			 switch(m_autoSelected) 
+		{
+	   		 case kLeftCustomAuto:
+	   			 break;
+	   		 case kLeftCustomTest:
+	   			 break;
+	   		 case kLeftDefaultAuto:
 
-  			 break;
-  		 }
+	   			 break;
+	   	 }
+		}
+
+	   	 
+	   	 else
+	   	 {
+	   		 switch (m_autoSelected) 
+	   		 {
+	   		 	case kRightCustomAuto:
+	   		 		// Put custom auto code here
+	   		 		break;
+	   		 	case kRightCustomTest:
+	   		 		//place test code
+	   		 		break;
+	   		 	case kRightDefaultAuto:
+	   		 		break;
+	   		 	default:
+	   		 		// Put default auto code here
+	   		 		break;
+	   		 } 
+	   	 }
 	}
 	
 		
