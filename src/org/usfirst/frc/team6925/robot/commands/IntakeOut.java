@@ -26,7 +26,7 @@ public class IntakeOut extends Command
     protected void execute() 
     {
     		
-		Robot.intake.set(-1,-1);
+		Robot.intake.setIntakeSpeed(-1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +38,7 @@ public class IntakeOut extends Command
     // Called once after isFinished returns true
     protected void end() 
     {
-    		Robot.intake.tankDrive(0, 0);
+    		Robot.intake.setIntakeSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

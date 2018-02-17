@@ -5,18 +5,32 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team6925.robot.RobotMap;
+import org.usfirst.frc.team6925.robot.commands.Intake;
+import org.usfirst.frc.team6925.robot.commands.IntakeOut;
+import org.usfirst.frc.team6925.robot.commands.reload;
+import org.usfirst.frc.team6925.robot.commands.shoot;
 
 
 public class OI 
 {
 	public Joystick drive_Joystick = new Joystick(RobotMap.joystick_port);
-	public Joystick OP_Joystick = new Joystick(1);//RobotMap is freaking out about it (figure out later)
-	
+	public Joystick OP_Joystick = new Joystick(RobotMap.OP_joystick_Port);//RobotMap is freaking out about it (figure out later)
+	Button button1 = new JoystickButton(OP_Joystick, 1),
+			button2 = new JoystickButton(OP_Joystick, 2),
+			button3 = new JoystickButton(OP_Joystick, 3),
+			button4 = new JoystickButton(OP_Joystick, 4),
+			button5 = new JoystickButton(OP_Joystick, 5),
+			button6 = new JoystickButton(OP_Joystick, 6),
+			button7 = new JoystickButton(OP_Joystick, 7),
+			button8 = new JoystickButton(OP_Joystick, 8);
 	
 	
 	public OI() 
 	{
-		
+		button1.whenPressed(new shoot());
+		button2.whenPressed(new reload());
+		button3.whenPressed(new Intake());
+		button4.whenPressed(new IntakeOut());
 	}
 }
 

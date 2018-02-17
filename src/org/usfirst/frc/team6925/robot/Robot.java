@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
+
 import org.usfirst.frc.team6925.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team6925.robot.subsystems.basket;
 import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
@@ -33,13 +35,17 @@ public class Robot extends IterativeRobot
 	public static IntakeSubsystem intake;
 	public static driveTrain drivetrain;
 	public static OI oi;
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
+    private static final String kRightDefaultAuto = "Right Default";
+    private static final String kRightCustomAuto = "Right Auto";
+    private static final String kRightCustomTest = "Test Right Auto";
+    private static final String kLeftDefaultAuto = "Left Default";
+    private static final String kLeftCustomAuto = "Left Auto";
+    private static final String kLeftCustomTest = "Test Right Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
-
+	
 
 	
 	/**
@@ -58,8 +64,13 @@ public class Robot extends IterativeRobot
 		m_frontCamera.setFPS(60);
 		m_frontCamera.setResolution(640, 640);
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
+		m_chooser.addDefault("Default Right Auto", kRightDefaultAuto);
+	   	m_chooser.addObject("Right Auto", kRightCustomAuto);
+	   	m_chooser.addObject("Test Right Auto", kRightCustomTest);
+	   	m_chooser.addDefault("Default Right Auto", kLeftDefaultAuto);
+	   	m_chooser.addObject("Left custom Auto", kLeftCustomAuto);
+	   	m_chooser.addObject("Left Custom Test", kLeftCustomTest);
+
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
 
@@ -79,29 +90,77 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
+		String GameData;
+	   	GameData = DriverStation.getInstance().getGameSpecificMessage();
+	   	gameData = GameData;   
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
+    public String getGameData()
+    {
+   	 return gameData;
+    }
+
 
 	/**
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
-	public void autonomousPeriodic()
-	{
-		switch (m_autoSelected) 
-		{
-			case kCustomAuto:
-			
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
-		}
+	public void autonomousPeriodic() {
+		switch(m_autoSelected) 
+		 {
+		 
+  		 case kLeftCustomAuto:
+  			 break;
+  		 case kLeftCustomTest:
+  			 break;
+  		 case kLeftDefaultAuto:
+
+  			 break;
+  		 }
 	}
+	
+		
+
+		/*if (gameData.charAt(0)== 'L') {
+			 switch(m_autoSelected) 
+			 {
+			 
+	   		 case kLeftCustomAuto:
+	   			 break;
+	   		 case kLeftCustomTest:
+	   			 break;
+	   		 case kLeftDefaultAuto:
+
+	   			 break;
+	   		 }
+	   	 }
+
+	   	 
+	   	 else
+	   	 {
+	   		 switch (m_autoSelected) 
+	   		 {
+	   		 	case kRightCustomAuto:
+	   		 		// Put custom auto code here
+	   		 		break;
+	   		 	case kRightCustomTest:
+	   		 		//place test code
+	   		 		break;
+	   		 	case kRightDefaultAuto:
+	   		 		break;
+	   		 	default:
+	   		 		// Put default auto code here
+	   		 		break;
+	   		 }
+	   			
+	   		 
+	}
+		
+*/
+
 
 	/**
 	 * This function is called periodically during operator control.
