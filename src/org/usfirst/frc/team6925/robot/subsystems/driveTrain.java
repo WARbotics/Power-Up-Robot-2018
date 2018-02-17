@@ -12,15 +12,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class driveTrain extends Subsystem 
 {
-	 VictorSP frontLeft = new VictorSP(1);
-	 VictorSP frontRight = new VictorSP(3);
-	 VictorSP rearLeft = new VictorSP(2);
-	 VictorSP rearRight = new VictorSP(4);
-	 SpeedControllerGroup m_Left = new SpeedControllerGroup(frontLeft, rearLeft);
-	 SpeedControllerGroup m_Right = new SpeedControllerGroup(frontRight, rearRight);
-	 DifferentialDrive robotDrive = new DifferentialDrive(m_Left, m_Right);
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands
+	//creating the PWM speed controllers 
+	private VictorSP m_frontLeftMotor;
+	private VictorSP m_frontRightMotor; 
+	private VictorSP m_rearLeftMotor;
+	private VictorSP m_rearRightMotor;
+
+	SpeedControllerGroup m_Left;
+	SpeedControllerGroup m_Right;
+	
+	DifferentialDrive robotDrive;
+
+
+
+	public driveTrain() 
+	{
+		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
+		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
+		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
+		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
+		
+		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
+		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
+		robotDrive = new DifferentialDrive(m_Left, m_Right);
+	}
 
    public void arcadeDrive(double moveSpeed, double rotateSpeed) 
    {
