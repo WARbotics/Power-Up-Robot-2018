@@ -1,8 +1,7 @@
 package org.usfirst.frc.team6925.robot.subsystems;
 
 import org.usfirst.frc.team6925.robot.RobotMap;
-import org.usfirst.frc.team6925.robot.commands.driveArcade;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import org.usfirst.frc.team6925.robot.commands.tankDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,8 +19,7 @@ public class driveTrain extends Subsystem
 
 	SpeedControllerGroup m_Left;
 	SpeedControllerGroup m_Right;
-	
-	DifferentialDrive robotDrive;
+
 
 
 	//drivetrain
@@ -35,17 +33,20 @@ public class driveTrain extends Subsystem
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
-		robotDrive = new DifferentialDrive(m_Left, m_Right);
 		System.out.println("end of driveTrain method");
 	}
 
-   public void arcadeDrive(double moveSpeed, double rotateSpeed) 
+   public void tankDriveLeft(double inputSpeedLeft)
    {
-	   robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+	   m_Left.set(inputSpeedLeft);
    }
-	public void initDefaultCommand() 
+   public void tankDriveRight(double inputSpeedRight)
+   {
+	   m_Right.set(inputSpeedRight);
+   }
+   public void initDefaultCommand() 
     {
-		setDefaultCommand(new driveArcade());
+		setDefaultCommand(new tankDrive());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

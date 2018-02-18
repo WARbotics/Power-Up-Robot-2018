@@ -14,7 +14,7 @@ import org.usfirst.frc.team6925.robot.commands.shoot;
 public class OI 
 {
 	public Joystick drive_Joystick = new Joystick(RobotMap.joystick_port);
-	public Joystick OP_Joystick = new Joystick(RobotMap.OP_joystick_Port);//RobotMap is freaking out about it (figure out later)
+	public Joystick OP_Joystick = new Joystick(RobotMap.OP_joystick_Port);
 	Button button1 = new JoystickButton(OP_Joystick, 1),
 			button2 = new JoystickButton(OP_Joystick, 2),
 			button3 = new JoystickButton(OP_Joystick, 3),

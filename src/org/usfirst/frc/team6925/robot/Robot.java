@@ -147,53 +147,17 @@ public class Robot extends IterativeRobot
 	
 		
 
-		/*if (gameData.charAt(0)== 'L') {
-			 switch(m_autoSelected) 
-			 {
-			 
-	   		 case kLeftCustomAuto:
-	   			 break;
-	   		 case kLeftCustomTest:
-	   			 break;
-	   		 case kLeftDefaultAuto:
-
-	   			 break;
-	   		 }
-	   	 }
-
-	   	 
-	   	 else
-	   	 {
-	   		 switch (m_autoSelected) 
-	   		 {
-	   		 	case kRightCustomAuto:
-	   		 		// Put custom auto code here
-	   		 		break;
-	   		 	case kRightCustomTest:
-	   		 		//place test code
-	   		 		break;
-	   		 	case kRightDefaultAuto:
-	   		 		break;
-	   		 	default:
-	   		 		// Put default auto code here
-	   		 		break;
-	   		 }
-	   			
-	   		 
-	}
-		
-*/
-
-
 	/**
 	 * This function is called periodically during operator control.
 	 */
 	@Override
 	public void teleopPeriodic()
 	{
+		double inputSpeedLeft = Robot.oi.drive_Joystick.getY();
+    	double inputSpeedRight = Robot.oi.drive_Joystick.getThrottle();
+    	Robot.drivetrain.tankDriveLeft(inputSpeedLeft);
+    	Robot.drivetrain.tankDriveRight(inputSpeedRight);
 		System.out.println("IN TELEOPPERIODIC");
-		
-		//Printing out Encorder "distance"
 		
 	}
 
@@ -203,6 +167,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void testPeriodic()
 	{
+		
 
 	}
 }
