@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class driveTrain extends Subsystem 
 {
-	//creating the PWM speed controllers 
+	//Creating VictorSP motors 
 	private VictorSP m_frontLeftMotor;
 	private VictorSP m_frontRightMotor; 
 	private VictorSP m_rearLeftMotor;
 	private VictorSP m_rearRightMotor;
+	//creating the PWM speed controllers 
 
 	SpeedControllerGroup m_Left;
 	SpeedControllerGroup m_Right;
-
-
-
+	
 	//drivetrain
 	public driveTrain() 
 	{
@@ -38,6 +37,7 @@ public class driveTrain extends Subsystem
 
    public void tankDriveLeft(double inputSpeedLeft)
    {
+	   //
 	   m_Left.set(inputSpeedLeft);
    }
    public void tankDriveRight(double inputSpeedRight)

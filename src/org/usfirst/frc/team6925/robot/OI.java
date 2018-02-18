@@ -13,8 +13,10 @@ import org.usfirst.frc.team6925.robot.commands.shoot;
 
 public class OI 
 {
+	//Constructing the joystick and and placing it with it port number  
 	public Joystick drive_Joystick = new Joystick(RobotMap.joystick_port);
 	public Joystick OP_Joystick = new Joystick(RobotMap.OP_joystick_Port);
+	//Constructing the button for the Operator Joystick
 	Button button1 = new JoystickButton(OP_Joystick, 1),
 			button2 = new JoystickButton(OP_Joystick, 2),
 			button3 = new JoystickButton(OP_Joystick, 3),
@@ -27,6 +29,7 @@ public class OI
 	
 	public OI() 
 	{
+		//placing buttons to there commands  
 		button1.whenPressed(new shoot());
 		button2.whenPressed(new reload());
 		button3.whenPressed(new Intake());

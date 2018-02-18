@@ -27,6 +27,14 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
  * project.
  */
 
+/*   __   ___ ____  ____  
+  / /_ / _ \___ \| ___| 
+ | '_ \ (_) |__) |___ \ 
+ | (_) \__, / __/ ___) |
+  \___/  /_/_____|____/ 
+*/                        
+
+
 //TODO 
 //Button and basket (spark)
 public class Robot extends IterativeRobot 
@@ -35,12 +43,12 @@ public class Robot extends IterativeRobot
 	public static IntakeSubsystem intake;
 	public static driveTrain drivetrain;
 	public static OI oi;
-    private static final String kRightDefaultAuto = "Right Default";
-    private static final String kRightCustomAuto = "Right Auto";
-    private static final String kRightCustomTest = "Test Right Auto";
-    private static final String kLeftDefaultAuto = "Left Default";
-    private static final String kLeftCustomAuto = "Left Auto";
-    private static final String kLeftCustomTest = "Test Right Auto";
+    private static final String R_Left = "R-Switch L-Start";
+    private static final String R_Right = "R-Switch R-Start";
+    private static final String R_Mid = "R-Switch M-Start";
+    private static final String L_Left = "L-Switch L-Start";
+    private static final String L_Right = "L-Switch R-Start";
+    private static final String L_Mid = "L-Switch M-Start";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
@@ -64,12 +72,12 @@ public class Robot extends IterativeRobot
 		m_frontCamera.setFPS(60);
 		m_frontCamera.setResolution(640, 640);
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
-		m_chooser.addDefault("Default Right Auto", kRightDefaultAuto);
-	   	m_chooser.addObject("Right Auto", kRightCustomAuto);
-	   	m_chooser.addObject("Test Right Auto", kRightCustomTest);
-	   	m_chooser.addDefault("Default Right Auto", kLeftDefaultAuto);
-	   	m_chooser.addObject("Left custom Auto", kLeftCustomAuto);
-	   	m_chooser.addObject("Left Custom Test", kLeftCustomTest);
+		m_chooser.addDefault("Right Switch and Right Start", R_Left);
+	   	m_chooser.addObject("Right Switch and Right Start", R_Right);
+	   	m_chooser.addObject("Right Switch and Mid Start", R_Mid);
+	   	m_chooser.addDefault("Left Switch Left Start", L_Left);
+	   	m_chooser.addObject("Left Switch Right Start", L_Right);
+	   	m_chooser.addObject("Left Switch Mid Start", L_Mid);
 
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
@@ -90,17 +98,17 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
+		//Collecting the GameData 
 		String GameData;
 	   	GameData = DriverStation.getInstance().getGameSpecificMessage();
 	   	gameData = GameData;   
 		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
     public String getGameData()
     {
-   	 return gameData;
+    	//returns the data  
+   	 	return gameData;
     }
 
 
@@ -110,19 +118,21 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic() 
 	{
-		
+		//based on the first letter of the game Data
 		if (gameData.charAt(0)== 'L') 
 		{
 			 switch(m_autoSelected) 
 		{
-	   		 case kLeftCustomAuto:
+	   		 case L_Right:
+	   			 //Left Switch and Right placement
 	   			 break;
-	   		 case kLeftCustomTest:
+	   		 case L_Mid:
+	   			 //Left  Switch and Right placement 
 	   			 break;
-	   		 case kLeftDefaultAuto:
-
+	   		 case L_Left:
+	   			 //Left  switch anad Left placement
 	   			 break;
-	   	 }
+	   	}
 		}
 
 	   	 
@@ -130,16 +140,14 @@ public class Robot extends IterativeRobot
 	   	 {
 	   		 switch (m_autoSelected) 
 	   		 {
-	   		 	case kRightCustomAuto:
-	   		 		// Put custom auto code here
+	   		 	case R_Right:
+	   		 		//Right Switch and Right placement
 	   		 		break;
-	   		 	case kRightCustomTest:
-	   		 		//place test code
+	   		 	case R_Mid:
+	   		 		//Right Switch and Middle placement
 	   		 		break;
-	   		 	case kRightDefaultAuto:
-	   		 		break;
-	   		 	default:
-	   		 		// Put default auto code here
+	   		 	case R_Left:
+	   		 		//Right Switch and Left Placement
 	   		 		break;
 	   		 } 
 	   	 }
