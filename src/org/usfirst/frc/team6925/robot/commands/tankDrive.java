@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class tankDrive extends Command 
 {
 
-    public tankDrive() {
+    public tankDrive() 
+    {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
@@ -24,8 +25,8 @@ public class tankDrive extends Command
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	double inputSpeed = Robot.oi.drive_Joystick.getY();
-    	double inputSpeedRight = Robot.oi.drive_Joystick.getThrottle();
+    	double inputSpeed = Robot.oi.drive_Joystick.getRawAxis(2);
+    	double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
     	Robot.drivetrain.tankDriveLeft(inputSpeed);
     	Robot.drivetrain.tankDriveRight(inputSpeedRight);
     	

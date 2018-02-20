@@ -4,10 +4,8 @@ import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  *
@@ -22,10 +20,10 @@ public class IntakeSubsystem extends Subsystem
 
 	public IntakeSubsystem() 
 	{
-		Spark intakeLeft = new Spark(RobotMap.intakeMotor);
-		Spark intakeRight = new Spark(RobotMap.intakeMotor1);
+		intakeLeft = new Spark(RobotMap.intakeMotor);
+		intakeRight = new Spark(RobotMap.intakeMotor1);
 		
-		SpeedControllerGroup intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
+		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 	}
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{

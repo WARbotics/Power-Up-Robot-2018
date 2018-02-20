@@ -37,7 +37,6 @@ public class driveTrain extends Subsystem
 
    public void tankDriveLeft(double inputSpeedLeft)
    {
-	   //
 	   m_Left.set(inputSpeedLeft);
    }
    public void tankDriveRight(double inputSpeedRight)

@@ -161,10 +161,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		double inputSpeedLeft = Robot.oi.drive_Joystick.getY();
-    	double inputSpeedRight = Robot.oi.drive_Joystick.getThrottle();
-    	Robot.drivetrain.tankDriveLeft(inputSpeedLeft);
-    	Robot.drivetrain.tankDriveRight(inputSpeedRight);
+		double inputSpeedLeft = -Robot.oi.drive_Joystick.getRawAxis(1);
+		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
+    		Robot.drivetrain.tankDriveLeft(inputSpeedLeft);
+    		System.out.println("Passed leftside");
+    		Robot.drivetrain.tankDriveRight(inputSpeedRight);
 		System.out.println("IN TELEOPPERIODIC");
 		
 	}
