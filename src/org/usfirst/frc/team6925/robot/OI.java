@@ -1,3 +1,7 @@
+/*
+ * This constructs and identifies the buttons located on the joystick
+ */
+
 package org.usfirst.frc.team6925.robot;
 
 //import
