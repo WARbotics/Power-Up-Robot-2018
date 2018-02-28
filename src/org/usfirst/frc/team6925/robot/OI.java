@@ -26,6 +26,8 @@ public class OI
 	Button intakeIN;
 	Button intakeOUT;
 	
+	Button testMotors;
+	Button testUnit;
 	public OI() 
 	{
 		//Constructing the button for the Operator Joystick
@@ -33,8 +35,14 @@ public class OI
 		basketReload = new JoystickButton(OP_Joystick, 2);
 		intakeIN = new JoystickButton(OP_Joystick, 3);
 		intakeOUT = new JoystickButton(OP_Joystick, 4);
+		
+		
+		testMotors = new JoystickButton(OP_Joystick, 5);
+		testUnit = new JoystickButton(OP_Joystick,6);
 		//placing buttons to there commands  
 		System.out.println("When through Button");
+		
+		
 	}
 }
 //test 

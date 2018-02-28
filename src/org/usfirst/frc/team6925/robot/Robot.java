@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team6925.robot;
-
+import org.usfirst.frc.team6925.robot.subsystems.Diagnostics;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
 
@@ -167,6 +167,8 @@ public class Robot extends IterativeRobot
     		System.out.println("Passed leftside");
     		Robot.drivetrain.tankDriveRight(inputSpeedRight);
 		System.out.println("IN TELEOPPERIODIC");
+		
+		
 		if (Robot.oi.basket.get()) 
 		{
 			Robot.Basket.setSpeed(.75);
@@ -174,6 +176,8 @@ public class Robot extends IterativeRobot
 		else {
 			Robot.Basket.setSpeed(0);
 		}
+		
+		
 		if (Robot.oi.basketReload.get()) 
 		{
 			Robot.Basket.setSpeed(-.75);
@@ -182,6 +186,8 @@ public class Robot extends IterativeRobot
 		{
 			Robot.Basket.setSpeed(0);
 		}
+		
+		
 		if (Robot.oi.intakeIN.get()) 
 		{
 			Robot.intake.setIntakeSpeed(.75);
@@ -190,6 +196,8 @@ public class Robot extends IterativeRobot
 		{
 			Robot.intake.setIntakeSpeed(0);
 		}
+		
+		
 		if (Robot.oi.intakeOUT.get()) 
 		{
 			Robot.intake.setIntakeSpeed(-.75);
@@ -198,7 +206,25 @@ public class Robot extends IterativeRobot
 		{
 			Robot.intake.setIntakeSpeed(0);
 		}
-			
+		
+		
+		//now for the pretty stuff :)
+		if (Robot.oi.testMotors.get())
+		{
+			if (!Diagnostics.isRunning())
+			{
+				Diagnostics.testSpeedGroups();
+			}
+		}
+		
+		if (Robot.oi.testUnit.get())
+		{
+			if (!Diagnostics.isRunning())
+			{
+				Diagnostics.testUnit();
+			}
+		}
+		
 	}
 
 	/**
