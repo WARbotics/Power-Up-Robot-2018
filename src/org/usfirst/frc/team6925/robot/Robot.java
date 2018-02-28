@@ -9,6 +9,8 @@ package org.usfirst.frc.team6925.robot;
 import org.usfirst.frc.team6925.robot.subsystems.Diagnostics;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Joystick;
+
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -162,10 +164,11 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic()
 	{
 		double inputSpeedLeft = -Robot.oi.drive_Joystick.getRawAxis(1);
+		
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-    		Robot.drivetrain.tankDriveLeft(inputSpeedLeft);
+    		Robot.drivetrain.tankDriveLeft(deadBand(inputSpeedLeft));
     		System.out.println("Passed leftside");
-    		Robot.drivetrain.tankDriveRight(inputSpeedRight);
+    		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight));
 		System.out.println("IN TELEOPPERIODIC");
 		
 		
@@ -235,5 +238,16 @@ public class Robot extends IterativeRobot
 	{
 		
 
+	}
+	public double deadBand(double coolDoubleThing)
+	{
+		if (coolDoubleThing > .2)
+		{
+			return 0.0;
+		}
+		else
+		{
+			return coolDoubleThing;
+		}
 	}
 }
