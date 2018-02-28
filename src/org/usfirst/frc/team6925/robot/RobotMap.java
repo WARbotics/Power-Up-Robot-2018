@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6925.robot;
 
+
 public class RobotMap {
 	//RobotMap is here just to allow to change variables easier 
 	//Joystick
