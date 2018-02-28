@@ -167,7 +167,38 @@ public class Robot extends IterativeRobot
     		System.out.println("Passed leftside");
     		Robot.drivetrain.tankDriveRight(inputSpeedRight);
 		System.out.println("IN TELEOPPERIODIC");
-		
+		if (Robot.oi.basket.get()) 
+		{
+			Robot.Basket.setSpeed(.75);
+		}
+		else {
+			Robot.Basket.setSpeed(0);
+		}
+		if (Robot.oi.basketReload.get()) 
+		{
+			Robot.Basket.setSpeed(-.75);
+		}
+		else 
+		{
+			Robot.Basket.setSpeed(0);
+		}
+		if (Robot.oi.intakeIN.get()) 
+		{
+			Robot.intake.setIntakeSpeed(.75);
+		}
+		else 
+		{
+			Robot.intake.setIntakeSpeed(0);
+		}
+		if (Robot.oi.intakeOUT.get()) 
+		{
+			Robot.intake.setIntakeSpeed(-.75);
+		}
+		else 
+		{
+			Robot.intake.setIntakeSpeed(0);
+		}
+			
 	}
 
 	/**
