@@ -3,6 +3,7 @@ package org.usfirst.frc.team6925.robot.subsystems;
 import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.tankDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -49,5 +50,26 @@ public class driveTrain extends Subsystem
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+  
+   //For turning
+   public void turn(String direction, double degree, double turnSpeed)
+   {
+	   if (direction.equalsIgnoreCase("left"))
+	   {
+		   m_Left.set(turnSpeed * -1);
+		   m_Right.set(turnSpeed);
+		   Timer.delay(2.0);
+	   }
+	   else if (direction.equalsIgnoreCase("right"))
+	   {
+		   m_Left.set(turnSpeed * 1);
+		   m_Right.set(turnSpeed * -1);
+		   Timer.delay(2.0);
+	   }
+	   else
+	   {
+		   System.out.println("ERROR: TURN HAS NO DIRECTION");
+	   }
+   }
 }
 
