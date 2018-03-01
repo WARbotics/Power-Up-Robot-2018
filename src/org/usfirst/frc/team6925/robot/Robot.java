@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import org.usfirst.frc.team6925.robot.subsystems.IntakeSubsystem;
-import org.usfirst.frc.team6925.robot.subsystems.basket;
+import org.usfirst.frc.team6925.robot.subsystems.Basket;
 import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -48,7 +48,7 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 //Button and basket (spark)
 public class Robot extends IterativeRobot 
 {
-	public static basket Basket; 
+	public static Basket basket; 
 	public static IntakeSubsystem intake;
 	public static driveTrain drivetrain;
 	public static OI oi;
@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		System.out.println("Robot has init");
-		Basket = new basket();
+		basket = new Basket();
 		intake = new IntakeSubsystem();
 		drivetrain = new driveTrain();
 		oi = new OI();
@@ -177,23 +177,24 @@ public class Robot extends IterativeRobot
     		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight, .2));
 		
 		
+    	//Gets the value of 
 		if (Robot.oi.basket.get()) 
 		{
-			Robot.Basket.setSpeed(.75);
+			Robot.basket.setSpeed(.75);
 		}
 		else 
 		{
-			Robot.Basket.setSpeed(0);
+			Robot.basket.setSpeed(0);
 		}
 		
 		
 		if (Robot.oi.basketReload.get()) 
 		{
-			Robot.Basket.setSpeed(-.75);
+			Robot.basket.setSpeed(-.75);
 		}
 		else 
 		{
-			Robot.Basket.setSpeed(0);
+			Robot.basket.setSpeed(0);
 		}
 		
 		
