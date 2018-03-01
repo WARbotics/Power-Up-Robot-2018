@@ -5,6 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
+
+/*
+ * 
+ * 
+ * Y'ALL, RIGHT SPEED GROUP SPEEDS SHOULD ALWAYS BE MULTIPLIED BY -1
+ */
 package org.usfirst.frc.team6925.robot;
 import org.usfirst.frc.team6925.robot.subsystems.Diagnostics;
 import edu.wpi.cscore.UsbCamera;
@@ -167,9 +174,7 @@ public class Robot extends IterativeRobot
 		
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
     		Robot.drivetrain.tankDriveLeft(deadBand(inputSpeedLeft, .2));
-    		System.out.println("Passed leftside");
     		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight, .2));
-		System.out.println("IN TELEOPPERIODIC");
 		
 		
 		if (Robot.oi.basket.get()) 

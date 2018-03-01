@@ -60,7 +60,7 @@ public class Diagnostics {
 		
 		System.out.println("TESTING FOR UNIT AT SPEED: " + driveSpeed+ ". STAND BACK!");
 		Robot.drivetrain.tankDriveRight(driveSpeed * -1);
-		Robot.drivetrain.tankDriveLeft(driveSpeed );
+		Robot.drivetrain.tankDriveLeft(driveSpeed);
 		Timer.delay(2);
 		
 		System.out.println("STOPPING");
