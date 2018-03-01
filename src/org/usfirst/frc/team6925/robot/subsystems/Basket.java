@@ -25,8 +25,9 @@ public class Basket extends Subsystem
 	}
 	public void setSpeed(double inputSpeed) 
 	{
+		System.out.println("Input speed: " + inputSpeed + ", setting basketMotor to " +inputSpeed);
+		//Decided to 
 		basketMotor.set(inputSpeed);
-		System.out.println("Input speed: " + inputSpeed);
 	}
 	
     public void initDefaultCommand() {

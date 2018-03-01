@@ -14,7 +14,7 @@ public class shoot extends Command
     {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Basket);
+    	requires(Robot.basket);
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class shoot extends Command
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-    	Robot.Basket.setSpeed(1);
+    	Robot.basket.setSpeed(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +37,7 @@ public class shoot extends Command
     // Called once after isFinished returns true
     protected void end() 
     {
-    	Robot.Basket.setSpeed(0);
+    	Robot.basket.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

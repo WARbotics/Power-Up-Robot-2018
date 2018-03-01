@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import org.usfirst.frc.team6925.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team6925.robot.commands.Autonomous;
 import org.usfirst.frc.team6925.robot.subsystems.Basket;
 import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 /**
@@ -127,7 +128,12 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic() 
 	{
+		
+		Autonomous controller = new Autonomous("forward");
+		
+		
 		//based on the first letter of the game Data
+		/*
 		if (gameData.charAt(0)== 'L') 
 		{
 			 switch(m_autoSelected) 
@@ -160,6 +166,7 @@ public class Robot extends IterativeRobot
 	   		 		break;
 	   		 } 
 	   	 }
+	   	 */
 	}
 	
 		
