@@ -29,10 +29,27 @@ public class Autonomous {
 	public void run(String starting_pos, String side) {
 		
 	}
-	public void run()
+	public void run(String starting_pos)
 	{
 		System.out.println("MOVING FORWARD!");
 		//this.move(.5, 10);
+		
+		if (starting_pos.equalsIgnoreCase("left"))
+		{
+			
+		}
+		else if (starting_pos.equalsIgnoreCase("middle"))
+		{
+			
+		}
+		else if (starting_pos.equalsIgnoreCase("right"))
+		{
+			
+		}
+		else
+		{
+			System.out.println("RUN PARAM CASE INVALID");
+		}
 	}
 
 	

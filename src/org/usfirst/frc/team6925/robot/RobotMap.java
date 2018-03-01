@@ -17,13 +17,13 @@ public class RobotMap {
 	public static int intakeMotor = 6;
 	public static int intakeMotor1 = 7;
 	//Basket motor
-	public static int basketMotor = 5;
+	public static int basketMotor = 9;
 	//Joystick Axis
 	public static int Joystick_Move_Axis = 1;
 	public static int Joystick_Rotate_Axis = 0; 
 	
 	public static final double kAngleSetpoint = 0.0;
-	public static final double kP = 0.005; // propotional turning constant
+	public static final double kP = 0.005; // proportional turning constant
 
 	// gyro calibration constant, may need to be adjusted;
 	// gyro value of 360 is set to correspond to one full revolution

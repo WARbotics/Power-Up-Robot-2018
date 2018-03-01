@@ -9,10 +9,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team6925.robot.RobotMap;
-import org.usfirst.frc.team6925.robot.commands.Intake;
-import org.usfirst.frc.team6925.robot.commands.IntakeOut;
-import org.usfirst.frc.team6925.robot.commands.reload;
-import org.usfirst.frc.team6925.robot.commands.shoot;
 
 
 public class OI 

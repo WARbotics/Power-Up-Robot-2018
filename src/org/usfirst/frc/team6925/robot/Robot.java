@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 
-import org.usfirst.frc.team6925.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team6925.robot.commands.Autonomous;
 import org.usfirst.frc.team6925.robot.subsystems.Basket;
 import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
@@ -49,8 +48,7 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 //Button and basket (spark)
 public class Robot extends IterativeRobot 
 {
-	public static Basket basket; 
-	public static IntakeSubsystem intake;
+	
 	public static driveTrain drivetrain;
 	public static OI oi;
     private static final String R_Left = "R-Switch L-Start";
@@ -74,8 +72,7 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		System.out.println("Robot is ready for testing!");
-		basket = new Basket();
-		intake = new IntakeSubsystem();
+		//basket = new Basket();
 		drivetrain = new driveTrain();
 		oi = new OI();
 		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
@@ -189,17 +186,21 @@ public class Robot extends IterativeRobot
     		
 
     	//Gets the value of the button that controls the basket.
-		if (Robot.oi.basket.get()) 
+		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
 		{
-			Robot.basket.setSpeed(.75);
+			Robot.drivetrain.setBasket(.75);
 		}
-		else 
+		else if (Robot.oi.basketReload.get())
 		{
-			Robot.basket.setSpeed(0);
+			Robot.drivetrain.setBasket(-.75);
+		}
+		else
+		{
+			Robot.drivetrain.setBasket(0);
 		}
 		
-		
-		if (Robot.oi.basketReload.get()) 
+		/*
+		if (Robot.oi.basketReload.get() && !Robot.oi.basket.get()) 
 		{
 			Robot.basket.setSpeed(-.75);
 		}
@@ -207,29 +208,24 @@ public class Robot extends IterativeRobot
 		{
 			Robot.basket.setSpeed(0);
 		}
-		
+		*/
 		
 		if (Robot.oi.intakeIN.get()) 
 		{
-			Robot.intake.setIntakeSpeed(.75);
+			Robot.drivetrain.setIntakeSpeed(.75);
+		}
+		else if (Robot.oi.intakeOUT.get()) 
+		{
+			Robot.drivetrain.setIntakeSpeed(-.75);
 		}
 		else 
 		{
-			Robot.intake.setIntakeSpeed(0);
-		}
-		
-		
-		if (Robot.oi.intakeOUT.get()) 
-		{
-			Robot.intake.setIntakeSpeed(-.75);
-		}
-		else 
-		{
-			Robot.intake.setIntakeSpeed(0);
+			Robot.drivetrain.setIntakeSpeed(0);
 		}
 		
 		
 		//now for the pretty stuff :)
+		/*
 		if (Robot.oi.testMotors.get())
 		{
 			if (!Diagnostics.isRunning())
@@ -245,7 +241,10 @@ public class Robot extends IterativeRobot
 				Diagnostics.testUnit();
 			}
 		}
+		*/
 		
+		
+		System.out.println("FINAL VALUE THROUGH RUN FOR SPARK MOTOR = " + Robot.drivetrain.basketMotor.get());
 	}
 
 	/**
