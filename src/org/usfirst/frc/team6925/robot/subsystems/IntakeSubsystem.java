@@ -2,6 +2,7 @@ package org.usfirst.frc.team6925.robot.subsystems;
 
 import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.Intake;
+import org.usfirst.frc.team6925.robot.commands.IntakeOut;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -33,6 +34,7 @@ public class IntakeSubsystem extends Subsystem
     {
         // Set the default command for a subsystem here.
     		setDefaultCommand(new Intake());
+    		setDefaultCommand(new IntakeOut());
         //setDefaultCommand(new MySpecialCommand());
     }
 

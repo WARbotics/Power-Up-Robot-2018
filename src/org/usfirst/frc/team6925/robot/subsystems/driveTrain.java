@@ -25,7 +25,6 @@ public class driveTrain extends Subsystem
 	//drivetrain
 	public driveTrain() 
 	{
-		System.out.println("We are calling DriveTrain");
 		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
 		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
 		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
@@ -33,7 +32,6 @@ public class driveTrain extends Subsystem
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
-		System.out.println("end of driveTrain method");
 	}
 
    public void tankDriveLeft(double inputSpeedLeft)

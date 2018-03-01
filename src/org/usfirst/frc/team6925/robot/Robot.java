@@ -166,9 +166,9 @@ public class Robot extends IterativeRobot
 		double inputSpeedLeft = -Robot.oi.drive_Joystick.getRawAxis(1);
 		
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-    		Robot.drivetrain.tankDriveLeft(deadBand(inputSpeedLeft));
+    		Robot.drivetrain.tankDriveLeft(deadBand(inputSpeedLeft, .2));
     		System.out.println("Passed leftside");
-    		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight));
+    		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight, .2));
 		System.out.println("IN TELEOPPERIODIC");
 		
 		
@@ -176,7 +176,8 @@ public class Robot extends IterativeRobot
 		{
 			Robot.Basket.setSpeed(.75);
 		}
-		else {
+		else 
+		{
 			Robot.Basket.setSpeed(0);
 		}
 		
@@ -191,7 +192,7 @@ public class Robot extends IterativeRobot
 		}
 		
 		
-		if (Robot.oi.intakeIN.get()) 
+		/*if (Robot.oi.intakeIN.get()) 
 		{
 			Robot.intake.setIntakeSpeed(.75);
 		}
@@ -208,7 +209,7 @@ public class Robot extends IterativeRobot
 		else 
 		{
 			Robot.intake.setIntakeSpeed(0);
-		}
+		}*/
 		
 		
 		//now for the pretty stuff :)
@@ -239,15 +240,15 @@ public class Robot extends IterativeRobot
 		
 
 	}
-	public double deadBand(double coolDoubleThing)
+	public double deadBand(double deadBandAXIS, Double deadBandAmount)
 	{
-		if (coolDoubleThing > .2)
+		if (deadBandAXIS > -deadBandAmount && deadBandAXIS < deadBandAmount)
 		{
 			return 0.0;
 		}
 		else
 		{
-			return coolDoubleThing;
+			return deadBandAXIS;
 		}
 	}
 }
