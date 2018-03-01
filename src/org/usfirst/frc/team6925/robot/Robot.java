@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		System.out.println("Robot has init");
+		System.out.println("Robot is ready for testing!");
 		basket = new Basket();
 		intake = new IntakeSubsystem();
 		drivetrain = new driveTrain();
@@ -129,7 +129,7 @@ public class Robot extends IterativeRobot
 	public void autonomousPeriodic() 
 	{
 		
-		Autonomous controller = new Autonomous("forward");
+		//Autonomous controller = new Autonomous("forward");
 		
 		
 		//based on the first letter of the game Data
@@ -184,7 +184,11 @@ public class Robot extends IterativeRobot
     		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight, .2));
 		
 		
-    	//Gets the value of 
+    	
+    		
+    		
+
+    	//Gets the value of the button that controls the basket.
 		if (Robot.oi.basket.get()) 
 		{
 			Robot.basket.setSpeed(.75);

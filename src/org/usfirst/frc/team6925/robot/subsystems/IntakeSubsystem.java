@@ -28,6 +28,7 @@ public class IntakeSubsystem extends Subsystem
 	}
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
+		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
 		intakeController.set(inputIntakeSpeed);
 	}
     public void initDefaultCommand() 

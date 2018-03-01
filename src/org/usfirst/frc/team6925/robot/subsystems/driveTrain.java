@@ -49,25 +49,5 @@ public class driveTrain extends Subsystem
         //setDefaultCommand(new MySpecialCommand());
     }
   
-   //For turning
-   public void turn(String direction, double degree, double turnSpeed)
-   {
-	   if (direction.equalsIgnoreCase("left"))
-	   {
-		   m_Left.set(turnSpeed * -1);
-		   m_Right.set(turnSpeed);
-		   Timer.delay(2.0);
-	   }
-	   else if (direction.equalsIgnoreCase("right"))
-	   {
-		   m_Left.set(turnSpeed * 1);
-		   m_Right.set(turnSpeed * -1);
-		   Timer.delay(2.0);
-	   }
-	   else
-	   {
-		   System.out.println("ERROR: TURN HAS NO DIRECTION");
-	   }
-   }
 }
 
