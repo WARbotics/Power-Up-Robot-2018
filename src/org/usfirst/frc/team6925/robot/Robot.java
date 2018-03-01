@@ -192,7 +192,7 @@ public class Robot extends IterativeRobot
 		}
 		
 		
-		/*if (Robot.oi.intakeIN.get()) 
+		if (Robot.oi.intakeIN.get()) 
 		{
 			Robot.intake.setIntakeSpeed(.75);
 		}
@@ -209,7 +209,7 @@ public class Robot extends IterativeRobot
 		else 
 		{
 			Robot.intake.setIntakeSpeed(0);
-		}*/
+		}
 		
 		
 		//now for the pretty stuff :)
