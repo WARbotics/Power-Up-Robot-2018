@@ -27,7 +27,13 @@ public class Autonomous {
 	}
 	
 	public void run(String starting_pos, String side) {
-		
+		//This should serve four cases:
+		/*
+		 * 1. Left right
+		 * 2. Right left
+		 * 3. Middle left
+		 * 4. Middle right
+		 */
 	}
 	public void run(String starting_pos)
 	{
@@ -36,17 +42,15 @@ public class Autonomous {
 		
 		if (starting_pos.equalsIgnoreCase("left"))
 		{
-			
-		}
-		else if (starting_pos.equalsIgnoreCase("middle"))
-		{
-			
+			//in inches,
+			//to cross line requires 168 in
+			move(200);
 		}
 		else if (starting_pos.equalsIgnoreCase("right"))
 		{
-			
+			move(200);
 		}
-		else
+		else 
 		{
 			System.out.println("RUN PARAM CASE INVALID");
 		}
@@ -56,45 +60,77 @@ public class Autonomous {
 	//TURN BACK NOW
 	private void turn(String direction, double degrees, double v)
 	{
-		//double r = WHEEL_DIAMETER / 2;
-		//double radians = degrees * (Math.PI / 180);
-		//double omega = v / r;
+		double r = WHEEL_DIAMETER / 2;
+		double rad = degrees * (Math.PI / 180);
+		double w = (v / r) * 2 * Math.PI;
 		
+		double speedRight = v*-1;
+		double speedLeft = v;
 		
+		double timeStuff = rad / w;
 		
-		//So to make it easy on my brain, lets do this:
-		double rightSpeed = v * -1;
-		double leftSpeed = v * 1;
-		
-		double seconds = 0;
-		
-		//if we're going to turn left, right needs to move forwards, left move backwards
 		if (direction.equalsIgnoreCase("left"))
 		{
-			Robot.drivetrain.tankDriveRight(rightSpeed);
-			Robot.drivetrain.tankDriveLeft(leftSpeed * -1);
-			Timer.delay(seconds);
-			Robot.drivetrain.tankDriveLeft(0);
+			Robot.drivetrain.tankDriveRight(speedRight);
+			Robot.drivetrain.tankDriveLeft(speedLeft * -1);
+			Timer.delay(timeStuff);
 			Robot.drivetrain.tankDriveRight(0);
+			Robot.drivetrain.tankDriveLeft(0);
 		}
 		else if (direction.equalsIgnoreCase("right"))
 		{
-			Robot.drivetrain.tankDriveRight(rightSpeed * -1);
-			Robot.drivetrain.tankDriveRight(leftSpeed);
-			Timer.delay(seconds);
-			Robot.drivetrain.tankDriveLeft(0);
+			Robot.drivetrain.tankDriveRight(-speedRight);
+			Robot.drivetrain.tankDriveLeft(speedLeft);
+			Timer.delay(timeStuff);
 			Robot.drivetrain.tankDriveRight(0);
+			Robot.drivetrain.tankDriveLeft(0);
 		}
+		else
+		{
+			System.out.println("ERROR: INVALID DIRECTION (param 1)");
+		}
+		
+		//double radians = degrees * (Math.PI / 180);
+		//double omega = v / r;
+		
 	}
 	
-	private static void move(double speed, double time)
+	private static void move(double length, double speed)
 	{
+		//So we want to go a certain length
+		//
+		double Xf = length;
+		double Vi = speed;
+		double k = .0075;
+		
+		double t = (k * Xf) / Vi;
+		
 		Robot.drivetrain.tankDriveRight(speed * -1);
 		Robot.drivetrain.tankDriveLeft(speed);
-		Timer.delay(time);
+		Timer.delay(t);
 		Robot.drivetrain.tankDriveRight(speed);
 		Robot.drivetrain.tankDriveLeft(speed * -1);		
-		Timer.delay(.5);
+		Timer.delay(1 / (t + 3));
+		Robot.drivetrain.tankDriveRight(0);
+		Robot.drivetrain.tankDriveLeft(0);
+	}
+	private static void move(double length)
+	{
+		//So we want to go a certain length
+		
+		double Xf = length;
+		//We're setting the motors to go .3 because that was our tested speed value
+		double Vi = .3;
+		double k = .0075;
+		
+		double t = (k * Xf) / Vi;
+		
+		Robot.drivetrain.tankDriveRight(Vi * -1);
+		Robot.drivetrain.tankDriveLeft(Vi);
+		Timer.delay(t);
+		Robot.drivetrain.tankDriveRight(Vi);
+		Robot.drivetrain.tankDriveLeft(Vi * -1);		
+		Timer.delay(1 / (t + 3));
 		Robot.drivetrain.tankDriveRight(0);
 		Robot.drivetrain.tankDriveLeft(0);
 	}

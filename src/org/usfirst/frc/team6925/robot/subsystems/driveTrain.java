@@ -23,7 +23,7 @@ public class driveTrain extends Subsystem
 
 	SpeedControllerGroup m_Left;
 	SpeedControllerGroup m_Right;
-    public VictorSP basketMotor; 
+    public Spark basketMotor; 
     public SpeedControllerGroup basket;
     
 	private Spark intakeLeft;
@@ -43,7 +43,7 @@ public class driveTrain extends Subsystem
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
 		
 		
-		basketMotor = new VictorSP(RobotMap.basketMotor);
+		basketMotor = new Spark(RobotMap.basketMotor);
 		
 		basket = new SpeedControllerGroup(basketMotor);
 
