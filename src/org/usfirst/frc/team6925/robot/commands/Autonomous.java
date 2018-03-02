@@ -56,6 +56,10 @@ public class Autonomous {
 		}
 	}
 
+	public void testRun()
+	{
+		this.turn("right", 90, .2);
+	}
 	
 	//TURN BACK NOW
 	private void turn(String direction, double degrees, double v)
@@ -114,6 +118,7 @@ public class Autonomous {
 		Robot.drivetrain.tankDriveRight(0);
 		Robot.drivetrain.tankDriveLeft(0);
 	}
+	
 	private static void move(double length)
 	{
 		//So we want to go a certain length
