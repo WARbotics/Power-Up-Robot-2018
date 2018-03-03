@@ -50,17 +50,25 @@ public class Autonomous {
 			if (side.equalsIgnoreCase("left"))
 			{
 				move(100);
+				Timer.delay(1);
 				turn("left",90,.3);
+				Timer.delay(1);
 				move(81);
+				Timer.delay(1);
 				turn("right",90,.3);
+				Timer.delay(1);
 				move(100);
 			}
 			else if (side.equalsIgnoreCase("right"))
 			{
 				move(100);
+				Timer.delay(1);
 				turn("right",90,.3);
+				Timer.delay(1);
 				move(81);
+				Timer.delay(1);
 				turn("left",90,.3);
+				Timer.delay(1);
 				move(100);
 			}
 		}
@@ -69,10 +77,14 @@ public class Autonomous {
 			if (side.equalsIgnoreCase("right"))
 			{
 				move(100);
+				Timer.delay(1);
 				turn("right",90,.3);
+				Timer.delay(1);
 				//added it to move 8 more inches
 				move(170);
+				Timer.delay(1);
 				turn("left",90,.3);
+				Timer.delay(1);
 				move(100);
 			}
 		}
@@ -81,9 +93,13 @@ public class Autonomous {
 			if (side.equalsIgnoreCase("left"))
 			{
 				move(100);
+				Timer.delay(1);
 				turn("left",90,.3);
+				Timer.delay(1);
 				move(170);
+				Timer.delay(1);
 				turn("right",90,.3);
+				Timer.delay(1);
 				move(100);
 			}
 		}
