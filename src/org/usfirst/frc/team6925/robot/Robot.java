@@ -102,6 +102,7 @@ public class Robot extends IterativeRobot
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
+	Autonomous obj;
 	@Override
 	public void autonomousInit() 
 	{
@@ -111,6 +112,7 @@ public class Robot extends IterativeRobot
 	   	gameData = GameData;   
 		m_autoSelected = m_chooser.getSelected();
 		System.out.println("Auto selected: " + m_autoSelected);
+		obj = new Autonomous();
 	}
     public String getGameData()
     {
@@ -130,18 +132,21 @@ public class Robot extends IterativeRobot
 		
 		
 		//based on the first letter of the game Data
-		/*
+		
 		if (gameData.charAt(0)== 'L') 
 		{
 			 switch(m_autoSelected) 
 		{
 	   		 case L_Right:
 	   			 //Left Switch and Right placement
+	   			 obj.run("right","left");
 	   			 break;
 	   		 case L_Mid:
-	   			 //Left  Switch and Right placement 
+	   			 //Left  Switch and Right placement
+	   			 obj.run("middle","left");
 	   			 break;
 	   		 case L_Left:
+	   			 obj.run("left");
 	   			 //Left  switch anad Left placement
 	   			 break;
 	   	}
@@ -153,17 +158,20 @@ public class Robot extends IterativeRobot
 	   		 switch (m_autoSelected) 
 	   		 {
 	   		 	case R_Right:
+	   		 		obj.run("right");
 	   		 		//Right Switch and Right placement
 	   		 		break;
 	   		 	case R_Mid:
+	   		 		obj.run("middle","right");
 	   		 		//Right Switch and Middle placement
 	   		 		break;
 	   		 	case R_Left:
+	   		 		obj.run("left","right");
 	   		 		//Right Switch and Left Placement
 	   		 		break;
 	   		 } 
 	   	 }
-	   	 */
+	   	 
 	}
 	
 		
