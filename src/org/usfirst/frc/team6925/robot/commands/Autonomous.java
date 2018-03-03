@@ -4,7 +4,7 @@ import org.usfirst.frc.team6925.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 
-//ALL VALUES ARE IN INCHES
+//ALL VALUES ARE INCHES
 
 //We need the following functions:
 /*

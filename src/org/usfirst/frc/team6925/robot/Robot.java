@@ -171,7 +171,7 @@ public class Robot extends IterativeRobot
 	   		 		break;
 	   		 } 
 	   	 }
-	   	 //lit
+	   	 //l
 	}
 	
 		
