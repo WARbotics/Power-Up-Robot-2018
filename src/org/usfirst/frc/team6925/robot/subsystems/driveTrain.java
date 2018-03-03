@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6925.robot.subsystems;
 
+import org.usfirst.frc.team6925.robot.Robot;
 import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.tankDrive;
 
@@ -46,7 +47,11 @@ public class driveTrain extends Subsystem
 		basketMotor = new Spark(RobotMap.basketMotor);
 		
 		basket = new SpeedControllerGroup(basketMotor);
+		
+		intakeLeft = new Spark(RobotMap.intakeMotor);
+		intakeRight = new Spark(RobotMap.intakeMotor);
 
+		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 		//intakeLeft = new Spark(RobotMap.intakeMotor);
 		//intakeRight = new Spark(RobotMap.intakeMotor1);
 		
@@ -63,7 +68,7 @@ public class driveTrain extends Subsystem
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
 		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
-		//intakeController.set(inputIntakeSpeed);
+		intakeController.set(inputIntakeSpeed);
 	}
    public void tankDriveLeft(double inputSpeedLeft)
    {
