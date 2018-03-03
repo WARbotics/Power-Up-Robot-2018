@@ -59,6 +59,7 @@ public class Autonomous {
 				Timer.delay(1);
 				move(100);
 			}
+			//
 			else if (side.equalsIgnoreCase("right"))
 			{
 				move(100);
