@@ -140,13 +140,16 @@ public class Robot extends IterativeRobot
 	   		 case L_Right:
 	   			 //Left Switch and Right placement
 	   			 obj.run("right","left");
+	   			 System.out.println("L_Right Chosen");
 	   			 break;
 	   		 case L_Mid:
 	   			 //Left  Switch and Right placement
 	   			 obj.run("middle","left");
+	   			 System.out.println("L_Mid Chosen");
 	   			 break;
 	   		 case L_Left:
 	   			 obj.run("left");
+	   			 System.out.println("L_Left Chosen");
 	   			 //Left  switch anad Left placement
 	   			 break;
 	   	}
@@ -159,14 +162,17 @@ public class Robot extends IterativeRobot
 	   		 {
 	   		 	case R_Right:
 	   		 		obj.run("right");
+	   		 		System.out.println("R_Right Chosen");
 	   		 		//Right Switch and Right placement
 	   		 		break;
 	   		 	case R_Mid:
 	   		 		obj.run("middle","right");
+	   		 		System.out.println("R_Mid Chosen");
 	   		 		//Right Switch and Middle placement
 	   		 		break;
 	   		 	case R_Left:
 	   		 		obj.run("left","right");
+	   		 		System.out.println("R_Left Chosen");	
 	   		 		//Right Switch and Left Placement
 	   		 		break;
 	   		 } 
@@ -187,6 +193,7 @@ public class Robot extends IterativeRobot
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
     		Robot.drivetrain.tankDriveLeft(deadBand(inputSpeedLeft, .2));
     		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight, .2));
+    	
 		
 		
     	
@@ -220,11 +227,11 @@ public class Robot extends IterativeRobot
 		
 		if (Robot.oi.intakeIN.get()) 
 		{
-			Robot.drivetrain.setIntakeSpeed(.75);
+			Robot.drivetrain.setIntakeSpeed(1);
 		}
 		else if (Robot.oi.intakeOUT.get()) 
 		{
-			Robot.drivetrain.setIntakeSpeed(-.75);
+			Robot.drivetrain.setIntakeSpeed(-1);
 		}
 		else 
 		{
