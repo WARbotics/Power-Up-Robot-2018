@@ -14,6 +14,11 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Autonomous {
 	private final double WHEEL_DIAMETER = 24.25;
+	
+	//(88/2) / .3 = 146.6667
+	
+	//because really our test went 44 inches/second, we tested it for two seconds to get .88;
+	private final double CONVERSION = 146.6667;
 	/*
 	private String direction = "";
 	private double degrees = 0.0;
@@ -27,6 +32,10 @@ public class Autonomous {
 	}
 	
 	public void run(String starting_pos, String side) {
+		//Field width is 324
+		// / 2 = 162
+		// / 2 = 81
+		
 		//This should serve four cases:
 		/*
 		 * 1. Left right
@@ -34,6 +43,54 @@ public class Autonomous {
 		 * 3. Middle left
 		 * 4. Middle right
 		 */
+		
+		
+		if (starting_pos.equalsIgnoreCase("middle"))
+		{
+			if (side.equalsIgnoreCase("left"))
+			{
+				move(100);
+				turn("left",90,.3);
+				move(81);
+				turn("right",90,.3);
+				move(100);
+			}
+			else if (side.equalsIgnoreCase("right"))
+			{
+				move(100);
+				turn("right",90,.3);
+				move(81);
+				turn("left",90,.3);
+				move(100);
+			}
+		}
+		else if (starting_pos.equalsIgnoreCase("left"))
+		{
+			if (side.equalsIgnoreCase("right"))
+			{
+				move(100);
+				turn("right",90,.3);
+				//added it to move 8 more inches
+				move(170);
+				turn("left",90,.3);
+				move(100);
+			}
+		}
+		else if (starting_pos.equalsIgnoreCase("right"))
+		{
+			if (side.equalsIgnoreCase("left"))
+			{
+				move(100);
+				turn("left",90,.3);
+				move(170);
+				turn("right",90,.3);
+				move(100);
+			}
+		}
+		else 
+		{
+			System.out.println("INVALID STARTING POS!");
+		}
 	}
 	public void run(String starting_pos)
 	{
@@ -56,7 +113,7 @@ public class Autonomous {
 		}
 	}
 
-	public void testRun()
+	public void testTurn()
 	{
 		this.turn("right", 90, .2);
 	}
@@ -64,6 +121,7 @@ public class Autonomous {
 	//TURN BACK NOW
 	private void turn(String direction, double degrees, double v)
 	{
+		v = v * CONVERSION;
 		double r = WHEEL_DIAMETER / 2;
 		double rad = degrees * (Math.PI / 180);
 		double w = (v / r) * 2 * Math.PI;
@@ -99,43 +157,41 @@ public class Autonomous {
 		
 	}
 	
-	private static void move(double length, double speed)
+	private void move(double length, double speed)
 	{
 		//So we want to go a certain length
 		//
 		double Xf = length;
-		double Vi = speed;
-		double k = .0075;
+		double Vi = speed * CONVERSION;
 		
-		double t = (k * Xf) / Vi;
+		double t = Xf / Vi;
 		
 		Robot.drivetrain.tankDriveRight(speed * -1);
 		Robot.drivetrain.tankDriveLeft(speed);
 		Timer.delay(t);
-		Robot.drivetrain.tankDriveRight(speed);
-		Robot.drivetrain.tankDriveLeft(speed * -1);		
-		Timer.delay(1 / (t + 3));
+		//Robot.drivetrain.tankDriveRight(speed);
+		//Robot.drivetrain.tankDriveLeft(speed * -1);		
+		//Timer.delay(1 / (t + 3));
 		Robot.drivetrain.tankDriveRight(0);
 		Robot.drivetrain.tankDriveLeft(0);
 	}
 	
-	private static void move(double length)
+	private void move(double length)
 	{
 		//So we want to go a certain length
 		
 		double Xf = length;
 		//We're setting the motors to go .3 because that was our tested speed value
-		double Vi = .3;
-		double k = .0075;
+		double Vi = .3 * CONVERSION;
 		
-		double t = (k * Xf) / Vi;
+		double t = Xf / Vi;
 		
 		Robot.drivetrain.tankDriveRight(Vi * -1);
 		Robot.drivetrain.tankDriveLeft(Vi);
 		Timer.delay(t);
-		Robot.drivetrain.tankDriveRight(Vi);
-		Robot.drivetrain.tankDriveLeft(Vi * -1);		
-		Timer.delay(1 / (t + 3));
+		//Robot.drivetrain.tankDriveRight(Vi);
+		//Robot.drivetrain.tankDriveLeft(Vi * -1);		
+		//Timer.delay(1 / (t + 3));
 		Robot.drivetrain.tankDriveRight(0);
 		Robot.drivetrain.tankDriveLeft(0);
 	}
