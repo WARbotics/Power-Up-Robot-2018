@@ -49,6 +49,7 @@ public class driveTrain extends Subsystem
 		basket = new SpeedControllerGroup(basketMotor);
 		
 		intakeLeft = new Spark(RobotMap.intakeMotor);
+		intakeLeft.setInverted(true);
 		intakeRight = new Spark(RobotMap.intakeMotor);
 
 		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
