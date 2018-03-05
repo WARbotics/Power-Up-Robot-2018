@@ -152,6 +152,7 @@ public class Robot extends IterativeRobot
    			 obj.run("right");
    			 System.out.println("R_Mid Chosen");
 	 		//Right Switch and Middle placement
+   			 //Test
    			 break;
    		 case R_Left:
    			 obj.run("right");
