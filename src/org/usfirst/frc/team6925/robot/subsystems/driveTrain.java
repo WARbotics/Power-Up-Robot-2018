@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6925.robot.subsystems;
 
+import org.usfirst.frc.team6925.robot.Robot;
 import org.usfirst.frc.team6925.robot.RobotMap;
 import org.usfirst.frc.team6925.robot.commands.tankDrive;
 
@@ -37,7 +38,6 @@ public class driveTrain extends Subsystem
 		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
 		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
 		
-		//cool motor = new Spark(4);
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
@@ -46,12 +46,12 @@ public class driveTrain extends Subsystem
 		basketMotor = new Spark(RobotMap.basketMotor);
 		
 		basket = new SpeedControllerGroup(basketMotor);
+		
+		intakeLeft = new Spark(RobotMap.intakeMotor);
+		intakeLeft.setInverted(true);
+		intakeRight = new Spark(RobotMap.intakeMotor1);
 
-		//intakeLeft = new Spark(RobotMap.intakeMotor);
-		//intakeRight = new Spark(RobotMap.intakeMotor1);
-		
-		//intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
-		
+		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 	}
 	public void setBasket(double inputSpeed)
 	{
@@ -63,7 +63,10 @@ public class driveTrain extends Subsystem
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
 		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
-		//intakeController.set(inputIntakeSpeed);
+
+		System.out.println("Left Intake Motor is alive:" + intakeLeft.isAlive());
+		System.out.println("Right Intake Motor is alive:" + intakeRight.isAlive());
+		intakeController.set(inputIntakeSpeed);
 	}
    public void tankDriveLeft(double inputSpeedLeft)
    {

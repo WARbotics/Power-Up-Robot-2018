@@ -36,7 +36,7 @@ public class OI
 		testMotors = new JoystickButton(OP_Joystick, 5);
 		testUnit = new JoystickButton(OP_Joystick,6);
 		//placing buttons to there commands  
-		System.out.println("When through Button");
+		System.out.println("OI has been init");
 		
 		
 	}
