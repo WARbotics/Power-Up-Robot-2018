@@ -168,8 +168,6 @@ public class Robot extends IterativeRobot
    			 
 	} 
    	 }
-   	 //l
-	
 	
 		
 
@@ -179,11 +177,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		double inputSpeedLeft = -Robot.oi.drive_Joystick.getRawAxis(1) * .5;
-		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5) * .5;
-    		Robot.drivetrain.tankDriveLeft(inputSpeedLeft);
-    		Robot.drivetrain.tankDriveRight(inputSpeedRight);
-    	
+		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
+		
+		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
+    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .5);
+    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .5);
 		
 		
     	
@@ -193,6 +191,7 @@ public class Robot extends IterativeRobot
     	//Gets the value of the button that controls the basket.
 		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
 		{
+
 			Robot.drivetrain.setBasket(.1);
 		}
 		else if (Robot.oi.basketReload.get())
@@ -261,7 +260,7 @@ public class Robot extends IterativeRobot
 		
 
 	}
-	public double deadBand(double deadBandAXIS, Double deadBandAmount)
+	public double deadBand(double deadBandAXIS, double deadBandAmount)
 	{
 		if (deadBandAXIS > -deadBandAmount && deadBandAXIS < deadBandAmount)
 		{
@@ -271,5 +270,10 @@ public class Robot extends IterativeRobot
 		{
 			return deadBandAXIS;
 		}
+	}
+	//Make sure when using this function, you add RAW SPEED value with no weight.
+	public double sinSmooth(double speed)
+	{
+		return Math.sin(speed * 90);
 	}
 }

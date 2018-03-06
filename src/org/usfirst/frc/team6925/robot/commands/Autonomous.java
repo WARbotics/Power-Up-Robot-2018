@@ -15,8 +15,9 @@ import edu.wpi.first.wpilibj.Timer;
 public class Autonomous {
 	private final double WHEEL_DIAMETER = 24.25;
 	
+
+	private boolean isRunning = true;
 	//(88/2) / .3 = 146.6667
-	
 	//because really our test went 44 inches/second, we tested it for two seconds to get .88;
 	private final double CONVERSION = 146.6667;
 	/*
@@ -44,6 +45,9 @@ public class Autonomous {
 		 * 4. Middle right
 		 */
 		
+
+		
+
 		if (starting_pos.equalsIgnoreCase("test")) 
 		{
 			if (starting_pos.equalsIgnoreCase("right"))
@@ -61,59 +65,80 @@ public class Autonomous {
 		{
 			if (side.equalsIgnoreCase("left"))
 			{
-				move(100);
-				Timer.delay(1);
-				turn("left",90,.3);
-				Timer.delay(1);
-				move(81);
-				Timer.delay(1);
-				turn("right",90,.3);
-				Timer.delay(1);
-				move(100);
+				if (isRunning)
+				{
+					move(100);
+					Timer.delay(1);
+					turn("left",90,.3);
+					Timer.delay(1);
+					move(81);
+					Timer.delay(1);
+					turn("right",90,.3);
+					Timer.delay(1);
+					move(100);
+					isRunning = false;
+				}
+
 			}
 			//
 			else if (side.equalsIgnoreCase("right"))
 			{
-				move(100);
-				Timer.delay(1);
-				turn("right",90,.3);
-				Timer.delay(1);
-				move(81);
-				Timer.delay(1);
-				turn("left",90,.3);
-				Timer.delay(1);
-				move(100);
+
+				if (isRunning)
+				{
+					move(100);
+					Timer.delay(1);
+					turn("right",90,.3);
+					Timer.delay(1);
+					move(81);
+					Timer.delay(1);
+					turn("left",90,.3);
+					Timer.delay(1);
+					move(100);
+					isRunning = false;
+				}
+
 			}
 		}
 		else if (starting_pos.equalsIgnoreCase("left"))
 		{
 			if (side.equalsIgnoreCase("right"))
 			{
-				move(100);
-				Timer.delay(1);
-				turn("right",90,.3);
-				Timer.delay(1);
-				//added it to move 8 more inches
-				move(170);
-				Timer.delay(1);
-				turn("left",90,.3);
-				Timer.delay(1);
-				move(100);
+
+				if (isRunning)
+				{
+					move(100);
+					Timer.delay(1);
+					turn("right",90,.3);
+					Timer.delay(1);
+					//added it to move 8 more inches
+					move(170);
+					Timer.delay(1);
+					turn("left",90,.3);
+					Timer.delay(1);
+					move(100);
+					isRunning = false;
+				}
 			}
 		}
 		else if (starting_pos.equalsIgnoreCase("right"))
 		{
 			if (side.equalsIgnoreCase("left"))
 			{
-				move(100);
-				Timer.delay(1);
-				turn("left",90,.3);
-				Timer.delay(1);
-				move(170);
-				Timer.delay(1);
-				turn("right",90,.3);
-				Timer.delay(1);
-				move(100);
+				if (isRunning)
+				{
+					move(100);
+					Timer.delay(1);
+					turn("left",90,.3);
+					Timer.delay(1);
+					move(170);
+					Timer.delay(1);
+					turn("right",90,.3);
+					Timer.delay(1);
+					move(100);
+					isRunning = false;
+				}
+
 			}
 		}
 		else 
@@ -131,15 +156,20 @@ public class Autonomous {
 		{	
 			//in inches,
 			//to cross line requires 168 in
-			if (running)
+
+			if (isRunning)
 			{
-			Robot.drivetrain.tankDriveLeft(.3);
-			Robot.drivetrain.tankDriveRight(.3 * -1);
-			System.out.println("Drive Train is going");
-			Timer.delay(2.5);
-			Robot.drivetrain.tankDriveLeft(0);
-			Robot.drivetrain.tankDriveRight(0);
-			running = false;
+				move(168);
+				isRunning = false;
+			}
+		}
+		else if (starting_pos.equalsIgnoreCase("right"))
+		{
+			if (isRunning)
+			{
+				move(168);
+				isRunning = false;
+
 			}
 		}
 		else 
@@ -156,31 +186,36 @@ public class Autonomous {
 	//TURN BACK NOW
 	private void turn(String direction, double degrees, double v)
 	{
+
+		
+		//Comments for the encoders, assuming it counts rotations
+		//v is in inches
+		
 		v = v * CONVERSION;
 		double r = WHEEL_DIAMETER / 2;
 		double rad = degrees * (Math.PI / 180);
 		double w = (v / r) * 2 * Math.PI;
 		
-		double speedRight = v*-1;
+		double speedRight = v;
 		double speedLeft = v;
 		
 		double timeStuff = rad / w;
 		
 		if (direction.equalsIgnoreCase("left"))
 		{
-			Robot.drivetrain.tankDriveRight(speedRight);
-			Robot.drivetrain.tankDriveLeft(speedLeft * -1);
+			Robot.drivetrain.setSpeedRight(speedRight);
+			Robot.drivetrain.setSpeedLeft(speedLeft * -1);
 			Timer.delay(timeStuff);
-			Robot.drivetrain.tankDriveRight(0);
-			Robot.drivetrain.tankDriveLeft(0);
+			Robot.drivetrain.setSpeedRight(0);
+			Robot.drivetrain.setSpeedLeft(0);
 		}
 		else if (direction.equalsIgnoreCase("right"))
 		{
-			Robot.drivetrain.tankDriveRight(-speedRight);
-			Robot.drivetrain.tankDriveLeft(speedLeft);
+			Robot.drivetrain.setSpeedRight(-speedRight);
+			Robot.drivetrain.setSpeedLeft(speedLeft);
 			Timer.delay(timeStuff);
-			Robot.drivetrain.tankDriveRight(0);
-			Robot.drivetrain.tankDriveLeft(0);
+			Robot.drivetrain.setSpeedRight(0);
+			Robot.drivetrain.setSpeedLeft(0);
 		}
 		else
 		{
@@ -196,23 +231,24 @@ public class Autonomous {
 	{
 		//So we want to go a certain length
 		//
+		
+		//Vi = 
+		//rotations = .3
 		double Xf = length;
 		double Vi = speed * CONVERSION;
 		
 		double t = Xf / Vi;
 		
-		Robot.drivetrain.tankDriveRight(speed * -1);
-		Robot.drivetrain.tankDriveLeft(speed);
+		Robot.drivetrain.setSpeedRight(speed);
+		Robot.drivetrain.setSpeedLeft(speed);
 		Timer.delay(t);
-		//Robot.drivetrain.tankDriveRight(speed);
-		//Robot.drivetrain.tankDriveLeft(speed * -1);		
+		//Robot.drivetrain.setSpeedRight(speed);
+		//Robot.drivetrain.setSpeedLeft(speed * -1);		
 		//Timer.delay(1 / (t + 3));
-		Robot.drivetrain.tankDriveRight(0);
-		Robot.drivetrain.tankDriveLeft(0);
+		Robot.drivetrain.setSpeedRight(0);
+		Robot.drivetrain.setSpeedLeft(0);
 	}
-	
-	
-	//length = 30
+
 	private void move(double length)
 	{
 		//So we want to go a certain length
@@ -223,14 +259,15 @@ public class Autonomous {
 		
 		double t = Xf / Vi;
 		
-		Robot.drivetrain.tankDriveRight(Vi * -1);
-		Robot.drivetrain.tankDriveLeft(Vi);
+		Robot.drivetrain.setSpeedRight(Vi);
+		Robot.drivetrain.setSpeedLeft(Vi);
 		Timer.delay(t);
-		//Robot.drivetrain.tankDriveRight(Vi);
-		//Robot.drivetrain.tankDriveLeft(Vi * -1);		
+
+		//Robot.drivetrain.setSpeedRight(Vi);
+		//Robot.drivetrain.setSpeedLeft(Vi);		
 		//Timer.delay(1 / (t + 3));
-		Robot.drivetrain.tankDriveRight(0);
-		Robot.drivetrain.tankDriveLeft(0);
-		*/
+		Robot.drivetrain.setSpeedRight(0);
+		Robot.drivetrain.setSpeedLeft(0);
+
 	}
 }

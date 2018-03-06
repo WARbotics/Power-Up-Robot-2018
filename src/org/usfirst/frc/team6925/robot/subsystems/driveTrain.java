@@ -30,13 +30,21 @@ public class driveTrain extends Subsystem
 	private Spark intakeLeft;
 	private Spark intakeRight;
 	SpeedControllerGroup intakeController;	
+	
+	//Encoders
+	//private Encoder leftEncoder;
+	//private Encoder rightEncoder;
+	
 	//drivetrain
 	public driveTrain() 
 	{
-		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);
+		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);		
 		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
+		m_frontRightMotor.setInverted(true);
 		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
+		
 		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
+		m_rearRightMotor.setInverted(true);
 		
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
@@ -46,6 +54,18 @@ public class driveTrain extends Subsystem
 		basketMotor = new Spark(RobotMap.basketMotor);
 		
 		basket = new SpeedControllerGroup(basketMotor);
+
+		
+		intakeLeft = new Spark(RobotMap.intakeMotor);
+		intakeLeft.setInverted(true);
+		intakeRight = new Spark(RobotMap.intakeMotor1);
+
+		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
+		
+		//obj		  =	initialize(port 1, port 2, inverted?, Encoding type);
+		//leftEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
+		//rightEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
+
 		
 		intakeLeft = new Spark(RobotMap.intakeMotor);
 		intakeLeft.setInverted(true);
@@ -64,15 +84,13 @@ public class driveTrain extends Subsystem
 	{
 		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
 
-		System.out.println("Left Intake Motor is alive:" + intakeLeft.isAlive());
-		System.out.println("Right Intake Motor is alive:" + intakeRight.isAlive());
 		intakeController.set(inputIntakeSpeed);
 	}
-   public void tankDriveLeft(double inputSpeedLeft)
+   public void setSpeedLeft(double inputSpeedLeft)
    {
 	   m_Left.set(inputSpeedLeft);
    }
-   public void tankDriveRight(double inputSpeedRight)
+   public void setSpeedRight(double inputSpeedRight)
    {
 	   m_Right.set(inputSpeedRight);
    }
@@ -85,4 +103,5 @@ public class driveTrain extends Subsystem
     }
   
 }
+
 

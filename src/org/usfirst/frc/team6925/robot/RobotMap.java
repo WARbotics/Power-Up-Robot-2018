@@ -22,6 +22,10 @@ public class RobotMap {
 	public static int Joystick_Move_Axis = 1;
 	public static int Joystick_Rotate_Axis = 0; 
 	
+	
+	//Encoders don't go here as initializing encoders requires two inputs.
+	
+	
 	public static final double kAngleSetpoint = 0.0;
 	public static final double kP = 0.005; // proportional turning constant
 
