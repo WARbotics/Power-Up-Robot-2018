@@ -182,11 +182,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		double inputSpeedLeft = -Robot.oi.drive_Joystick.getRawAxis(1);
+		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
 		
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-    		Robot.drivetrain.tankDriveLeft(deadBand(inputSpeedLeft, .2));
-    		Robot.drivetrain.tankDriveRight(deadBand(inputSpeedRight, .2));
+    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .5);
+    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .5);
 		
 		
     	
@@ -264,7 +264,7 @@ public class Robot extends IterativeRobot
 		
 
 	}
-	public double deadBand(double deadBandAXIS, Double deadBandAmount)
+	public double deadBand(double deadBandAXIS, double deadBandAmount)
 	{
 		if (deadBandAXIS > -deadBandAmount && deadBandAXIS < deadBandAmount)
 		{
@@ -274,5 +274,10 @@ public class Robot extends IterativeRobot
 		{
 			return deadBandAXIS;
 		}
+	}
+	//Make sure when using this function, you add RAW SPEED value with no weight.
+	public double sinSmooth(double speed)
+	{
+		return Math.sin(speed * 90);
 	}
 }

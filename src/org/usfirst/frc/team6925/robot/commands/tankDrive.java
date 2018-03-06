@@ -27,8 +27,8 @@ public class tankDrive extends Command
     {
     	double inputSpeed = Robot.oi.drive_Joystick.getRawAxis(2);
     	double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-    	Robot.drivetrain.tankDriveLeft(inputSpeed);
-    	Robot.drivetrain.tankDriveRight(inputSpeedRight);
+    	Robot.drivetrain.setSpeedLeft(inputSpeed);
+    	Robot.drivetrain.setSpeedRight(inputSpeedRight);
     	
     }
 
@@ -41,8 +41,8 @@ public class tankDrive extends Command
     // Called once after isFinished returns true
     protected void end() 
     {
-    	Robot.drivetrain.tankDriveLeft(0);
-    	Robot.drivetrain.tankDriveRight(0);
+    	Robot.drivetrain.setSpeedLeft(0);
+    	Robot.drivetrain.setSpeedRight(0);
     }
 
     // Called when another command which requires one or more of the same

@@ -32,19 +32,19 @@ public class Diagnostics {
 		running = true;
 		
 		System.out.println("TESTING LEFT MOTORS AT " + speed + " units/sec, for " + delay + " milliseconds.");
-		Robot.drivetrain.tankDriveLeft(speed);
+		Robot.drivetrain.setSpeedLeft(speed);
 		Timer.delay(delay);
 		
-		System.out.println("RESETTING Robot.drivetrain.tankDriveLeft.");
-		Robot.drivetrain.tankDriveLeft(0);
+		System.out.println("RESETTING Robot.drivetrain.setSpeedLeft.");
+		Robot.drivetrain.setSpeedLeft(0);
 		Timer.delay(3);
 		
 		System.out.println("TESTING RIGHT MOTORS AT " + speed + " units/sec, for " + delay + " milliseconds.");
-		Robot.drivetrain.tankDriveRight(speed * -1);
+		Robot.drivetrain.setSpeedRight(speed * -1);
 		Timer.delay(delay);
 		
-		System.out.println("RESETTING Robot.drivetrain.tankDriveRight.");
-		Robot.drivetrain.tankDriveRight(0);
+		System.out.println("RESETTING Robot.drivetrain.setSpeedRight.");
+		Robot.drivetrain.setSpeedRight(0);
 		Timer.delay(3);
 		
 		//sets running to false
@@ -59,13 +59,13 @@ public class Diagnostics {
 		
 		
 		System.out.println("TESTING FOR UNIT AT SPEED: " + driveSpeed+ ". STAND BACK!");
-		Robot.drivetrain.tankDriveRight(driveSpeed * -1);
-		Robot.drivetrain.tankDriveLeft(driveSpeed);
+		Robot.drivetrain.setSpeedRight(driveSpeed * -1);
+		Robot.drivetrain.setSpeedLeft(driveSpeed);
 		Timer.delay(2);
 		
 		System.out.println("STOPPING");
-		Robot.drivetrain.tankDriveRight(0);
-		Robot.drivetrain.tankDriveLeft(0);
+		Robot.drivetrain.setSpeedRight(0);
+		Robot.drivetrain.setSpeedLeft(0);
 		Timer.delay(2);
 		
 		
