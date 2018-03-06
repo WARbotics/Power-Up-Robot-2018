@@ -138,7 +138,7 @@ public class Robot extends IterativeRobot
 			 switch(m_autoSelected) 
 		{
 	   		 case L_Right:
-	   			 //Left Switch and Right placement
+	   			 //Left Switch and Right pl acement
 	   			 obj.run("right","left");
 	   			 break;
 	   		 case L_Mid:
@@ -220,11 +220,11 @@ public class Robot extends IterativeRobot
 		
 		if (Robot.oi.intakeIN.get()) 
 		{
-			Robot.drivetrain.setIntakeSpeed(.75);
+			Robot.drivetrain.setIntakeSpeed(1);
 		}
 		else if (Robot.oi.intakeOUT.get()) 
 		{
-			Robot.drivetrain.setIntakeSpeed(-.75);
+			Robot.drivetrain.setIntakeSpeed(-1);
 		}
 		else 
 		{
