@@ -17,13 +17,11 @@ import org.usfirst.frc.team6925.robot.subsystems.Diagnostics;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
-
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 
 import org.usfirst.frc.team6925.robot.commands.Autonomous;
 import org.usfirst.frc.team6925.robot.subsystems.Basket;
@@ -57,6 +55,8 @@ public class Robot extends IterativeRobot
     private static final String L_Left = "L-Switch L-Start";
     private static final String L_Right = "L-Switch R-Start";
     private static final String L_Mid = "L-Switch M-Start";
+    private static final String Nothing = "Nothing";
+    private static final String test = "Test";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
@@ -85,7 +85,8 @@ public class Robot extends IterativeRobot
 	   	m_chooser.addDefault("Left Switch Left Start", L_Left);
 	   	m_chooser.addObject("Left Switch Right Start", L_Right);
 	   	m_chooser.addObject("Left Switch Mid Start", L_Mid);
-
+	   	m_chooser.addObject("Nothing", Nothing);
+	   	m_chooser.addObject("Test", test);
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
 
@@ -106,19 +107,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-		//Collecting the GameData 
-		String GameData;
-	   	GameData = DriverStation.getInstance().getGameSpecificMessage();
-	   	gameData = GameData;   
+
 		m_autoSelected = m_chooser.getSelected();
 		System.out.println("Auto selected: " + m_autoSelected);
 		obj = new Autonomous();
 	}
-    public String getGameData()
-    {
-    	//returns the data  
-   	 	return gameData;
-    }
 
 
 	/**
@@ -133,46 +126,48 @@ public class Robot extends IterativeRobot
 		
 		//based on the first letter of the game Data
 		
-		if (gameData.charAt(0)== 'L') 
-		{
-			 switch(m_autoSelected) 
-		{
-	   		 case L_Right:
-	   			 //Left Switch and Right pl acement
-	   			 obj.run("right","left");
-	   			 break;
-	   		 case L_Mid:
-	   			 //Left  Switch and Right placement
-	   			 obj.run("middle","left");
-	   			 break;
-	   		 case L_Left:
-	   			 obj.run("left");
-	   			 //Left  switch anad Left placement
-	   			 break;
-	   	}
-		}
-
-	   	 
-	   	 else
-	   	 {
-	   		 switch (m_autoSelected) 
-	   		 {
-	   		 	case R_Right:
-	   		 		obj.run("right");
-	   		 		//Right Switch and Right placement
-	   		 		break;
-	   		 	case R_Mid:
-	   		 		obj.run("middle","right");
-	   		 		//Right Switch and Middle placement
-	   		 		break;
-	   		 	case R_Left:
-	   		 		obj.run("left","right");
-	   		 		//Right Switch and Left Placement
-	   		 		break;
-	   		 } 
-	   	 }
-	   	 //l
-	}
+		 switch(m_autoSelected) 
+	{
+   		 case L_Right:
+   			 //Left Switch and Right placement
+   			 obj.run("right","left");
+   			 System.out.println("L_Right Chosen");
+   			 break;
+   		 case L_Mid:
+   			 //Left  Switch and Right placement
+   			 obj.run("right");
+   			 System.out.println("L_Mid Chosen");
+   			 break;
+   		 case L_Left:
+   			 obj.run("left");
+   			 System.out.println("L_Left Chosen");
+   			 //Left  switch anad Left placement
+   			 break;
+   		 case R_Right:
+   			 obj.run("right");
+   			 System.out.println("R_Right Chosen");
+	 		//Right Switch and Right placement
+   			 break;
+   		 case R_Mid:
+   			 obj.run("right");
+   			 System.out.println("R_Mid Chosen");
+	 		//Right Switch and Middle placement
+   			 //Test
+   			 break;
+   		 case R_Left:
+   			 obj.run("right");
+   			 System.out.println("R_Left Chosen");	
+	 		//Right Switch and Left Placement
+   			 break;
+   		 case Nothing:
+   			 break;
+   		 case test: 
+   			 obj.run("left", "Right");
+   			 break;
+   			 
+   			 
+	} 
+   	 }
 	
 		
 
@@ -196,11 +191,12 @@ public class Robot extends IterativeRobot
     	//Gets the value of the button that controls the basket.
 		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
 		{
-			Robot.drivetrain.setBasket(.3);
+
+			Robot.drivetrain.setBasket(.1);
 		}
 		else if (Robot.oi.basketReload.get())
 		{
-			Robot.drivetrain.setBasket(-.3);
+			Robot.drivetrain.setBasket(-.1);
 		}
 		else
 		{

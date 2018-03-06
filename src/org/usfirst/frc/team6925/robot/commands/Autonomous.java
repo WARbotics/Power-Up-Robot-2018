@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Autonomous {
 	private final double WHEEL_DIAMETER = 24.25;
 	
+
 	private boolean isRunning = true;
 	//(88/2) / .3 = 146.6667
 	//because really our test went 44 inches/second, we tested it for two seconds to get .88;
@@ -44,7 +45,22 @@ public class Autonomous {
 		 * 4. Middle right
 		 */
 		
+
 		
+
+		if (starting_pos.equalsIgnoreCase("test")) 
+		{
+			if (starting_pos.equalsIgnoreCase("right"))
+			{
+				Robot.drivetrain.tankDriveLeft(.3);
+				Robot.drivetrain.tankDriveRight(.3 * -1);
+				System.out.println("MOVING!");
+				Timer.delay(2.5);
+				Robot.drivetrain.tankDriveLeft(0);
+				Robot.drivetrain.tankDriveLeft(0);
+				System.out.println("STOPPED!");
+			}
+		}
 		if (starting_pos.equalsIgnoreCase("middle"))
 		{
 			if (side.equalsIgnoreCase("left"))
@@ -62,10 +78,12 @@ public class Autonomous {
 					move(100);
 					isRunning = false;
 				}
+
 			}
 			//
 			else if (side.equalsIgnoreCase("right"))
 			{
+
 				if (isRunning)
 				{
 					move(100);
@@ -79,12 +97,14 @@ public class Autonomous {
 					move(100);
 					isRunning = false;
 				}
+
 			}
 		}
 		else if (starting_pos.equalsIgnoreCase("left"))
 		{
 			if (side.equalsIgnoreCase("right"))
 			{
+
 				if (isRunning)
 				{
 					move(100);
@@ -118,6 +138,7 @@ public class Autonomous {
 					move(100);
 					isRunning = false;
 				}
+
 			}
 		}
 		else 
@@ -125,15 +146,17 @@ public class Autonomous {
 			System.out.println("INVALID STARTING POS!");
 		}
 	}
+	public boolean running = true;
 	public void run(String starting_pos)
 	{
 		System.out.println("MOVING FORWARD!");
 		//this.move(.5, 10);
 		
-		if (starting_pos.equalsIgnoreCase("left"))
-		{
+		if (starting_pos.equalsIgnoreCase("left") || starting_pos.equalsIgnoreCase("right"))
+		{	
 			//in inches,
 			//to cross line requires 168 in
+
 			if (isRunning)
 			{
 				move(168);
@@ -146,6 +169,7 @@ public class Autonomous {
 			{
 				move(168);
 				isRunning = false;
+
 			}
 		}
 		else 
@@ -162,10 +186,10 @@ public class Autonomous {
 	//TURN BACK NOW
 	private void turn(String direction, double degrees, double v)
 	{
+
 		
 		//Comments for the encoders, assuming it counts rotations
 		//v is in inches
-		
 		
 		v = v * CONVERSION;
 		double r = WHEEL_DIAMETER / 2;
@@ -224,11 +248,11 @@ public class Autonomous {
 		Robot.drivetrain.setSpeedRight(0);
 		Robot.drivetrain.setSpeedLeft(0);
 	}
-	
+
 	private void move(double length)
 	{
 		//So we want to go a certain length
-		
+		/*
 		double Xf = length;
 		//We're setting the motors to go .3 because that was our tested speed value
 		double Vi = .3 * CONVERSION;
@@ -238,10 +262,12 @@ public class Autonomous {
 		Robot.drivetrain.setSpeedRight(Vi);
 		Robot.drivetrain.setSpeedLeft(Vi);
 		Timer.delay(t);
+
 		//Robot.drivetrain.setSpeedRight(Vi);
 		//Robot.drivetrain.setSpeedLeft(Vi);		
 		//Timer.delay(1 / (t + 3));
 		Robot.drivetrain.setSpeedRight(0);
 		Robot.drivetrain.setSpeedLeft(0);
+
 	}
 }

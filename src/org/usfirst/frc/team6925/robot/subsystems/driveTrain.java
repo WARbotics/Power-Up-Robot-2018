@@ -46,7 +46,6 @@ public class driveTrain extends Subsystem
 		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
 		m_rearRightMotor.setInverted(true);
 		
-		//cool motor = new Spark(4);
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
@@ -55,6 +54,7 @@ public class driveTrain extends Subsystem
 		basketMotor = new Spark(RobotMap.basketMotor);
 		
 		basket = new SpeedControllerGroup(basketMotor);
+
 		
 		intakeLeft = new Spark(RobotMap.intakeMotor);
 		intakeLeft.setInverted(true);
@@ -65,7 +65,13 @@ public class driveTrain extends Subsystem
 		//obj		  =	initialize(port 1, port 2, inverted?, Encoding type);
 		//leftEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
 		//rightEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
+
 		
+		intakeLeft = new Spark(RobotMap.intakeMotor);
+		intakeLeft.setInverted(true);
+		intakeRight = new Spark(RobotMap.intakeMotor1);
+
+		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 	}
 	public void setBasket(double inputSpeed)
 	{
@@ -77,6 +83,7 @@ public class driveTrain extends Subsystem
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
 		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
+
 		intakeController.set(inputIntakeSpeed);
 	}
    public void setSpeedLeft(double inputSpeedLeft)
