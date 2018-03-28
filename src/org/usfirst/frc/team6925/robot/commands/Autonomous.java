@@ -141,7 +141,7 @@ public class Autonomous {
 				move(.2,1);
 				Timer.delay(1);
 				turn("left",.3,.4);
-				Timer.delay(1);
+				Timer.delay(1); 
 				move(.3,1);
 				isRunning = false;
 			}
@@ -173,12 +173,12 @@ public class Autonomous {
 	
 	//TURN BACK NOW
 	private void turn(String direction, double speed, double time)
-	{
+	{ 
 		
 		//Comments for the encoders, assuming it counts rotations
 		//v is in inches
 		
-		
+		 
 		/*v = v * CONVERSION;
 		double r = WHEEL_DIAMETER / 2;
 		double rad = degrees * (Math.PI / 180);
