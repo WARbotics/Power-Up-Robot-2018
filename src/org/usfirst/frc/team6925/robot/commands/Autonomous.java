@@ -129,6 +129,7 @@ public class Autonomous {
 		
 		if (starting_pos.equalsIgnoreCase("left"))
 		{
+			//
 			//in inches,
 			//to cross line requires 168 in
 			if (isRunning)

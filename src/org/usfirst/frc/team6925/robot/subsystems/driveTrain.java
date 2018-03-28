@@ -79,7 +79,7 @@ public class driveTrain extends Subsystem
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
 //<<<<<<< HEAD
-//=======
+////=======
 		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
 
 //>>>>>>> branch 'daniel_branch' of https://github.com/WARbotics/WaRobotics-PowerUp-2018
