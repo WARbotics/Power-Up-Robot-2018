@@ -51,15 +51,16 @@ public class Autonomous {
 			{
 				if (isRunning)
 				{
-					move(100);
+					System.out.println("MIDD LEFT");
+					move(.2, 2);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(81);
+					move(.2, 2);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.2, 2);
 					isRunning = false;
 				}
 			}
@@ -68,15 +69,16 @@ public class Autonomous {
 			{
 				if (isRunning)
 				{
-					move(100);
+					System.out.println("MIDD RIGHT");
+					move(.2, 2);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					move(81);
+					move(.2, 2);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.2, 2);
 					isRunning = false;
 				}
 			}
@@ -87,16 +89,17 @@ public class Autonomous {
 			{
 				if (isRunning)
 				{
-					move(100);
+					System.out.println("LEFT RIGHT");
+					Timer.delay(3);
+					move(.3,1);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					//added it to move 8 more inches
-					move(170);
+					move(.3,2);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.3,1);
 					isRunning = false;
 				}
 			}
@@ -107,15 +110,9 @@ public class Autonomous {
 			{
 				if (isRunning)
 				{
-					move(100);
-					Timer.delay(1);
+					System.out.println("right left");
 					turn("left",90,.3);
 					Timer.delay(1);
-					move(170);
-					Timer.delay(1);
-					turn("right",90,.3);
-					Timer.delay(1);
-					move(100);
 					isRunning = false;
 				}
 			}
@@ -136,7 +133,16 @@ public class Autonomous {
 			//to cross line requires 168 in
 			if (isRunning)
 			{
-				move(168);
+				System.out.println("LEFT LEFT");
+				move(.3,1);
+				Timer.delay(1);
+				turn("right",.3,.4);
+				Timer.delay(1);
+				move(.2,1);
+				Timer.delay(1);
+				turn("left",.3,.4);
+				Timer.delay(1);
+				move(.3,1);
 				isRunning = false;
 			}
 		}
@@ -144,13 +150,18 @@ public class Autonomous {
 		{
 			if (isRunning)
 			{
-				move(168);
+				
 				isRunning = false;
 			}
 		}
 		else 
 		{
 			System.out.println("RUN PARAM CASE INVALID");
+		}
+		if (starting_pos.equalsIgnoreCase("fullSpeed"))
+		{
+			move(1,100);
+			isRunning = false;
 		}
 	}
 
@@ -160,14 +171,14 @@ public class Autonomous {
 	}
 	
 	//TURN BACK NOW
-	private void turn(String direction, double degrees, double v)
+	private void turn(String direction, double speed, double time)
 	{
 		
 		//Comments for the encoders, assuming it counts rotations
 		//v is in inches
 		
 		
-		v = v * CONVERSION;
+		/*v = v * CONVERSION;
 		double r = WHEEL_DIAMETER / 2;
 		double rad = degrees * (Math.PI / 180);
 		double w = (v / r) * 2 * Math.PI;
@@ -175,21 +186,22 @@ public class Autonomous {
 		double speedRight = v;
 		double speedLeft = v;
 		
-		double timeStuff = rad / w;
+		double timeStuff = rad / w;*/
 		
 		if (direction.equalsIgnoreCase("left"))
 		{
-			Robot.drivetrain.setSpeedRight(speedRight);
-			Robot.drivetrain.setSpeedLeft(speedLeft * -1);
-			Timer.delay(timeStuff);
+			//REVERSE THESE ON REAL ROBOT
+			Robot.drivetrain.setSpeedRight(-speed);
+			Robot.drivetrain.setSpeedLeft(speed);
+			Timer.delay(time);
 			Robot.drivetrain.setSpeedRight(0);
 			Robot.drivetrain.setSpeedLeft(0);
 		}
 		else if (direction.equalsIgnoreCase("right"))
 		{
-			Robot.drivetrain.setSpeedRight(-speedRight);
-			Robot.drivetrain.setSpeedLeft(speedLeft);
-			Timer.delay(timeStuff);
+			Robot.drivetrain.setSpeedRight(speed);
+			Robot.drivetrain.setSpeedLeft(-speed);
+			Timer.delay(time);
 			Robot.drivetrain.setSpeedRight(0);
 			Robot.drivetrain.setSpeedLeft(0);
 		}
@@ -203,21 +215,21 @@ public class Autonomous {
 		
 	}
 	
-	private void move(double length, double speed)
+	private void move(double speed, double time)
 	{
 		//So we want to go a certain length
 		//
 		
 		//Vi = 
 		//rotations = .3
-		double Xf = length;
+		/*double Xf = length;
 		double Vi = speed * CONVERSION;
 		
-		double t = Xf / Vi;
+		double t = Xf / Vi;*/
 		
 		Robot.drivetrain.setSpeedRight(speed);
 		Robot.drivetrain.setSpeedLeft(speed);
-		Timer.delay(t);
+		Timer.delay(time);
 		//Robot.drivetrain.setSpeedRight(speed);
 		//Robot.drivetrain.setSpeedLeft(speed * -1);		
 		//Timer.delay(1 / (t + 3));
@@ -225,23 +237,4 @@ public class Autonomous {
 		Robot.drivetrain.setSpeedLeft(0);
 	}
 	
-	private void move(double length)
-	{
-		//So we want to go a certain length
-		
-		double Xf = length;
-		//We're setting the motors to go .3 because that was our tested speed value
-		double Vi = .3 * CONVERSION;
-		
-		double t = Xf / Vi;
-		
-		Robot.drivetrain.setSpeedRight(Vi);
-		Robot.drivetrain.setSpeedLeft(Vi);
-		Timer.delay(t);
-		//Robot.drivetrain.setSpeedRight(Vi);
-		//Robot.drivetrain.setSpeedLeft(Vi);		
-		//Timer.delay(1 / (t + 3));
-		Robot.drivetrain.setSpeedRight(0);
-		Robot.drivetrain.setSpeedLeft(0);
-	}
 }

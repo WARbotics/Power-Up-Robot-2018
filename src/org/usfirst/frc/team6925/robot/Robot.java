@@ -57,6 +57,7 @@ public class Robot extends IterativeRobot
     private static final String L_Left = "L-Switch L-Start";
     private static final String L_Right = "L-Switch R-Start";
     private static final String L_Mid = "L-Switch M-Start";
+    private static final String L_fullSpeed = "FULL SPEED AHEAD";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
@@ -79,12 +80,13 @@ public class Robot extends IterativeRobot
 		m_frontCamera.setFPS(60);
 		m_frontCamera.setResolution(640, 640);
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
-		m_chooser.addDefault("Right Switch and Right Start", R_Left);
-	   	m_chooser.addObject("Right Switch and Right Start", R_Right);
-	   	m_chooser.addObject("Right Switch and Mid Start", R_Mid);
-	   	m_chooser.addDefault("Left Switch Left Start", L_Left);
-	   	m_chooser.addObject("Left Switch Right Start", L_Right);
-	   	m_chooser.addObject("Left Switch Mid Start", L_Mid);
+		m_chooser.addDefault("Left Start/Right Switch", R_Left);
+	   	m_chooser.addDefault("Left Start/Left Switch", L_Left);
+	   	m_chooser.addObject("Mid Start/Right Switch", R_Mid);
+	   	m_chooser.addObject("Mid StartLeft Switch/", L_Mid);
+	   	m_chooser.addObject("Right Start/Left Switch", L_Right);
+	   	m_chooser.addObject("Right Start/Right Switch", R_Right);
+	   	m_chooser.addObject("FULL SPEED AHEAD", L_fullSpeed);
 
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
@@ -133,8 +135,7 @@ public class Robot extends IterativeRobot
 		
 		//based on the first letter of the game Data
 		
-		if (gameData.charAt(0)== 'L') 
-		{
+		
 			 switch(m_autoSelected) 
 		{
 	   		 case L_Right:
@@ -149,28 +150,23 @@ public class Robot extends IterativeRobot
 	   			 obj.run("left");
 	   			 //Left  switch anad Left placement
 	   			 break;
-	   	}
-		}
-
-	   	 
-	   	 else
-	   	 {
-	   		 switch (m_autoSelected) 
-	   		 {
-	   		 	case R_Right:
-	   		 		obj.run("right");
-	   		 		//Right Switch and Right placement
-	   		 		break;
-	   		 	case R_Mid:
-	   		 		obj.run("middle","right");
-	   		 		//Right Switch and Middle placement
-	   		 		break;
-	   		 	case R_Left:
-	   		 		obj.run("left","right");
-	   		 		//Right Switch and Left Placement
-	   		 		break;
+   		 	case R_Right:
+   		 		obj.run("right");
+   		 		//Right Switch and Right placement
+   		 		break;
+   		 	case R_Mid:
+   		 		obj.run("middle","right");
+   		 		//Right Switch and Middle placement
+   		 		break;
+   		 	case R_Left:
+   		 		obj.run("left","right");
+   		 		//Right Switch and Left Placement
+   		 		break;
+   		 	case L_fullSpeed:
+   		 		obj.run("fullspeed");
+   		 		break;
 	   		 } 
-	   	 }
+	   	 //}
 	   	 //l
 	}
 	
@@ -185,8 +181,8 @@ public class Robot extends IterativeRobot
 		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
 		
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .5);
-    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .5);
+    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
+    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
 		
 		
     	
@@ -278,6 +274,10 @@ public class Robot extends IterativeRobot
 	//Make sure when using this function, you add RAW SPEED value with no weight.
 	public double sinSmooth(double speed)
 	{
-		return Math.sin(speed * 90);
+		//check out: y = .5 * Math.sin((Math.PI * x) - (Math.PI/2)) + .5
+		//^ is the best function
+		
+		return (.5 * Math.sin((Math.PI * speed) - (Math.PI /2))) + .5;
+		//return Math.sin(speed);
 	}
 }
