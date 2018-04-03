@@ -204,17 +204,6 @@ public class Robot extends IterativeRobot
 			Robot.drivetrain.setBasket(0);
 		}
 		
-		/*
-		if (Robot.oi.basketReload.get() && !Robot.oi.basket.get()) 
-		{
-			Robot.basket.setSpeed(-.75);
-		}
-		else 
-		{
-			Robot.basket.setSpeed(0);
-		}
-		*/
-		
 		if (Robot.oi.intakeIN.get()) 
 		{
 			Robot.drivetrain.setIntakeSpeed(1);
@@ -226,6 +215,11 @@ public class Robot extends IterativeRobot
 		else 
 		{
 			Robot.drivetrain.setIntakeSpeed(0);
+		}
+		if (Robot.oi.reserveControl.get()) 
+		{
+			Robot.drivetrain.setSpeedLeft(-inputSpeedLeft *.8);
+			Robot.drivetrain.setSpeedRight(-inputSpeedRight * .8);
 		}
 		
 		

@@ -24,6 +24,7 @@ public class OI
 	//
 	Button testMotors;
 	Button testUnit;
+	Button reserveControl;
 	public OI() 
 	{
 		//Constructing the button for the Operator Joystick
@@ -35,6 +36,7 @@ public class OI
 		
 		testMotors = new JoystickButton(OP_Joystick, 5);
 		testUnit = new JoystickButton(OP_Joystick,6);
+		reserveControl = new JoystickButton(drive_Joystick, 1);
 		//placing buttons to there commands  
 		System.out.println("OI has been init");
 		
