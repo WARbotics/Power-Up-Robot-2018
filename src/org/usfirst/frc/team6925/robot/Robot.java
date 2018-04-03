@@ -193,11 +193,11 @@ public class Robot extends IterativeRobot
     	//Gets the value of the button that controls the basket.
 		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
 		{
-			Robot.drivetrain.setBasket(.3);
+			Robot.drivetrain.setBasket(.9);
 		}
 		else if (Robot.oi.basketReload.get())
 		{
-			Robot.drivetrain.setBasket(-.3);
+			Robot.drivetrain.setBasket(-.8);
 		}
 		else
 		{
