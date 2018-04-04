@@ -51,16 +51,17 @@ public class Autonomous {
 			{
 				if (isRunning)
 				{
+					//THIS CODE IS BETTER THAN MID RIGHT. REPLICATE.
 					System.out.println("MIDD LEFT");
-					move(.2, 2);
+					move(.2, 1);
 					Timer.delay(1);
 					turn("left",.3,.4);
 					Timer.delay(1);
-					move(.2, 2);
+					move(.2, 2.25);
 					Timer.delay(1);
 					turn("right",.3,.4);
 					Timer.delay(1);
-					move(.2, 2);
+					move(.2, 3.5);
 					isRunning = false;
 				}
 			}
@@ -111,7 +112,15 @@ public class Autonomous {
 				if (isRunning)
 				{
 					System.out.println("right left");
-					turn("left",90,.3);
+					move(.2,1);
+					Timer.delay(1);
+					turn("left",.3,.4);
+					Timer.delay(1);
+					move(.3,3);
+					Timer.delay(1);
+					turn("right",.3,.4);
+					Timer.delay(1);
+					move(.2,4);
 					Timer.delay(1);
 					isRunning = false;
 				}
@@ -238,5 +247,15 @@ public class Autonomous {
 		Robot.drivetrain.setSpeedRight(0);
 		Robot.drivetrain.setSpeedLeft(0);
 	}
+	private void basket() 
+	{
+		Robot.drivetrain.basket.set(.8);
+		Timer.delay(4);
+		Robot.drivetrain.basket.set(.8);
+		Timer.delay(4);
+		Robot.drivetrain.basket.set(0);
+	}
+		
+		
 	
 }

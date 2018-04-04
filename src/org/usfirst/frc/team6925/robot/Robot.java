@@ -44,8 +44,6 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 */                        
 
 
-//TODO 
-//Button and basket (spark)
 public class Robot extends IterativeRobot 
 {
 	
@@ -63,7 +61,6 @@ public class Robot extends IterativeRobot
 	public static String gameData;
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	
-	//TEST
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -72,8 +69,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		System.out.println("Robot is ready for testing!");
-		//basket = new Basket();
 		drivetrain = new driveTrain();
 		oi = new OI();
 		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
@@ -109,19 +104,24 @@ public class Robot extends IterativeRobot
 	public void autonomousInit() 
 	{
 		//Collecting the GameData 
-		String GameData;
-	   	GameData = DriverStation.getInstance().getGameSpecificMessage();
-	   	gameData = GameData;   
+		String gameData;
+	   	gameData = DriverStation.getInstance().getGameSpecificMessage();
+        if(gameData.length() > 0)
+        {
+        		if(gameData.charAt(0) == 'L')
+        		{
+        		//Put left auto code here
+        		} 
+        		else 
+        		{
+        		//Put right auto code here
+        	}
+        }
 		m_autoSelected = m_chooser.getSelected();
 		System.out.println("Auto selected: " + m_autoSelected);
 		obj = new Autonomous();
 	}
-    public String getGameData()
-    {
-    	//returns the data  
-   	 	return gameData;
-    }
-
+	
 
 	/**
 	 * This function is called periodically during autonomous.
@@ -178,9 +178,20 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		//
+
+
+		if (Robot.oi.reverseControl.get()) 
+		{
+			Robot.drivetrain.m_Left.setInverted(false);
+			Robot.drivetrain.m_Right.setInverted(true);
+		}
+		else
+		{
+			Robot.drivetrain.m_Left.setInverted(true);
+			Robot.drivetrain.m_Right.setInverted(false);
+		}
+	
 		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
-		
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
     		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
     		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
@@ -216,11 +227,6 @@ public class Robot extends IterativeRobot
 		{
 			Robot.drivetrain.setIntakeSpeed(0);
 		}
-		if (Robot.oi.reserveControl.get()) 
-		{
-			Robot.drivetrain.setSpeedLeft(-inputSpeedLeft *.8);
-			Robot.drivetrain.setSpeedRight(-inputSpeedRight * .8);
-		}
 		
 		
 		//now for the pretty stuff :)
@@ -243,8 +249,10 @@ public class Robot extends IterativeRobot
 		*/
 		
 		
-		System.out.println("FINAL VALUE THROUGH RUN FOR SPARK MOTOR = " + Robot.drivetrain.basketMotor.get());
 	}
+	
+
+
 
 	/**
 	 * This function is called periodically during test mode.

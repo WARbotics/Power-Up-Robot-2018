@@ -22,8 +22,8 @@ public class driveTrain extends Subsystem
 	private VictorSP m_rearRightMotor;
 	//creating the PWM speed controllers 
 
-	SpeedControllerGroup m_Left;
-	SpeedControllerGroup m_Right;
+	public SpeedControllerGroup m_Left;
+	public SpeedControllerGroup m_Right;
     public Spark basketMotor; 
     public SpeedControllerGroup basket;
     
@@ -65,12 +65,6 @@ public class driveTrain extends Subsystem
 		//leftEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
 		//rightEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
 
-		
-		intakeLeft = new Spark(RobotMap.intakeMotor);
-		intakeLeft.setInverted(true);
-		intakeRight = new Spark(RobotMap.intakeMotor1);
-
-		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 	}
 	public void setBasket(double inputSpeed)
 	{
@@ -78,16 +72,13 @@ public class driveTrain extends Subsystem
 	}
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
-//<<<<<<< HEAD
-////=======
-		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
-
-//>>>>>>> branch 'daniel_branch' of https://github.com/WARbotics/WaRobotics-PowerUp-2018
 		intakeController.set(inputIntakeSpeed);
 	}
    public void setSpeedLeft(double inputSpeedLeft)
    {
+	   
 	   m_Left.set(inputSpeedLeft);
+	
    }
    public void setSpeedRight(double inputSpeedRight)
    {
