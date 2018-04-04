@@ -62,6 +62,8 @@ public class Autonomous {
 					turn("right",.3,.4);
 					Timer.delay(1);
 					move(.2, 3.5);
+					Timer.delay(2);
+					basket();
 					isRunning = false;
 				}
 			}
@@ -80,6 +82,12 @@ public class Autonomous {
 					turn("left",.3,.4);
 					Timer.delay(1);
 					move(.2, 2);
+					Timer.delay(2);
+					basket();
+					{
+						isRunning = false;
+					}
+						
 					isRunning = false;
 				}
 			}
@@ -101,6 +109,8 @@ public class Autonomous {
 					turn("left",.3,.4);
 					Timer.delay(1);
 					move(.3,1);
+					Timer.delay(2);
+					basket();
 					isRunning = false;
 				}
 			}
@@ -121,7 +131,8 @@ public class Autonomous {
 					turn("right",.3,.4);
 					Timer.delay(1);
 					move(.2,4);
-					Timer.delay(1);
+					Timer.delay(2);
+					basket();
 					isRunning = false;
 				}
 			}
@@ -153,6 +164,8 @@ public class Autonomous {
 				turn("left",.3,.4);
 				Timer.delay(1); 
 				move(.3,1);
+				Timer.delay(2);
+				basket();
 				isRunning = false;
 			}
 		}
@@ -250,12 +263,13 @@ public class Autonomous {
 	private void basket() 
 	{
 		Robot.drivetrain.basket.set(.8);
-		Timer.delay(4);
-		Robot.drivetrain.basket.set(.8);
-		Timer.delay(4);
+		Timer.delay(2);
+		Robot.drivetrain.basket.set(0);
+		// This to allow the cube roll into the switch if the speed is not fast enough
+		Timer.delay(2);
+		Robot.drivetrain.basket.set(.7);
+		Timer.delay(2);
 		Robot.drivetrain.basket.set(0);
 	}
-		
-		
-	
 }
+		 

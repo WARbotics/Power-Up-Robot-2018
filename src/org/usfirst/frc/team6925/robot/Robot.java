@@ -56,6 +56,9 @@ public class Robot extends IterativeRobot
     private static final String L_Right = "L-Switch R-Start";
     private static final String L_Mid = "L-Switch M-Start";
     private static final String L_fullSpeed = "FULL SPEED AHEAD";
+    private static final String Left = "Left";
+    private static final String Right = "Right";
+    private static final String Middle = "Middle";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
@@ -82,6 +85,9 @@ public class Robot extends IterativeRobot
 	   	m_chooser.addObject("Right Start/Left Switch", L_Right);
 	   	m_chooser.addObject("Right Start/Right Switch", R_Right);
 	   	m_chooser.addObject("FULL SPEED AHEAD", L_fullSpeed);
+	   	m_chooser.addObject("Left", Left);
+	   	m_chooser.addObject("Middle", Middle);
+	   	m_chooser.addObject("Right", Right);
 
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
@@ -99,6 +105,7 @@ public class Robot extends IterativeRobot
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
+
 	Autonomous obj;
 	@Override
 	public void autonomousInit() 
@@ -106,21 +113,14 @@ public class Robot extends IterativeRobot
 		//Collecting the GameData 
 		String gameData;
 	   	gameData = DriverStation.getInstance().getGameSpecificMessage();
-        if(gameData.length() > 0)
-        {
-        		if(gameData.charAt(0) == 'L')
-        		{
-        		//Put left auto code here
-        		} 
-        		else 
-        		{
-        		//Put right auto code here
-        	}
-        }
+	   	
 		m_autoSelected = m_chooser.getSelected();
 		System.out.println("Auto selected: " + m_autoSelected);
 		obj = new Autonomous();
 	}
+
+
+	
 	
 
 	/**
@@ -133,41 +133,55 @@ public class Robot extends IterativeRobot
 		//Autonomous controller = new Autonomous("forward");
 		
 		
-		//based on the first letter of the game Data
-		
+		/*
+		 * There three main switch case 
+		 * then after that it will check the data of FMS in a if statement is L it runs the left code or if right then right
+		 * 
+		 */
 		
 			 switch(m_autoSelected) 
-		{
-	   		 case L_Right:
-	   			 //Left Switch and Right pl acement
-	   			 obj.run("right","left");
-	   			 break;
-	   		 case L_Mid:
-	   			 //Left  Switch and Right placement
-	   			 obj.run("middle","left");
-	   			 break;
-	   		 case L_Left:
-	   			 obj.run("left");
-	   			 //Left  switch anad Left placement
-	   			 break;
-   		 	case R_Right:
-   		 		obj.run("right");
-   		 		//Right Switch and Right placement
-   		 		break;
-   		 	case R_Mid:
-   		 		obj.run("middle","right");
-   		 		//Right Switch and Middle placement
-   		 		break;
-   		 	case R_Left:
-   		 		obj.run("left","right");
-   		 		//Right Switch and Left Placement
-   		 		break;
-   		 	case L_fullSpeed:
-   		 		obj.run("fullspeed");
-   		 		break;
-	   		 } 
-	   	 //}
-	   	 //l
+			 {
+			 case Left:
+				 if (gameData.charAt(0) == 'L') 
+				 {
+					 obj.run("left");
+					 //Left placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') 
+				 {
+					 obj.run("left","right");
+					 //Left placement and right switch
+				 }
+				 break;
+			 case Middle:
+				 if (gameData.charAt(0) == 'L') 
+				 {
+					 obj.run("middle", "left");
+					 //Middle placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') 
+				 {
+					 //Middle placement and right switch
+					 obj.run("middle","right");
+				 }
+			 	 break;
+			 case Right:
+				 if (gameData.charAt(0) == 'L') 
+				 {
+					 obj.run("right", "left");
+					 //Right placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') 
+				 {
+					 obj.run("right");
+					 //Right placement and right switch
+				 }
+				 break;
+			 case L_fullSpeed:
+	   		 		obj.run("fullspeed");
+	   		 		break;
+			 
+			 }
 	}
 	
 		
