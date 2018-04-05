@@ -193,7 +193,7 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic()
 	{
 
-
+		
 		if (Robot.oi.reverseControl.get()) 
 		{
 			Robot.drivetrain.m_Left.setInverted(false);
@@ -293,8 +293,14 @@ public class Robot extends IterativeRobot
 	{
 		//check out: y = .5 * Math.sin((Math.PI * x) - (Math.PI/2)) + .5
 		//^ is the best function
-		
-		return (.5 * Math.sin((Math.PI * speed) - (Math.PI /2))) + .5;
-		//return Math.sin(speed);
+		if (speed >= 0)
+		{
+			return .5 * Math.sin((Math.PI * speed) - (Math.PI / 2)) + .5;
+		}
+		else if (speed < 0)
+		{
+			return -(.5 * Math.sin((Math.PI * speed) - (Math.PI / 2)) + .5);
+		}
+		return 0;
 	}
 }

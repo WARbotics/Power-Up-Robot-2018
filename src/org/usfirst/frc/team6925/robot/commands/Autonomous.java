@@ -13,36 +13,16 @@ import edu.wpi.first.wpilibj.Timer;
  * nvm screw this we do this later.
  */
 public class Autonomous {
-	private final double WHEEL_DIAMETER = 24.25;
 	
 	private boolean isRunning = true;
-	//(88/2) / .3 = 146.6667
-	//because really our test went 44 inches/second, we tested it for two seconds to get .88;
-	private final double CONVERSION = 146.6667;
-	/*
-	private String direction = "";
-	private double degrees = 0.0;
-	private double speed = 0.0;
-	*/
-	
-	//This is what we can access. We just want to create an object and then run it by typing in object.run(param);
-	public Autonomous()
+
+
+public Autonomous()
 	{
 		System.out.println("AUTONOMOUS OBJECT INITIALIZED!");
 	}
 	
 	public void run(String starting_pos, String side) {
-		//Field width is 324
-		// / 2 = 162
-		// / 2 = 81
-		
-		//This should serve four cases:
-		/*
-		 * 1. Left right
-		 * 2. Right left
-		 * 3. Middle left
-		 * 4. Middle right
-		 */
 		
 		
 		if (starting_pos.equalsIgnoreCase("middle"))
@@ -73,21 +53,17 @@ public class Autonomous {
 				if (isRunning)
 				{
 					System.out.println("MIDD RIGHT");
-					move(.2, 2);
+					move(.2, 1);
 					Timer.delay(1);
 					turn("right",.3,.4);
 					Timer.delay(1);
-					move(.2, 2);
+					move(.2, 2.25);
 					Timer.delay(1);
 					turn("left",.3,.4);
 					Timer.delay(1);
-					move(.2, 2);
+					move(.2, 3.5);
 					Timer.delay(2);
-					basket();
-					{
-						isRunning = false;
-					}
-						
+					basket();						
 					isRunning = false;
 				}
 			}
@@ -108,7 +84,7 @@ public class Autonomous {
 					Timer.delay(1);
 					turn("left",.3,.4);
 					Timer.delay(1);
-					move(.3,1);
+					move(.2,4);
 					Timer.delay(2);
 					basket();
 					isRunning = false;
@@ -163,7 +139,7 @@ public class Autonomous {
 				Timer.delay(1);
 				turn("left",.3,.4);
 				Timer.delay(1); 
-				move(.3,1);
+				move(.2,4);
 				Timer.delay(2);
 				basket();
 				isRunning = false;
@@ -173,7 +149,18 @@ public class Autonomous {
 		{
 			if (isRunning)
 			{
-				
+				System.out.println("RIGHT RIGHT");
+				move(.3,1);
+				Timer.delay(1);
+				turn("left",.3,.4);
+				Timer.delay(1);
+				move(.2,1);
+				Timer.delay(1);
+				turn("right",.3,.4);
+				Timer.delay(1); 
+				move(.3,1);
+				Timer.delay(2);
+				basket();
 				isRunning = false;
 			}
 		}
@@ -267,7 +254,7 @@ public class Autonomous {
 		Robot.drivetrain.basket.set(0);
 		// This to allow the cube roll into the switch if the speed is not fast enough
 		Timer.delay(2);
-		Robot.drivetrain.basket.set(.7);
+		Robot.drivetrain.basket.set(-.7);
 		Timer.delay(2);
 		Robot.drivetrain.basket.set(0);
 	}
