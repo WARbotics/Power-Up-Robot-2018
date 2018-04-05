@@ -207,7 +207,7 @@ public class Robot extends IterativeRobot
 	
 		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-		//put sinSmooth here
+		//put sinSmooth here1
     		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
     		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
 		
