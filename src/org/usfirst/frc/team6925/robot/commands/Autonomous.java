@@ -121,7 +121,7 @@ public Autonomous()
 	public void run(String starting_pos)
 	{
 		System.out.println("MOVING FORWARD!");
-		//this.move(.5, 10);
+		//this.move(.5, 10);3
 		
 		if (starting_pos.equalsIgnoreCase("left"))
 		{
