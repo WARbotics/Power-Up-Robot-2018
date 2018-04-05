@@ -207,6 +207,7 @@ public class Robot extends IterativeRobot
 	
 		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
+		//put sinSmooth here
     		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
     		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
 		
@@ -292,7 +293,7 @@ public class Robot extends IterativeRobot
 	public double sinSmooth(double speed)
 	{
 		//check out: y = .5 * Math.sin((Math.PI * x) - (Math.PI/2)) + .5
-		//^ is the best function
+		//^ is the best functiona
 		if (speed >= 0)
 		{
 			return .5 * Math.sin((Math.PI * speed) - (Math.PI / 2)) + .5;
