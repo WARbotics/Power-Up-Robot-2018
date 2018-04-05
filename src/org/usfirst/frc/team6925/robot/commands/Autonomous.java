@@ -249,6 +249,7 @@ public Autonomous()
 	}
 	private void basket() 
 	{
+		//basket auto
 		Robot.drivetrain.basket.set(.8);
 		Timer.delay(2);
 		Robot.drivetrain.basket.set(0);
