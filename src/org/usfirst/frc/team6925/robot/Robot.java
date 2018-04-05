@@ -292,6 +292,7 @@ public class Robot extends IterativeRobot
 	//Make sure when using this function, you add RAW SPEED value with no weight.
 	public double sinSmooth(double speed)
 	{
+		//
 		//check out: y = .5 * Math.sin((Math.PI * x) - (Math.PI/2)) + .5
 		//^ is the best functiona
 		if (speed >= 0)
