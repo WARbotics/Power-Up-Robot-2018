@@ -1,19 +1,12 @@
 package org.usfirst.frc.team6925.robot.subsystems;
 
-import org.usfirst.frc.team6925.robot.Robot;
 import org.usfirst.frc.team6925.robot.RobotMap;
-import org.usfirst.frc.team6925.robot.commands.tankDrive;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
-public class driveTrain extends Subsystem 
+public class driveTrain
 {
 	//Creating VictorSP motors 
 	private VictorSP m_frontLeftMotor;
@@ -31,11 +24,6 @@ public class driveTrain extends Subsystem
 	private Spark intakeRight;
 	SpeedControllerGroup intakeController;	
 	
-	//Encoders
-	//private Encoder leftEncoder;
-	//private Encoder rightEncoder;
-	
-	//drivetrain f
 	public driveTrain() 
 	{
 		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);		
@@ -49,7 +37,7 @@ public class driveTrain extends Subsystem
 		m_Left.setInverted(true);
 		
 		basketMotor = new Spark(RobotMap.basketMotor);
-		//W
+		
 		basket = new SpeedControllerGroup(basketMotor);
 
 		
@@ -61,9 +49,6 @@ public class driveTrain extends Subsystem
 		
 		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 		
-		//obj		  =	initialize(port 1, port 2, inverted?, Encoding type);
-		//leftEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
-		//rightEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
 
 	}
 	public void setBasket(double inputSpeed)
@@ -84,14 +69,6 @@ public class driveTrain extends Subsystem
    {
 	   m_Right.set(inputSpeedRight);
    }
-   public void initDefaultCommand() 
-    {
-
-		setDefaultCommand(new tankDrive());
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
-  
 }
 
 
