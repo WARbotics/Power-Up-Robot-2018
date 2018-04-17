@@ -13,110 +13,80 @@ import edu.wpi.first.wpilibj.Timer;
  * nvm screw this we do this later.
  */
 public class Autonomous {
-	private final double WHEEL_DIAMETER = 24.25;
 	
-
 	private boolean isRunning = true;
-	//(88/2) / .3 = 146.6667
-	//because really our test went 44 inches/second, we tested it for two seconds to get .88;
-	private final double CONVERSION = 146.6667;
-	/*
-	private String direction = "";
-	private double degrees = 0.0;
-	private double speed = 0.0;
-	*/
-	
-	//This is what we can access. We just want to create an object and then run it by typing in object.run(param);
-	public Autonomous()
+
+
+public Autonomous()
 	{
 		System.out.println("AUTONOMOUS OBJECT INITIALIZED!");
 	}
 	
 	public void run(String starting_pos, String side) {
-		//Field width is 324
-		// / 2 = 162
-		// / 2 = 81
 		
-		//This should serve four cases:
-		/*
-		 * 1. Left right
-		 * 2. Right left
-		 * 3. Middle left
-		 * 4. Middle right
-		 */
 		
-
-		
-
-		if (starting_pos.equalsIgnoreCase("test")) 
-		{
-			if (starting_pos.equalsIgnoreCase("right"))
-			{
-				Robot.drivetrain.tankDriveLeft(.3);
-				Robot.drivetrain.tankDriveRight(.3 * -1);
-				System.out.println("MOVING!");
-				Timer.delay(2.5);
-				Robot.drivetrain.tankDriveLeft(0);
-				Robot.drivetrain.tankDriveLeft(0);
-				System.out.println("STOPPED!");
-			}
-		}
 		if (starting_pos.equalsIgnoreCase("middle"))
 		{
 			if (side.equalsIgnoreCase("left"))
 			{
 				if (isRunning)
 				{
-					move(100);
+					//THIS CODE IS BETTER THAN MID RIGHT. REPLICATE.
+					System.out.println("MIDD LEFT");
+					move(.2, 1);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(81);
+					move(.2, 2.25);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.2, 3.5);
+					Timer.delay(2);
+					basket();
 					isRunning = false;
 				}
-
 			}
 			//
 			else if (side.equalsIgnoreCase("right"))
 			{
-
 				if (isRunning)
 				{
-					move(100);
+					System.out.println("MIDD RIGHT");
+					move(.2, 1);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					move(81);
+					move(.2, 2.25);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.2, 3.5);
+					Timer.delay(2);
+					basket();						
 					isRunning = false;
 				}
-
 			}
 		}
 		else if (starting_pos.equalsIgnoreCase("left"))
 		{
 			if (side.equalsIgnoreCase("right"))
 			{
-
 				if (isRunning)
 				{
-					move(100);
+					System.out.println("LEFT RIGHT");
+					Timer.delay(3);
+					move(.3,1);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					//added it to move 8 more inches
-					move(170);
+					move(.3,2);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.2,4);
+					Timer.delay(2);
+					basket();
 					isRunning = false;
 				}
 			}
@@ -127,18 +97,20 @@ public class Autonomous {
 			{
 				if (isRunning)
 				{
-					move(100);
+					System.out.println("right left");
+					move(.2,1);
 					Timer.delay(1);
-					turn("left",90,.3);
+					turn("left",.3,.4);
 					Timer.delay(1);
-					move(170);
+					move(.3,3);
 					Timer.delay(1);
-					turn("right",90,.3);
+					turn("right",.3,.4);
 					Timer.delay(1);
-					move(100);
+					move(.2,4);
+					Timer.delay(2);
+					basket();
 					isRunning = false;
 				}
-
 			}
 		}
 		else 
@@ -146,20 +118,30 @@ public class Autonomous {
 			System.out.println("INVALID STARTING POS!");
 		}
 	}
-	public boolean running = true;
 	public void run(String starting_pos)
 	{
 		System.out.println("MOVING FORWARD!");
-		//this.move(.5, 10);
+		//this.move(.5, 10);3e
 		
-		if (starting_pos.equalsIgnoreCase("left") || starting_pos.equalsIgnoreCase("right"))
-		{	
+		if (starting_pos.equalsIgnoreCase("left"))
+		{
+			//
 			//in inches,
 			//to cross line requires 168 in
-
 			if (isRunning)
 			{
-				move(168);
+				System.out.println("LEFT LEFT");
+				move(.3,1);
+				Timer.delay(1);
+				turn("right",.3,.4);
+				Timer.delay(1);
+				move(.2,1);
+				Timer.delay(1);
+				turn("left",.3,.4);
+				Timer.delay(1); 
+				move(.2,4);
+				Timer.delay(2);
+				basket();
 				isRunning = false;
 			}
 		}
@@ -167,14 +149,30 @@ public class Autonomous {
 		{
 			if (isRunning)
 			{
-				move(168);
+				System.out.println("RIGHT RIGHT");
+				move(.3,1);
+				Timer.delay(1);
+				turn("left",.3,.4);
+				Timer.delay(1);
+				move(.2,1);
+				Timer.delay(1);
+				turn("right",.3,.4);
+				Timer.delay(1); 
+				move(.3,1);
+				Timer.delay(2);
+				basket();
 				isRunning = false;
-
 			}
 		}
 		else 
 		{
 			System.out.println("RUN PARAM CASE INVALID");
+		}
+		if (starting_pos.equalsIgnoreCase("fullSpeed"))
+		{
+			move(1,100);
+			isRunning = false;
+			//s
 		}
 	}
 
@@ -184,14 +182,14 @@ public class Autonomous {
 	}
 	
 	//TURN BACK NOW
-	private void turn(String direction, double degrees, double v)
-	{
-
+	private void turn(String direction, double speed, double time)
+	{ 
 		
 		//Comments for the encoders, assuming it counts rotations
 		//v is in inches
 		
-		v = v * CONVERSION;
+		 
+		/*v = v * CONVERSION;
 		double r = WHEEL_DIAMETER / 2;
 		double rad = degrees * (Math.PI / 180);
 		double w = (v / r) * 2 * Math.PI;
@@ -199,21 +197,22 @@ public class Autonomous {
 		double speedRight = v;
 		double speedLeft = v;
 		
-		double timeStuff = rad / w;
+		double timeStuff = rad / w;*/
 		
 		if (direction.equalsIgnoreCase("left"))
 		{
-			Robot.drivetrain.setSpeedRight(speedRight);
-			Robot.drivetrain.setSpeedLeft(speedLeft * -1);
-			Timer.delay(timeStuff);
+			//REVERSE THESE ON REAL ROBOT
+			Robot.drivetrain.setSpeedRight(-speed);
+			Robot.drivetrain.setSpeedLeft(speed);
+			Timer.delay(time);
 			Robot.drivetrain.setSpeedRight(0);
 			Robot.drivetrain.setSpeedLeft(0);
 		}
 		else if (direction.equalsIgnoreCase("right"))
 		{
-			Robot.drivetrain.setSpeedRight(-speedRight);
-			Robot.drivetrain.setSpeedLeft(speedLeft);
-			Timer.delay(timeStuff);
+			Robot.drivetrain.setSpeedRight(speed);
+			Robot.drivetrain.setSpeedLeft(-speed);
+			Timer.delay(time);
 			Robot.drivetrain.setSpeedRight(0);
 			Robot.drivetrain.setSpeedLeft(0);
 		}
@@ -227,47 +226,38 @@ public class Autonomous {
 		
 	}
 	
-	private void move(double length, double speed)
+	private void move(double speed, double time)
 	{
 		//So we want to go a certain length
 		//
 		
 		//Vi = 
 		//rotations = .3
-		double Xf = length;
+		/*double Xf = length;
 		double Vi = speed * CONVERSION;
 		
-		double t = Xf / Vi;
+		double t = Xf / Vi;*/
 		
 		Robot.drivetrain.setSpeedRight(speed);
 		Robot.drivetrain.setSpeedLeft(speed);
-		Timer.delay(t);
+		Timer.delay(time);
 		//Robot.drivetrain.setSpeedRight(speed);
 		//Robot.drivetrain.setSpeedLeft(speed * -1);		
 		//Timer.delay(1 / (t + 3));
 		Robot.drivetrain.setSpeedRight(0);
 		Robot.drivetrain.setSpeedLeft(0);
 	}
-
-	private void move(double length)
+	private void basket() 
 	{
-		//So we want to go a certain length
-		/*
-		double Xf = length;
-		//We're setting the motors to go .3 because that was our tested speed value
-		double Vi = .3 * CONVERSION;
-		
-		double t = Xf / Vi;
-		
-		Robot.drivetrain.setSpeedRight(Vi);
-		Robot.drivetrain.setSpeedLeft(Vi);
-		Timer.delay(t);
-
-		//Robot.drivetrain.setSpeedRight(Vi);
-		//Robot.drivetrain.setSpeedLeft(Vi);		
-		//Timer.delay(1 / (t + 3));
-		Robot.drivetrain.setSpeedRight(0);
-		Robot.drivetrain.setSpeedLeft(0);
-
+		//basket auto
+		Robot.drivetrain.basket.set(.8);
+		Timer.delay(2);
+		Robot.drivetrain.basket.set(0);
+		// This to allow the cube roll into the switch if the speed is not fast enough
+		Timer.delay(2);
+		Robot.drivetrain.basket.set(-.7);
+		Timer.delay(2);
+		Robot.drivetrain.basket.set(0);
 	}
 }
+		 

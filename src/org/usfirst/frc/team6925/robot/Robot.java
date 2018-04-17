@@ -17,11 +17,13 @@ import org.usfirst.frc.team6925.robot.subsystems.Diagnostics;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
+
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 
 import org.usfirst.frc.team6925.robot.commands.Autonomous;
 import org.usfirst.frc.team6925.robot.subsystems.Basket;
@@ -42,8 +44,6 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 */                        
 
 
-//TODO 
-//Button and basket (spark)
 public class Robot extends IterativeRobot 
 {
 	
@@ -55,14 +55,15 @@ public class Robot extends IterativeRobot
     private static final String L_Left = "L-Switch L-Start";
     private static final String L_Right = "L-Switch R-Start";
     private static final String L_Mid = "L-Switch M-Start";
-    private static final String Nothing = "Nothing";
-    private static final String test = "Test";
+    private static final String L_fullSpeed = "FULL SPEED AHEAD";
+    private static final String Left = "Left";
+    private static final String Right = "Right";
+    private static final String Middle = "Middle";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
 	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
 	
-	//TEST
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -71,22 +72,23 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		System.out.println("Robot is ready for testing!");
-		//basket = new Basket();
 		drivetrain = new driveTrain();
 		oi = new OI();
 		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
 		m_frontCamera.setFPS(60);
 		m_frontCamera.setResolution(640, 640);
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
-		m_chooser.addDefault("Right Switch and Right Start", R_Left);
-	   	m_chooser.addObject("Right Switch and Right Start", R_Right);
-	   	m_chooser.addObject("Right Switch and Mid Start", R_Mid);
-	   	m_chooser.addDefault("Left Switch Left Start", L_Left);
-	   	m_chooser.addObject("Left Switch Right Start", L_Right);
-	   	m_chooser.addObject("Left Switch Mid Start", L_Mid);
-	   	m_chooser.addObject("Nothing", Nothing);
-	   	m_chooser.addObject("Test", test);
+		m_chooser.addDefault("Left Start/Right Switch", R_Left);
+	   	m_chooser.addDefault("Left Start/Left Switch", L_Left);
+	   	m_chooser.addObject("Mid Start/Right Switch", R_Mid);
+	   	m_chooser.addObject("Mid StartLeft Switch/", L_Mid);
+	   	m_chooser.addObject("Right Start/Left Switch", L_Right);
+	   	m_chooser.addObject("Right Start/Right Switch", R_Right);
+	   	m_chooser.addObject("FULL SPEED AHEAD", L_fullSpeed);
+	   	m_chooser.addObject("Left", Left);
+	   	m_chooser.addObject("Middle", Middle);
+	   	m_chooser.addObject("Right", Right);
+
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
 
@@ -103,16 +105,23 @@ public class Robot extends IterativeRobot
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
+
 	Autonomous obj;
 	@Override
 	public void autonomousInit() 
 	{
-
+		//Collecting the GameData 
+		String gameData;
+	   	gameData = DriverStation.getInstance().getGameSpecificMessage();
+	   	
 		m_autoSelected = m_chooser.getSelected();
 		System.out.println("Auto selected: " + m_autoSelected);
 		obj = new Autonomous();
 	}
 
+
+	
+	
 
 	/**
 	 * This function is called periodically during autonomous.
@@ -124,50 +133,56 @@ public class Robot extends IterativeRobot
 		//Autonomous controller = new Autonomous("forward");
 		
 		
-		//based on the first letter of the game Data
+		/*
+		 * There three main switch case 
+		 * then after that it will check the data of FMS in a if statement is L it runs the left code or if right then right
+		 * 
+		 */
 		
-		 switch(m_autoSelected) 
-	{
-   		 case L_Right:
-   			 //Left Switch and Right placement
-   			 obj.run("right","left");
-   			 System.out.println("L_Right Chosen");
-   			 break;
-   		 case L_Mid:
-   			 //Left  Switch and Right placement
-   			 obj.run("right");
-   			 System.out.println("L_Mid Chosen");
-   			 break;
-   		 case L_Left:
-   			 obj.run("left");
-   			 System.out.println("L_Left Chosen");
-   			 //Left  switch anad Left placement
-   			 break;
-   		 case R_Right:
-   			 obj.run("right");
-   			 System.out.println("R_Right Chosen");
-	 		//Right Switch and Right placement
-   			 break;
-   		 case R_Mid:
-   			 obj.run("right");
-   			 System.out.println("R_Mid Chosen");
-	 		//Right Switch and Middle placement
-   			 //Test
-   			 break;
-   		 case R_Left:
-   			 obj.run("right");
-   			 System.out.println("R_Left Chosen");	
-	 		//Right Switch and Left Placement
-   			 break;
-   		 case Nothing:
-   			 break;
-   		 case test: 
-   			 obj.run("left", "Right");
-   			 break;
-   			 
-   			 
-	} 
-   	 }
+			 switch(m_autoSelected) 
+			 {
+			 case Left:
+				 if (gameData.charAt(0) == 'L') 
+				 {
+					 obj.run("left");
+					 //Left placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') 
+				 {
+					 obj.run("left","right");
+					 //Left placement and right switch
+				 }
+				 break;
+			 case Middle:
+				 if (gameData.charAt(0) == 'L') 
+				 {
+					 obj.run("middle", "left");
+					 //Middle placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') 
+				 {
+					 //Middle placement and right switch
+					 obj.run("middle","right");
+				 }
+			 	 break;
+			 case Right:
+				 if (gameData.charAt(0) == 'L') 
+				 {
+					 obj.run("right", "left");
+					 //Right placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') 
+				 {
+					 obj.run("right");
+					 //Right placement and right switch
+				 }
+				 break;
+			 case L_fullSpeed:
+	   		 		obj.run("fullspeed");
+	   		 		break;
+			 
+			 }
+	}
 	
 		
 
@@ -177,11 +192,24 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
+
 		
+		if (Robot.oi.reverseControl.get()) 
+		{
+			Robot.drivetrain.m_Left.setInverted(false);
+			Robot.drivetrain.m_Right.setInverted(true);
+		}
+		else
+		{
+			Robot.drivetrain.m_Left.setInverted(true);
+			Robot.drivetrain.m_Right.setInverted(false);
+		}
+	
+		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
-    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .5);
-    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .5);
+		//put sinSmooth here1
+    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
+    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
 		
 		
     	
@@ -191,28 +219,16 @@ public class Robot extends IterativeRobot
     	//Gets the value of the button that controls the basket.
 		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
 		{
-
-			Robot.drivetrain.setBasket(.1);
+			Robot.drivetrain.setBasket(.9);
 		}
 		else if (Robot.oi.basketReload.get())
 		{
-			Robot.drivetrain.setBasket(-.1);
+			Robot.drivetrain.setBasket(-.8);
 		}
 		else
 		{
 			Robot.drivetrain.setBasket(0);
 		}
-		
-		/*
-		if (Robot.oi.basketReload.get() && !Robot.oi.basket.get()) 
-		{
-			Robot.basket.setSpeed(-.75);
-		}
-		else 
-		{
-			Robot.basket.setSpeed(0);
-		}
-		*/
 		
 		if (Robot.oi.intakeIN.get()) 
 		{
@@ -248,8 +264,10 @@ public class Robot extends IterativeRobot
 		*/
 		
 		
-		System.out.println("FINAL VALUE THROUGH RUN FOR SPARK MOTOR = " + Robot.drivetrain.basketMotor.get());
 	}
+	
+
+
 
 	/**
 	 * This function is called periodically during test mode.
@@ -274,6 +292,17 @@ public class Robot extends IterativeRobot
 	//Make sure when using this function, you add RAW SPEED value with no weight.
 	public double sinSmooth(double speed)
 	{
-		return Math.sin(speed * 90);
+		//3l
+		//check out: y = .5 * Math.sin((Math.PI * x) - (Math.PI/2)) + .5
+		//^ is the best functiona
+		if (speed >= 0)
+		{
+			return .5 * Math.sin((Math.PI * speed) - (Math.PI / 2)) + .5;
+		}
+		else if (speed < 0)
+		{
+			return -(.5 * Math.sin((Math.PI * speed) - (Math.PI / 2)) + .5);
+		}
+		return 0;
 	}
 }

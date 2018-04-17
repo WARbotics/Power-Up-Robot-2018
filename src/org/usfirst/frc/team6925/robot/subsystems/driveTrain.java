@@ -22,8 +22,8 @@ public class driveTrain extends Subsystem
 	private VictorSP m_rearRightMotor;
 	//creating the PWM speed controllers 
 
-	SpeedControllerGroup m_Left;
-	SpeedControllerGroup m_Right;
+	public SpeedControllerGroup m_Left;
+	public SpeedControllerGroup m_Right;
     public Spark basketMotor; 
     public SpeedControllerGroup basket;
     
@@ -35,24 +35,21 @@ public class driveTrain extends Subsystem
 	//private Encoder leftEncoder;
 	//private Encoder rightEncoder;
 	
-	//drivetrain
+	//drivetrain f
 	public driveTrain() 
 	{
 		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);		
 		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-		m_frontRightMotor.setInverted(true);
 		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-		
 		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
-		m_rearRightMotor.setInverted(true);
 		
 		
 		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
 		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
-		
+		m_Left.setInverted(true);
 		
 		basketMotor = new Spark(RobotMap.basketMotor);
-		
+		//W
 		basket = new SpeedControllerGroup(basketMotor);
 
 		
@@ -60,35 +57,28 @@ public class driveTrain extends Subsystem
 		intakeLeft.setInverted(true);
 		intakeRight = new Spark(RobotMap.intakeMotor1);
 
+		
+		
 		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 		
 		//obj		  =	initialize(port 1, port 2, inverted?, Encoding type);
 		//leftEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
 		//rightEncoder = new Encoder(port1, port2, false, Encoder.EncodingType.k4x);
 
-		
-		intakeLeft = new Spark(RobotMap.intakeMotor);
-		intakeLeft.setInverted(true);
-		intakeRight = new Spark(RobotMap.intakeMotor1);
-
-		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
 	}
 	public void setBasket(double inputSpeed)
 	{
-		System.out.println("Input speed: " + inputSpeed + ", setting basketMotor to " +inputSpeed);
-		//Decided to 
 		this.basket.set(inputSpeed);
-		System.out.println("VALUE OF SPARK: " + basketMotor.get());
 	}
 	public void setIntakeSpeed(double inputIntakeSpeed)
 	{
-		System.out.println("setIntakeSpeed accessed! inputIntakeSpeed = " + inputIntakeSpeed + ", setting to intakeController.");
-
 		intakeController.set(inputIntakeSpeed);
 	}
    public void setSpeedLeft(double inputSpeedLeft)
    {
+	   
 	   m_Left.set(inputSpeedLeft);
+	
    }
    public void setSpeedRight(double inputSpeedRight)
    {

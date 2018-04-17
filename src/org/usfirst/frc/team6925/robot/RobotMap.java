@@ -21,7 +21,7 @@ public class RobotMap {
 	//Joystick Axis
 	public static int Joystick_Move_Axis = 1;
 	public static int Joystick_Rotate_Axis = 0; 
-	
+	//
 	
 	//Encoders don't go here as initializing encoders requires two inputs.
 	
