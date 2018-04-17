@@ -13,10 +13,8 @@
  * Y'ALL, RIGHT SPEED GROUP SPEEDS SHOULD ALWAYS BE MULTIPLIED BY -1
  */
 package org.usfirst.frc.team6925.robot;
-import org.usfirst.frc.team6925.robot.subsystems.Diagnostics;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Joystick;
 
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -26,7 +24,6 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import org.usfirst.frc.team6925.robot.commands.Autonomous;
-import org.usfirst.frc.team6925.robot.subsystems.Basket;
 import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -49,16 +46,11 @@ public class Robot extends IterativeRobot
 	
 	public static driveTrain drivetrain;
 	public static OI oi;
-    private static final String R_Left = "R-Switch L-Start";
-    private static final String R_Right = "R-Switch R-Start";
-    private static final String R_Mid = "R-Switch M-Start";
-    private static final String L_Left = "L-Switch L-Start";
-    private static final String L_Right = "L-Switch R-Start";
-    private static final String L_Mid = "L-Switch M-Start";
     private static final String L_fullSpeed = "FULL SPEED AHEAD";
     private static final String Left = "Left";
     private static final String Right = "Right";
     private static final String Middle = "Middle";
+    private static final String None = "None";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
@@ -74,20 +66,18 @@ public class Robot extends IterativeRobot
 	{
 		drivetrain = new driveTrain();
 		oi = new OI();
+		UsbCamera m_rearCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
 		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
-		m_frontCamera.setFPS(60);
+		m_rearCamera.setFPS(15);
+		m_rearCamera.setResolution(640, 640);
+		m_frontCamera.setFPS(15);
 		m_frontCamera.setResolution(640, 640);
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
-		m_chooser.addDefault("Left Start/Right Switch", R_Left);
-	   	m_chooser.addDefault("Left Start/Left Switch", L_Left);
-	   	m_chooser.addObject("Mid Start/Right Switch", R_Mid);
-	   	m_chooser.addObject("Mid StartLeft Switch/", L_Mid);
-	   	m_chooser.addObject("Right Start/Left Switch", L_Right);
-	   	m_chooser.addObject("Right Start/Right Switch", R_Right);
 	   	m_chooser.addObject("FULL SPEED AHEAD", L_fullSpeed);
 	   	m_chooser.addObject("Left", Left);
 	   	m_chooser.addObject("Middle", Middle);
 	   	m_chooser.addObject("Right", Right);
+	   	m_chooser.addDefault("None", None);
 
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("Robot Init has finished");
@@ -111,7 +101,7 @@ public class Robot extends IterativeRobot
 	public void autonomousInit() 
 	{
 		//Collecting the GameData 
-		String gameData;
+	
 	   	gameData = DriverStation.getInstance().getGameSpecificMessage();
 	   	
 		m_autoSelected = m_chooser.getSelected();
@@ -129,15 +119,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic() 
 	{
-		
-		//Autonomous controller = new Autonomous("forward");
-		
-		
-		/*
-		 * There three main switch case 
-		 * then after that it will check the data of FMS in a if statement is L it runs the left code or if right then right
-		 * 
-		 */
 		
 			 switch(m_autoSelected) 
 			 {
@@ -180,6 +161,8 @@ public class Robot extends IterativeRobot
 			 case L_fullSpeed:
 	   		 		obj.run("fullspeed");
 	   		 		break;
+			 case None:
+				 break;
 			 
 			 }
 	}
@@ -213,9 +196,6 @@ public class Robot extends IterativeRobot
 		
 		
     	
-    		
-    		
-
     	//Gets the value of the button that controls the basket.
 		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
 		{
@@ -243,27 +223,6 @@ public class Robot extends IterativeRobot
 			Robot.drivetrain.setIntakeSpeed(0);
 		}
 		
-		
-		//now for the pretty stuff :)
-		/*
-		if (Robot.oi.testMotors.get())
-		{
-			if (!Diagnostics.isRunning())
-			{
-				Diagnostics.testSpeedGroups();
-			}
-		}
-		
-		if (Robot.oi.testUnit.get())
-		{
-			if (!Diagnostics.isRunning())
-			{
-				Diagnostics.testUnit();
-			}
-		}
-		*/
-		
-		
 	}
 	
 
@@ -277,17 +236,6 @@ public class Robot extends IterativeRobot
 	{
 		
 
-	}
-	public double deadBand(double deadBandAXIS, double deadBandAmount)
-	{
-		if (deadBandAXIS > -deadBandAmount && deadBandAXIS < deadBandAmount)
-		{
-			return 0.0;
-		}
-		else
-		{
-			return deadBandAXIS;
-		}
 	}
 	//Make sure when using this function, you add RAW SPEED value with no weight.
 	public double sinSmooth(double speed)

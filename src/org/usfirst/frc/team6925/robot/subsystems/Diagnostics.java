@@ -9,8 +9,6 @@ package org.usfirst.frc.team6925.robot.subsystems;
 import org.usfirst.frc.team6925.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
-import java.util.*;
-
 public class Diagnostics {
 	
 	private static double speed = .3;

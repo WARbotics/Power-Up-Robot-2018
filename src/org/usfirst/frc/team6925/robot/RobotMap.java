@@ -6,6 +6,10 @@ public class RobotMap {
 	//Joystick
 	public static int joystick_port = 0;
 	public static int OP_joystick_Port = 1;
+	//Joystick Axis
+	public static int Joystick_Move_Axis = 1;
+	public static int Joystick_Rotate_Axis = 0; 
+	
 	//Motors
 	public static int m_frontLeftMotor = 1;
 	public static int m_frontRightMotor = 3;
@@ -13,21 +17,12 @@ public class RobotMap {
 	public static int m_rearRightMotor = 4;
 	//Cammera
 	public static int frontCamera = 0; 
+	public static int backCamera = 1;
 	//Intake Motor
 	public static int intakeMotor = 6;
 	public static int intakeMotor1 = 7;
 	//Basket motor
 	public static int basketMotor = 9;
-	//Joystick Axis
-	public static int Joystick_Move_Axis = 1;
-	public static int Joystick_Rotate_Axis = 0; 
-	//
-	
-	//Encoders don't go here as initializing encoders requires two inputs.
-	
-	
-	public static final double kAngleSetpoint = 0.0;
-	public static final double kP = 0.005; // proportional turning constant
 
 	// gyro calibration constant, may need to be adjusted;
 	// gyro value of 360 is set to correspond to one full revolution
