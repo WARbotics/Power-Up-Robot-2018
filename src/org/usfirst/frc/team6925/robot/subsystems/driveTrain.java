@@ -26,24 +26,25 @@ public class driveTrain
 	
 	public driveTrain() 
 	{
-		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);		
-		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
+		// Motor in the front and to the left of the robot 
+		DriveTrainMotor0 = new VictorSP(RobotContants.MOTOR_FRONT_LEFT);		
+		frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
+		rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
+		rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
 		
 		
-		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
-		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
-		m_Left.setInverted(true);
+		leftMotorGroup = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
+		rightMotorGroup = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
+
+		leftMotorGroup.setInverted(true);
 		
 		basketMotor = new Spark(RobotMap.basketMotor);
-		
-		basket = new SpeedControllerGroup(basketMotor);
+		basketMotorGroup = new SpeedControllerGroup(basketMotor);
 
 		
-		intakeLeft = new Spark(RobotMap.intakeMotor);
-		intakeLeft.setInverted(true);
-		intakeRight = new Spark(RobotMap.intakeMotor1);
+		leftIntakeMotor = new Spark(RobotMap.);
+		leftIntakeMotor.setInverted(true);
+		rightIntakeMotor = new Spark(RobotMap.intakeMotor1);
 
 		
 		

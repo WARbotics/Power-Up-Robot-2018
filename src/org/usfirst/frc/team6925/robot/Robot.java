@@ -66,8 +66,8 @@ public class Robot extends IterativeRobot
 	{
 		drivetrain = new driveTrain();
 		oi = new OI();
-		UsbCamera m_rearCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
-		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
+		UsbCamera m_rearCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.BACK_CAMERA);
+		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.FRONT_CAMERA);
 		m_rearCamera.setFPS(15);
 		m_rearCamera.setResolution(640, 640);
 		m_frontCamera.setFPS(15);
@@ -191,8 +191,8 @@ public class Robot extends IterativeRobot
 		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
 		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
 		//put sinSmooth here1
-    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
-    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
+    	Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
+    	Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
 		
 		
     	
