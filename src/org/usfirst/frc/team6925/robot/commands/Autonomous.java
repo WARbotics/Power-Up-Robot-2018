@@ -1,7 +1,5 @@
 package org.usfirst.frc.team6925.robot.commands;
-
 import org.usfirst.frc.team6925.robot.Robot;
-
 import edu.wpi.first.wpilibj.Timer;
 
 //ALL VALUES ARE INCHES
@@ -22,12 +20,12 @@ public Autonomous()
 		System.out.println("AUTONOMOUS OBJECT INITIALIZED!");
 	}
 	
-	public void run(String starting_pos, String side) {
+	public void run(String startingPosition, String startingSide) {
 		
 		
-		if (starting_pos.equalsIgnoreCase("middle"))
+		if (startingPosition.equalsIgnoreCase("middle"))
 		{
-			if (side.equalsIgnoreCase("left"))
+			if (startingSide.equalsIgnoreCase("left"))
 			{
 				if (isRunning)
 				{
@@ -48,7 +46,7 @@ public Autonomous()
 				}
 			}
 			//
-			else if (side.equalsIgnoreCase("right"))
+			else if (startingSide.equalsIgnoreCase("right"))
 			{
 				if (isRunning)
 				{
@@ -68,9 +66,9 @@ public Autonomous()
 				}
 			}
 		}
-		else if (starting_pos.equalsIgnoreCase("left"))
+		else if (startingPosition.equalsIgnoreCase("left"))
 		{
-			if (side.equalsIgnoreCase("right"))
+			if (startingSide.equalsIgnoreCase("right"))
 			{
 				if (isRunning)
 				{
@@ -91,9 +89,9 @@ public Autonomous()
 				}
 			}
 		}
-		else if (starting_pos.equalsIgnoreCase("right"))
+		else if (startingPosition.equalsIgnoreCase("right"))
 		{
-			if (side.equalsIgnoreCase("left"))
+			if (startingSide.equalsIgnoreCase("left"))
 			{
 				if (isRunning)
 				{
@@ -118,12 +116,12 @@ public Autonomous()
 			System.out.println("INVALID STARTING POS!");
 		}
 	}
-	public void run(String starting_pos)
+	public void run(String startingPosition)
 	{
 		System.out.println("MOVING FORWARD!");
 		//this.move(.5, 10);3e
 		
-		if (starting_pos.equalsIgnoreCase("left"))
+		if (startingPosition.equalsIgnoreCase("left"))
 		{
 			//
 			//in inches,
@@ -145,7 +143,7 @@ public Autonomous()
 				isRunning = false;
 			}
 		}
-		else if (starting_pos.equalsIgnoreCase("right"))
+		else if (startingPosition.equalsIgnoreCase("right"))
 		{
 			if (isRunning)
 			{
@@ -168,7 +166,7 @@ public Autonomous()
 		{
 			System.out.println("RUN PARAM CASE INVALID");
 		}
-		if (starting_pos.equalsIgnoreCase("fullSpeed"))
+		if (startingPosition.equalsIgnoreCase("fullSpeed"))
 		{
 			move(1,100);
 			isRunning = false;

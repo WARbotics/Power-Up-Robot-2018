@@ -1,7 +1,5 @@
 package org.usfirst.frc.team6925.robot.subsystems;
-
 import org.usfirst.frc.team6925.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -9,66 +7,55 @@ import edu.wpi.first.wpilibj.VictorSP;
 public class driveTrain
 {
 	//Creating VictorSP motors 
-	private VictorSP m_frontLeftMotor;
-	private VictorSP m_frontRightMotor; 
-	private VictorSP m_rearLeftMotor;
-	private VictorSP m_rearRightMotor;
-	//creating the PWM speed controllers 
-
-	public SpeedControllerGroup m_Left;
-	public SpeedControllerGroup m_Right;
-    public Spark basketMotor; 
-    public SpeedControllerGroup basket;
-    
-	private Spark intakeLeft;
-	private Spark intakeRight;
-	SpeedControllerGroup intakeController;	
+	private VictorSP frontDrivetrainMotor0;
+	private VictorSP frontDrivetrainMotor1; 
+	private VictorSP rearDrivetrainMotor0;
+	private VictorSP rearDrivetrainMotor1;
+	//drivetrain speed groups
+	public SpeedControllerGroup leftDrivetrainGroup;
+	public SpeedControllerGroup rightDrivetrainGroup;
+	//basket Motor
+	public Spark basketMotor; 
+    public SpeedControllerGroup basketGroup;
+    //Intake  
+	private Spark intakeMotor0;
+	private Spark intakeMotor1;
+	SpeedControllerGroup intakeMotorGroup;	
 	
-	public driveTrain() 
-	{
-		m_frontLeftMotor = new VictorSP(RobotMap.m_frontLeftMotor);		
-		m_frontRightMotor = new VictorSP(RobotMap.m_frontRightMotor);
-		m_rearLeftMotor = new VictorSP(RobotMap.m_rearLeftMotor);
-		m_rearRightMotor = new VictorSP(RobotMap.m_rearRightMotor);
-		
-		
-		m_Left = new SpeedControllerGroup(m_frontLeftMotor, m_rearLeftMotor);
-		m_Right = new SpeedControllerGroup(m_frontRightMotor, m_rearRightMotor);
-		m_Left.setInverted(true);
+	public driveTrain() {
+		frontDrivetrainMotor0 = new VictorSP(RobotMap.frontDrivetrainMotor0);		
+		frontDrivetrainMotor1 = new VictorSP(RobotMap.frontDrivetrainMotor1);
+		rearDrivetrainMotor0 = new VictorSP(RobotMap.rearDrivetrainMotor0);
+		rearDrivetrainMotor1 = new VictorSP(RobotMap.rearDrivetrainMotor1);
+				
+		leftDrivetrainGroup = new SpeedControllerGroup(frontDrivetrainMotor0, rearDrivetrainMotor0);
+		rightDrivetrainGroup = new SpeedControllerGroup(frontDrivetrainMotor1, rearDrivetrainMotor1);
+		leftDrivetrainGroup.setInverted(true);
 		
 		basketMotor = new Spark(RobotMap.basketMotor);
-		
-		basket = new SpeedControllerGroup(basketMotor);
+		basketGroup = new SpeedControllerGroup(basketMotor);
 
-		
-		intakeLeft = new Spark(RobotMap.intakeMotor);
-		intakeLeft.setInverted(true);
-		intakeRight = new Spark(RobotMap.intakeMotor1);
-
-		
-		
+		intakeMotor0 = new Spark(RobotMap.intakeMotor0);
+		intakeMotor0.setInverted(true);
+		intakeMotor1 = new Spark(RobotMap.inTakeMotor1);
 		intakeController = new SpeedControllerGroup(intakeLeft, intakeRight);
-		
-
 	}
-	public void setBasket(double inputSpeed)
-	{
+
+	public void setBasket(double inputSpeed){
 		this.basket.set(inputSpeed);
 	}
-	public void setIntakeSpeed(double inputIntakeSpeed)
-	{
-		intakeController.set(inputIntakeSpeed);
+
+	public void setIntakeSpeed(double inputSpeed){
+		intakeController.set(inputSpeed);
 	}
-   public void setSpeedLeft(double inputSpeedLeft)
-   {
-	   
-	   m_Left.set(inputSpeedLeft);
-	
-   }
-   public void setSpeedRight(double inputSpeedRight)
-   {
-	   m_Right.set(inputSpeedRight);
-   }
+
+   	public void setLeftDrivetrainSpeed(double inputSpeed){
+		leftDrivetrainGroup.set(inputSpeed);
+	}
+
+   	public void setRightDrivetrainSpeed(double inputSpeed) {
+	   rightDrivetrainGroup.set(inputSpeed);
+	}
 }
 
 

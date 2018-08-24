@@ -33,20 +33,12 @@ import org.usfirst.frc.team6925.robot.subsystems.driveTrain;
  * project.
  */
 
-/*   __   ___ ____  ____  
-  / /_ / _ \___ \| ___| 
- | '_ \ (_) |__) |___ \ 
- | (_) \__, / __/ ___) |
-  \___/  /_/_____|____/ 
-*/                        
-
-
 public class Robot extends IterativeRobot 
 {
 	
-	public static driveTrain drivetrain;
+	public static driveTrain;
 	public static OI oi;
-    private static final String L_fullSpeed = "FULL SPEED AHEAD";
+    private static final String fullSpeed = "FULL SPEED AHEAD";
     private static final String Left = "Left";
     private static final String Right = "Right";
     private static final String Middle = "Middle";
@@ -54,7 +46,7 @@ public class Robot extends IterativeRobot
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	public static String gameData;
-	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroPort);
+	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.GyroPort);
 	
 	
 	/**
@@ -64,16 +56,16 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		drivetrain = new driveTrain();
+		driveTrain = new driveTrain();
 		oi = new OI();
-		UsbCamera m_rearCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
-		UsbCamera m_frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
+		UsbCamera rearCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.rearCamera);
+		UsbCamera frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
 		m_rearCamera.setFPS(15);
 		m_rearCamera.setResolution(640, 640);
 		m_frontCamera.setFPS(15);
 		m_frontCamera.setResolution(640, 640);
 		m_gyro.setSensitivity(RobotMap.kVoltsPerDegreePerSecond);
-	   	m_chooser.addObject("FULL SPEED AHEAD", L_fullSpeed);
+	   	m_chooser.addObject("FULL SPEED AHEAD", fullSpeed);
 	   	m_chooser.addObject("Left", Left);
 	   	m_chooser.addObject("Middle", Middle);
 	   	m_chooser.addObject("Right", Right);
@@ -158,7 +150,7 @@ public class Robot extends IterativeRobot
 					 //Right placement and right switch
 				 }
 				 break;
-			 case L_fullSpeed:
+			 case fullSpeed:
 	   		 		obj.run("fullspeed");
 	   		 		break;
 			 case None:
