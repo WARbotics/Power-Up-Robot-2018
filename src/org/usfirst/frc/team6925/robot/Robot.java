@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		driveTrain = new driveTrain();
+		drivetrain = new driveTrain();
 		oi = new OI();
 		UsbCamera rearCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.rearCamera);
 		UsbCamera frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
@@ -171,25 +171,25 @@ public class Robot extends IterativeRobot
 		
 		if (Robot.oi.reverseControl.get()) 
 		{
-			Robot.drivetrain.m_Left.setInverted(false);
-			Robot.drivetrain.m_Right.setInverted(true);
+			Robot.drivetrain.leftDrivetrainGroup.setInverted(false);
+			Robot.drivetrain.rightDrivetrainGroup.setInverted(true);
 		}
 		else
 		{
-			Robot.drivetrain.m_Left.setInverted(true);
-			Robot.drivetrain.m_Right.setInverted(false);
+			Robot.leftDrivetrainGroup.setInverted(true);
+			Robot.drivetrain.rightDrivetrainGroup.setInverted(false);
 		}
 	
-		double inputSpeedLeft = Robot.oi.drive_Joystick.getRawAxis(1);
-		double inputSpeedRight = Robot.oi.drive_Joystick.getRawAxis(5);
+		double inputSpeedLeft = Robot.oi.driverJoystick.getRawAxis(1);
+		double inputSpeedRight = Robot.oi.driverJoystick.getRawAxis(5);
 		//put sinSmooth here1
-    		Robot.drivetrain.setSpeedLeft(inputSpeedLeft *  .8);
-    		Robot.drivetrain.setSpeedRight(inputSpeedRight * .8);
+    		Robot.drivetrain.setLeftDrivetrainSpeed(inputSpeedLeft *  .8);
+    		Robot.drivetrain.setRightDrivetrainSpeed(inputSpeedRight * .8);
 		
 		
     	
     	//Gets the value of the button that controls the basket.
-		if (Robot.oi.basket.get() && !Robot.oi.basketReload.get()) 
+		if (Robot.oi.basketActive.get() && !Robot.oi.basketReload.get()) 
 		{
 			Robot.drivetrain.setBasket(.9);
 		}
@@ -202,11 +202,11 @@ public class Robot extends IterativeRobot
 			Robot.drivetrain.setBasket(0);
 		}
 		
-		if (Robot.oi.intakeIN.get()) 
+		if (Robot.oi.inTakeButton.get()) 
 		{
 			Robot.drivetrain.setIntakeSpeed(1);
 		}
-		else if (Robot.oi.intakeOUT.get()) 
+		else if (Robot.oi.outTakeButton.get()) 
 		{
 			Robot.drivetrain.setIntakeSpeed(-1);
 		}

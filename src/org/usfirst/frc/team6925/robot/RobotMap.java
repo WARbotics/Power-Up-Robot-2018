@@ -9,7 +9,6 @@ public class RobotMap {
 	//Joystick Axis
 	public static int joystickMoveAxis = 1;
 	public static int joystickRotateAxis = 0; 
-	
 	//Motors
 	public static int frontDrivertrainMotor0 = 1;
 	public static int frontDrivertrainMotor1 = 3;
@@ -19,8 +18,8 @@ public class RobotMap {
 	public static int frontCamera = 0; 
 	public static int rearCamera = 1;
 	//Intake Motor
-	public static int inTakeMotor = 6;
-	public static int outTakeMotor = 7;
+	public static int inTakeMotor0 = 6;
+	public static int inTakeMotor1 = 7;
 	//Basket motor
 	public static int basketMotor = 9;
 
