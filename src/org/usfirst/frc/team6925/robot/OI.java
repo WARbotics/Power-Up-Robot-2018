@@ -1,48 +1,38 @@
-/*
- * This constructs and identifies the buttons located on the joystick
- */
-
 package org.usfirst.frc.team6925.robot;
 
 //import
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team6925.robot.RobotMap;
 
 
 public class OI 
 {
-	//Constructing the joystick and and placing it with it port number  
-	public Joystick drive_Joystick = new Joystick(RobotMap.joystick_port);
-	public Joystick OP_Joystick = new Joystick(RobotMap.OP_joystick_Port);
+	//Constructing the joystick and and placing it with its port number  
+	public Joystick driveJoystick = new Joystick(0);
+	public Joystick operatorJoystick = new Joystick(1);
 	//Constructing the button for the Operator Joystick
-	Button basket;
-	Button basketReload;
-	Button intakeIN;
-	Button intakeOUT;
-	//
-	Button testMotors;
-	Button testUnit;
-	Button reverseControl;
-	public OI() 
-	{
+	public Button getBasket;
+	public Button getBasketReload;
+	public Button getIntake;
+	public Button getOuttake;
+
+	public Button testMotors;
+	public Button testUnit;
+	public Button reverseControls;
+	
+	@SuppressWarnings("unused")
+	public OI() {
 		//Constructing the button for the Operator Joystick
-		basket = new JoystickButton(OP_Joystick, 1);
-		basketReload = new JoystickButton(OP_Joystick, 2);
-		intakeIN = new JoystickButton(OP_Joystick, 3);
-		intakeOUT = new JoystickButton(OP_Joystick, 4);
-		
-		
-		testMotors = new JoystickButton(OP_Joystick, 5);
-		testUnit = new JoystickButton(OP_Joystick,6);
-		reverseControl = new JoystickButton(drive_Joystick, 5);
-		//placing buttons to there commands  
+		JoystickButton getBasket = new JoystickButton(operatorJoystick, 1);
+		JoystickButton getBasketReload = new JoystickButton(operatorJoystick, 2);
+		JoystickButton getIntake = new JoystickButton(operatorJoystick, 3);
+		JoystickButton getOuttake= new JoystickButton(operatorJoystick, 4);
+		JoystickButton testMotors = new JoystickButton(operatorJoystick, 5);
+		JoystickButton testUnit = new JoystickButton(operatorJoystick,6);
+		JoystickButton reverseControls = new JoystickButton(driveJoystick, 5);
+
 		System.out.println("OI has been init");
-		
 		
 	}
 }
-//test 
-
-
