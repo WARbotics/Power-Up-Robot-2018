@@ -48,9 +48,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		drivetrain driveTrain = new drivetrain();
-		basket basket = new basket();	
-		intake intake = new intake();
+		driveTrain = new drivetrain();
+		basket = new basket();	
+		intake = new intake();
+		input = new OI();
 		UsbCamera rearCamera = CameraServer.getInstance().startAutomaticCapture(0);
 		UsbCamera frontCamera = CameraServer.getInstance().startAutomaticCapture(1);
 		rearCamera.setFPS(15);
@@ -63,6 +64,7 @@ public class Robot extends IterativeRobot {
 	   	m_chooser.addObject("Right", Right);
 	   	m_chooser.addDefault("None", None);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		System.out.println("robot init");
 	}
 
 
@@ -74,42 +76,43 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
+		System.out.println("auto init ran");
 	}
 	@Override
 	public void autonomousPeriodic() {
 		 switch(m_autoSelected) {
 		 case Left:
 			 if (gameData.charAt(0) == 'L') {
-				 auto.run("left");
+				 Robot.auto.run("left");
 				 //Left placement and left switch
 			 }
 			 else if(gameData.charAt(0) == 'R') {
-				 auto.run("left","right");
+				 Robot.auto.run("left","right");
 				 //Left placement and right switch
 			 }
 			 break;
 		 case Middle:
 			 if (gameData.charAt(0) == 'L') {
-				 auto.run("middle", "left");
+				 Robot.auto.run("middle", "left");
 				 //Middle placement and left switch
 			 }
 			 else if(gameData.charAt(0) == 'R') {
 				 //Middle placement and right switch
-				 auto.run("middle","right");
+				 Robot.auto.run("middle","right");
 			 }
 		 	 break;
 		 case Right:
 			 if (gameData.charAt(0) == 'L') {
-				 auto.run("right", "left");
+				 Robot.auto.run("right", "left");
 				 //Right placement and left switch
 			 }
 			 else if(gameData.charAt(0) == 'R') {
-				 auto.run("right");
+				 Robot.auto.run("right");
 				 //Right placement and right switch
 			 }
 			 break;
 		 case L_fullSpeed:
-   		 		auto.run("fullspeed");
+   		 		Robot.auto.run("fullspeed");
    		 		break;
 		 case None:
 			 break;
@@ -122,40 +125,41 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.println("Tele started");
 		if (Robot.input.reverseControls.get()){
-			driveTrain.leftMotorGroup.setInverted(false);
-			driveTrain.rightMotorGroup.setInverted(true);
+			Robot.driveTrain.leftMotorGroup.setInverted(false);
+			Robot.driveTrain.rightMotorGroup.setInverted(true);
 		}
 		else{
-			driveTrain.leftMotorGroup.setInverted(true);
-			driveTrain.rightMotorGroup.setInverted(false);
+			Robot.driveTrain.leftMotorGroup.setInverted(true);
+			Robot.driveTrain.rightMotorGroup.setInverted(false);
 		}
 	
-		double inputSpeedLeft = input.driveJoystick.getRawAxis(1);
-		double inputSpeedRight = input.driveJoystick.getRawAxis(5);
-    	driveTrain.setSpeedLeft(inputSpeedLeft *  .8);
-    	driveTrain.setSpeedRight(inputSpeedRight * .8);
-		
+		double inputSpeedLeft = Robot.input.driveJoystick.getRawAxis(1);
+		double inputSpeedRight = Robot.input.driveJoystick.getRawAxis(5);
+    	Robot.driveTrain.setSpeedLeft(inputSpeedLeft *  .8);
+    	Robot.driveTrain.setSpeedRight(inputSpeedRight * .8);
+		System.out.println("Tele worked");
 		
     	//Gets the value of the button that controls the basket.
-		if (input.getBasket.get() && !input.getBasketReload.get()){
-			basket.setBasket(.9);
+		if (Robot.input.getBasket.get() && !Robot.input.getBasketReload.get()){
+			Robot.basket.setBasket(.9);
 		}
-		else if (input.getBasketReload.get()){
-			basket.setBasket(-.8);
+		else if (Robot.input.getBasketReload.get()){
+			Robot.basket.setBasket(-.8);
 		}
 		else{
-			basket.setBasket(0);
+			Robot.basket.setBasket(0);
 		}
 		
-		if (input.getOuttake.get()) {
-			intake.setIntake(1);
+		if (Robot.input.getOuttake.get()) {
+			Robot.intake.setIntake(1);
 		}
-		else if (input.getOuttake.get()) {
-			intake.setIntake(-1);
+		else if (Robot.input.getOuttake.get()) {
+			Robot.intake.setIntake(-1);
 		}
 		else {
-			intake.setIntake(0);
+			Robot.intake.setIntake(0);
 		}
 	}
 

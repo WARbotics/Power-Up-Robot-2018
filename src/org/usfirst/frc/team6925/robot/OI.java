@@ -6,23 +6,20 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
-public class OI 
-{
+public class OI {
 	//Constructing the joystick and and placing it with its port number  
 	public Joystick driveJoystick = new Joystick(0);
 	public Joystick operatorJoystick = new Joystick(1);
 	//Constructing the button for the Operator Joystick
-	public Button getBasket;
-	public Button getBasketReload;
-	public Button getIntake;
-	public Button getOuttake;
-
-	public Button testMotors;
-	public Button testUnit;
-	public Button reverseControls;
+	JoystickButton getBasket = new JoystickButton(operatorJoystick, 1);
+	JoystickButton getBasketReload = new JoystickButton(operatorJoystick, 2);
+	JoystickButton getIntake = new JoystickButton(operatorJoystick, 3);
+	JoystickButton getOuttake= new JoystickButton(operatorJoystick, 4);
+	JoystickButton testMotors = new JoystickButton(operatorJoystick, 5);
+	JoystickButton testUnit = new JoystickButton(operatorJoystick,6);
+	JoystickButton reverseControls = new JoystickButton(driveJoystick, 5);
 	
-	@SuppressWarnings("unused")
-	public OI() {
+	public void oi() {
 		//Constructing the button for the Operator Joystick
 		JoystickButton getBasket = new JoystickButton(operatorJoystick, 1);
 		JoystickButton getBasketReload = new JoystickButton(operatorJoystick, 2);
