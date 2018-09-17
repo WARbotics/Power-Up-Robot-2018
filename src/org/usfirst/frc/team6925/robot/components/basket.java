@@ -7,8 +7,8 @@ public class basket{
     public SpeedControllerGroup basketMotorGroup;
     
     public void basketComponents(){
-    	Spark basketMotor = new Spark(0);
-		SpeedControllerGroup basketMotorGroup = new SpeedControllerGroup(basketMotor);
+    	basketMotor = new Spark(0);
+		basketMotorGroup = new SpeedControllerGroup(basketMotor);
     }
     public void setBasket(double inputSpeed){
 		basketMotor.set(inputSpeed);
