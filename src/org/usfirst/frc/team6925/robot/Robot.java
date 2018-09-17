@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		autonomous auto = new autonomous();
+		auto = new autonomous();
 		m_autoSelected = m_chooser.getSelected();
 	   	gameData = DriverStation.getInstance().getGameSpecificMessage();
 		// autoSelected = SmartDashboard.getString("Auto Selector",

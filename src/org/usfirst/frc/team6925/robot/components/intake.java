@@ -8,11 +8,10 @@ public class intake{
 		public Spark rightIntakeMotor;
 		public SpeedControllerGroup intakeMotorGroup;
 	public void intakeComponents(){
-		Spark leftIntakeMotor = new Spark(0);
+		leftIntakeMotor = new Spark(0);
 		leftIntakeMotor.setInverted(true);
-		Spark rightIntakeMotor = new Spark(1);
-		@SuppressWarnings("unused")
-		SpeedControllerGroup intakeMotorGroup = new SpeedControllerGroup(leftIntakeMotor, rightIntakeMotor);
+		rightIntakeMotor = new Spark(1);
+		intakeMotorGroup = new SpeedControllerGroup(leftIntakeMotor, rightIntakeMotor);
 		
 	}
 	public void setIntake(double inputIntakeSpeed){
