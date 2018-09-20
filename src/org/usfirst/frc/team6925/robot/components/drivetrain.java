@@ -14,12 +14,12 @@ public class drivetrain{
 	public SpeedControllerGroup leftMotorGroup;
 	public SpeedControllerGroup rightMotorGroup;	
 	
-	public void driveTrainComponents(){
+	public drivetrain(){
 		// DriveTrain Motor  
-		driveTrainMotor0 = new VictorSP(0);		
-		driveTrainMotor1 = new VictorSP(1);
-		driveTrainMotor2 = new VictorSP(2);
-		driveTrainMotor3 = new VictorSP(3);
+		driveTrainMotor0 = new VictorSP(1);		
+		driveTrainMotor1 = new VictorSP(2);
+		driveTrainMotor2 = new VictorSP(3);
+		driveTrainMotor3 = new VictorSP(4);
 		leftMotorGroup = new SpeedControllerGroup(driveTrainMotor0, driveTrainMotor1);
 		rightMotorGroup = new SpeedControllerGroup(driveTrainMotor2, driveTrainMotor3);
 		leftMotorGroup.setInverted(true);

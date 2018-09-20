@@ -32,6 +32,8 @@ public class Robot extends IterativeRobot {
 	public static intake intake;
 	public static OI input;
 	public static autonomous auto;
+	public static UsbCamera frontCamera;
+	public static UsbCamera rearCamera;
     private static final String L_fullSpeed = "FULL SPEED AHEAD";
     private static final String Left = "Left";
     private static final String Right = "Right";
@@ -52,8 +54,8 @@ public class Robot extends IterativeRobot {
 		basket = new basket();	
 		intake = new intake();
 		input = new OI();
-		UsbCamera rearCamera = CameraServer.getInstance().startAutomaticCapture(0);
-		UsbCamera frontCamera = CameraServer.getInstance().startAutomaticCapture(1);
+		rearCamera = CameraServer.getInstance().startAutomaticCapture(0);
+		frontCamera = CameraServer.getInstance().startAutomaticCapture(1);
 		rearCamera.setFPS(15);
 		rearCamera.setResolution(640, 640);
 		frontCamera.setFPS(15);
@@ -66,7 +68,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("robot init");
 	}
-
 
 	@Override
 	public void autonomousInit() {
@@ -125,7 +126,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		System.out.println("Tele started");
 		if (Robot.input.reverseControls.get()){
 			Robot.driveTrain.leftMotorGroup.setInverted(false);
 			Robot.driveTrain.rightMotorGroup.setInverted(true);
@@ -134,9 +134,9 @@ public class Robot extends IterativeRobot {
 			Robot.driveTrain.leftMotorGroup.setInverted(true);
 			Robot.driveTrain.rightMotorGroup.setInverted(false);
 		}
-	
+		System.out.println("Tele started");
 		double inputSpeedLeft = Robot.input.driveJoystick.getRawAxis(1);
-		double inputSpeedRight = Robot.input.driveJoystick.getRawAxis(5);
+		double inputSpeedRight = input.driveJoystick.getRawAxis(5);
     	Robot.driveTrain.setSpeedLeft(inputSpeedLeft *  .8);
     	Robot.driveTrain.setSpeedRight(inputSpeedRight * .8);
 		System.out.println("Tele worked");

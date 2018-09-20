@@ -3,14 +3,14 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 public class intake{
-    
 		public Spark leftIntakeMotor;
 		public Spark rightIntakeMotor;
 		public SpeedControllerGroup intakeMotorGroup;
-	public void intakeComponents(){
-		leftIntakeMotor = new Spark(0);
+		
+	public intake(){
+		leftIntakeMotor = new Spark(5);
 		leftIntakeMotor.setInverted(true);
-		rightIntakeMotor = new Spark(1);
+		rightIntakeMotor = new Spark(6);
 		intakeMotorGroup = new SpeedControllerGroup(leftIntakeMotor, rightIntakeMotor);
 		
 	}
