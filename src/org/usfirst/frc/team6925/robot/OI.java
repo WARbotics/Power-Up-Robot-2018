@@ -20,7 +20,7 @@ public class OI {
 	Button reverseControls;
 	
 	public OI() {
-		//Constructing the button for the Operator Joystick
+		//Constructing the button for the Operator Joystick and drivers joystick
 		getBasket = new JoystickButton(operatorJoystick, 1);
 		getBasketReload = new JoystickButton(operatorJoystick, 2);
 		getIntake = new JoystickButton(operatorJoystick, 3);

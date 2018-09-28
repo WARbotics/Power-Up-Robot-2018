@@ -8,9 +8,9 @@ public class intake{
 		public SpeedControllerGroup intakeMotorGroup;
 		
 	public intake(){
-		leftIntakeMotor = new Spark(5);
+		leftIntakeMotor = new Spark(6);
 		leftIntakeMotor.setInverted(true);
-		rightIntakeMotor = new Spark(6);
+		rightIntakeMotor = new Spark(7);
 		intakeMotorGroup = new SpeedControllerGroup(leftIntakeMotor, rightIntakeMotor);
 		
 	}

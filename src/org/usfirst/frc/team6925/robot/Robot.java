@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		if (Robot.input.reverseControls.get()){
+		if(Robot.input.reverseControls.get()){
 			Robot.driveTrain.leftMotorGroup.setInverted(false);
 			Robot.driveTrain.rightMotorGroup.setInverted(true);
 		}
@@ -136,7 +136,7 @@ public class Robot extends IterativeRobot {
 		}
 		System.out.println("Tele started");
 		double inputSpeedLeft = Robot.input.driveJoystick.getRawAxis(1);
-		double inputSpeedRight = input.driveJoystick.getRawAxis(5);
+		double inputSpeedRight = Robot.input.operatorJoystick.getRawAxis(1);
     	Robot.driveTrain.setSpeedLeft(inputSpeedLeft *  .8);
     	Robot.driveTrain.setSpeedRight(inputSpeedRight * .8);
 		System.out.println("Tele worked");
