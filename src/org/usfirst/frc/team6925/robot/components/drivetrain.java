@@ -2,7 +2,7 @@ package org.usfirst.frc.team6925.robot.components;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
-
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class drivetrain{
 	//Creating VictorSP motors 
 	public VictorSP driveTrainMotor0;
@@ -12,8 +12,9 @@ public class drivetrain{
 	//creating the PWM speed controllers 
 
 	public SpeedControllerGroup leftMotorGroup;
-	public SpeedControllerGroup rightMotorGroup;	
-	
+	public SpeedControllerGroup rightMotorGroup;
+	public DifferentialDrive m_drive;
+
 	public drivetrain(){
 		// DriveTrain Motor  
 		driveTrainMotor0 = new VictorSP(1);		
@@ -22,7 +23,9 @@ public class drivetrain{
 		driveTrainMotor3 = new VictorSP(4);
 		leftMotorGroup = new SpeedControllerGroup(driveTrainMotor0, driveTrainMotor1);
 		rightMotorGroup = new SpeedControllerGroup(driveTrainMotor2, driveTrainMotor3);
-		leftMotorGroup.setInverted(true);
+		
+		m_drive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
+		
 		
 
 	}
