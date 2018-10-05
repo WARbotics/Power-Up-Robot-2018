@@ -135,10 +135,9 @@ public class Robot extends IterativeRobot {
 			Robot.driveTrain.rightMotorGroup.setInverted(false);
 		}
 		System.out.println("Tele started");
-		double inputSpeedX = Robot.input.driveJoystick.getRawAxis(0);
-		double inputSpeedZ = Robot.input.driveJoystick.getRawAxis(1);
-		Robot.driveTrain.m_drive.arcadeDrive(inputSpeedX, inputSpeedZ);
-		System.out.println("Tele worked");
+		double inputSpeedLeft = Robot.input.driveJoystick.getRawAxis(1);
+		double inputSpeedRight = -Robot.input.driveJoystick.getRawAxis(3);
+		Robot.driveTrain.m_drive.tankDrive(inputSpeedLeft, inputSpeedRight);
 		
     	//Gets the value of the button that controls the basket.
 		if (Robot.input.getBasket.get() && !Robot.input.getBasketReload.get()){
