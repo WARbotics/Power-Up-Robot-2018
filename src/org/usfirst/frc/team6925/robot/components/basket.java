@@ -6,7 +6,7 @@ public class basket{
     public Spark basketMotor; 
     public SpeedControllerGroup basketMotorGroup;
     public basket(){
-    	basketMotor = new Spark(9);
+    	basketMotor = new Spark(8);
     	basketMotorGroup = new SpeedControllerGroup(basketMotor);
     	
     	

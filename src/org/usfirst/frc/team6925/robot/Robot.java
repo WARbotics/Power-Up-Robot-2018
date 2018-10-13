@@ -16,6 +16,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
     private static final String Right = "Right";
     private static final String Middle = "Middle";
     private static final String None = "None";
+    private static final String Test = "Test";
 	private String m_autoSelected;
 	public static String gameData;
 	
@@ -64,6 +66,7 @@ public class Robot extends IterativeRobot {
 	   	m_chooser.addObject("Left", Left);
 	   	m_chooser.addObject("Middle", Middle);
 	   	m_chooser.addObject("Right", Right);
+	   	m_chooser.addObject("Test", Test);
 	   	m_chooser.addDefault("None", None);
 		SmartDashboard.putData("Auto choices", m_chooser);
 		System.out.println("robot init");
@@ -81,43 +84,51 @@ public class Robot extends IterativeRobot {
 	}
 	@Override
 	public void autonomousPeriodic() {
+		System.out.println("Inside of the auto");
 		 switch(m_autoSelected) {
-		 case Left:
-			 if (gameData.charAt(0) == 'L') {
-				 Robot.auto.run("left");
-				 //Left placement and left switch
-			 }
-			 else if(gameData.charAt(0) == 'R') {
-				 Robot.auto.run("left","right");
-				 //Left placement and right switch
-			 }
-			 break;
-		 case Middle:
-			 if (gameData.charAt(0) == 'L') {
-				 Robot.auto.run("middle", "left");
-				 //Middle placement and left switch
-			 }
-			 else if(gameData.charAt(0) == 'R') {
-				 //Middle placement and right switch
-				 Robot.auto.run("middle","right");
-			 }
-		 	 break;
-		 case Right:
-			 if (gameData.charAt(0) == 'L') {
-				 Robot.auto.run("right", "left");
-				 //Right placement and left switch
-			 }
-			 else if(gameData.charAt(0) == 'R') {
-				 Robot.auto.run("right");
-				 //Right placement and right switch
-			 }
-			 break;
-		 case L_fullSpeed:
-   		 		Robot.auto.run("fullspeed");
-   		 		break;
-		 case None:
-			 break;
-		 
+			 case Left:
+				 if (gameData.charAt(0) == 'L') {
+					 Robot.auto.run("left");
+					 //Left placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') {
+					 Robot.auto.run("left","right");
+					 //Left placement and right switch
+				 }
+				 break;
+			 case Middle:
+				 if (gameData.charAt(0) == 'L') {
+					 Robot.auto.run("middle", "left");
+					 //Middle placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') {
+					 //Middle placement and right switch
+					 Robot.auto.run("middle","right");
+				 }
+			 	 break;
+			 case Right:
+				 if (gameData.charAt(0) == 'L') {
+					 Robot.auto.run("right", "left");
+					 //Right placement and left switch
+				 }
+				 else if(gameData.charAt(0) == 'R') {
+					 Robot.auto.run("right");
+					 //Right placement and right switch
+				 }
+				 break;
+			 case L_fullSpeed:
+				 Robot.auto.run("fullspeed");
+				 break;
+			 case Test:
+				 System.out.println("Inside test");
+				 Robot.basket.setBasket(.5);
+				 Timer.delay(2);
+				 Robot.basket.setBasket(-0.5);
+				 Timer.delay(2);
+				 Robot.basket.setBasket(0);
+				 break;
+			 case None:
+				 break;
 		 }
 	}
 

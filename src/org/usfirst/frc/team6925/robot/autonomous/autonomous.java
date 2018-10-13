@@ -31,7 +31,6 @@ public autonomous(){
 					Timer.delay(1);
 					move(.2, 3.5);
 					Timer.delay(2);
-					basket();
 					isRunning = false;
 				}
 			}
@@ -49,7 +48,7 @@ public autonomous(){
 					Timer.delay(1);
 					move(.2, 3.5);
 					Timer.delay(2);
-					basket();						
+				
 					isRunning = false;
 				}
 			}
@@ -69,7 +68,7 @@ public autonomous(){
 					Timer.delay(1);
 					move(.2,4);
 					Timer.delay(2);
-					basket();
+
 					isRunning = false;
 				}
 			}
@@ -88,7 +87,7 @@ public autonomous(){
 					Timer.delay(1);
 					move(.2,4);
 					Timer.delay(2);
-					basket();
+
 					isRunning = false;
 				}
 			}
@@ -116,7 +115,7 @@ public autonomous(){
 				Timer.delay(1); 
 				move(.2,4);
 				Timer.delay(2);
-				basket();
+
 				isRunning = false;
 			}
 		}
@@ -133,7 +132,7 @@ public autonomous(){
 				Timer.delay(1); 
 				move(.3,1);
 				Timer.delay(2);
-				basket();
+
 				isRunning = false;
 			}
 		}
